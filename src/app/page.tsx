@@ -1,6 +1,7 @@
 import StickyHeader from './components/StickyHeader';
 import FloatingActions from './components/FloatingActions';
 import Footer from './components/Footer';
+import PhotoSlider from './components/PhotoSlider';
 
 export default function Home() {
   return (
@@ -10,7 +11,9 @@ export default function Home() {
       
       {/* Section 1: Hero */}
       <section id="hero" className="h-screen bg-warm-white flex items-center justify-center pt-16">
-        <div className="text-center px-6 max-w-lg">
+        <div className="text-center px-6 max-w-2xl w-full">
+          <PhotoSlider title="Studio Space" height="h-80" />
+          
           <h1 className="text-[30px] md:text-[48px] font-[family-name:var(--font-castoro)] text-sage-dark mb-3 leading-tight">
             Rehearsal Space in the heart of London
           </h1>
@@ -38,8 +41,11 @@ export default function Home() {
 
       {/* Section 2: Space Details */}
       <section id="details" className="h-screen bg-sage-light/20 flex items-center justify-center">
-        <div className="text-center px-6 max-w-lg">
+        <div className="text-center px-6 max-w-2xl w-full">
           <h2 className="text-[24px] md:text-[36px] font-[family-name:var(--font-castoro)] text-wood-dark mb-6 leading-tight">Your Creative Space in Bedlam Mews</h2>
+          
+          <PhotoSlider title="Space Features" height="h-64" />
+          
           <p className="text-base text-sage-dark mb-8 font-light leading-relaxed">
             This well-lit and versatile creative studio is perfect for rehearsals, classes, workshops, 
             meetup events, and photo or film shoots.
