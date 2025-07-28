@@ -40,21 +40,21 @@ export default function Home() {
       </section>
 
       {/* Section 2: Space Details */}
-      <section id="details" className="h-screen bg-sage-light/20 flex items-center justify-center">
+      <section id="details" className="h-screen bg-sage-light/20 flex items-center justify-center py-20">
         <div className="text-center px-6 max-w-2xl w-full">
-          <h2 className="text-[24px] md:text-[36px] font-[family-name:var(--font-castoro)] text-wood-dark mb-6 leading-tight">Your Creative Space in Bedlam Mews</h2>
+          <h2 className="text-[20px] md:text-[32px] font-[family-name:var(--font-castoro)] text-wood-dark mb-4 leading-tight">Your Creative Space in Bedlam Mews</h2>
           
-          <PhotoSlider title="Space Features" height="h-64" />
+          <PhotoSlider title="Space Features" height="h-48" />
           
-          <p className="text-base text-sage-dark mb-8 font-light leading-relaxed">
+          <p className="text-sm text-sage-dark mb-6 font-light leading-relaxed">
             This well-lit and versatile creative studio is perfect for rehearsals, classes, workshops, 
             meetup events, and photo or film shoots.
           </p>
           
-          <div className="text-left space-y-4">
+          <div className="text-left space-y-3">
             <div>
-              <h3 className="font-medium mb-3 text-wood-dark text-lg">What You&apos;ll Find:</h3>
-              <ul className="text-base space-y-2 text-sage-dark font-light">
+              <h3 className="font-medium mb-2 text-wood-dark">What You&apos;ll Find:</h3>
+              <ul className="text-sm space-y-1 text-sage-dark font-light">
                 <li>• Exposed brick walls and wooden floors</li>
                 <li>• Large windows for natural light</li>
                 <li>• Open-plan layout accommodating 20+ people</li>
@@ -63,8 +63,8 @@ export default function Home() {
             </div>
             
             <div>
-              <h3 className="font-medium mb-3 text-wood-dark text-lg">Perfect For:</h3>
-              <ul className="text-base space-y-2 text-sage-dark font-light">
+              <h3 className="font-medium mb-2 text-wood-dark">Perfect For:</h3>
+              <ul className="text-sm space-y-1 text-sage-dark font-light">
                 <li>• Acting rehearsals and workshops</li>
                 <li>• Creative workshops and networking events</li>
                 <li>• Meeting spaces and private events</li>
