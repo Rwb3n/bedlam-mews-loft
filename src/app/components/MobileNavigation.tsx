@@ -75,7 +75,7 @@ export default function MobileNavigation() {
                 <MenubarItem 
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-xl ${activeSection === section.id 
+                  className={`text-2xl ${activeSection === section.id 
                     ? "bg-primary/10 text-primary font-medium" 
                     : "hover:bg-primary/5"
                   }`}
