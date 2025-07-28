@@ -5,19 +5,19 @@ import PhotoSlider from './components/PhotoSlider';
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen lg:mr-[27rem]">
       <Header />
       <FloatingActions />
       
       {/* Section 1: Hero */}
       <section id="hero" className="h-screen bg-card flex items-center justify-center pt-20 pb-32">
-        <div className="text-center px-6 max-w-2xl w-full">
+        <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
           <PhotoSlider title="Studio Space" height="h-64" />
           
           <h1 className="text-[24px] md:text-[40px] font-serif mb-2 leading-tight">
             Rehearsal Space in the heart of London
           </h1>
-          <p className="text-xl md:text-2xl mb-6 font-light">Bedlam Mews</p>
+          <p className="text-xl md:text-2xl mb-6 font-light">Bedlam Mews, Lambeth, SE11 6DF</p>
           
           <div className="space-y-2 text-lg">
             <p className="font-medium">Book with confidence:</p>
@@ -41,7 +41,7 @@ export default function Home() {
 
       {/* Section 2: Space Details */}
       <section id="details" className="h-screen bg-primary/20 flex items-center justify-center py-20">
-        <div className="text-center px-6 max-w-2xl w-full">
+        <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
           <h2 className="text-[20px] md:text-[32px] font-serif mb-4 leading-tight">Your Creative Space in Bedlam Mews</h2>
           
           <PhotoSlider title="Space Features" height="h-48" />
@@ -78,7 +78,7 @@ export default function Home() {
 
       {/* Section 3: Host & Availability */}
       <section id="host" className="h-screen bg-secondary/10 flex items-center justify-center">
-        <div className="text-center px-6 max-w-sm">
+        <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
           <h2 className="text-[24px] md:text-[36px] font-serif mb-8 leading-tight">Location Host</h2>
           
           <div className="mb-6">
@@ -107,7 +107,7 @@ export default function Home() {
 
       {/* Section 4: Amenities */}
       <section id="amenities" className="h-screen bg-secondary/20 flex items-center justify-center">
-        <div className="text-center px-6 max-w-sm">
+        <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
           <h2 className="text-[24px] md:text-[36px] font-serif mb-8 leading-tight">Features & Amenities</h2>
           
           <div className="mb-6">
@@ -136,7 +136,7 @@ export default function Home() {
 
       {/* Section 5: Location & Rules */}
       <section id="location" className="h-screen bg-secondary/10 flex items-center justify-center pb-32">
-        <div className="text-center px-6 max-w-md w-full">
+        <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
           <h2 className="text-[24px] md:text-[36px] font-serif mb-6 leading-tight">Location & Rules</h2>
           
           {/* Google Maps Embed */}

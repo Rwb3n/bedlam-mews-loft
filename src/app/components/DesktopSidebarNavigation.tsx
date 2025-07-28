@@ -45,7 +45,7 @@ export default function DesktopSidebarNavigation() {
   }, []);
 
   return (
-    <nav className="hidden md:block fixed left-0 top-0 h-full w-64 bg-card border-r border-primary/20 z-40">
+    <nav className="hidden lg:block fixed right-0 top-0 h-full w-[27rem] bg-card border-l border-primary/20 z-40">
       <div className="pt-20 px-6">
         <div className="mb-8">
           <h1 className="text-3xl font-serif text-foreground">Bedlam Mews Loft</h1>

@@ -7,9 +7,11 @@
   "architecture": {
     "framework": "Next.js 15 + React 19 + TypeScript",
     "styling": "Tailwind CSS v4 + shadcn/ui components",
-    "fonts": "Castoro (serif) + Montserrat (sans-serif)",
+    "fonts": "Castoro (serif) + Geist (sans-serif)",
     "animations": "Framer Motion",
-    "deployment": "Vercel"
+    "deployment": "Vercel",
+    "breakpoints": "Mobile/tablet (up to 1023px), Desktop (1024px+) using lg: prefix",
+    "layout": "Mobile navigation + 2-column desktop (content | right sidebar 432px)"
   },
   
   "documentation": {
