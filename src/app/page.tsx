@@ -14,23 +14,23 @@ export default function Home() {
         <div className="text-center px-6 max-w-2xl w-full">
           <PhotoSlider title="Studio Space" height="h-64" />
           
-          <h1 className="text-[24px] md:text-[40px] font-serif text-primary-foreground mb-2 leading-tight">
+          <h1 className="text-[24px] md:text-[40px] font-serif mb-2 leading-tight">
             Rehearsal Space in the heart of London
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-6 font-light">Bedlam Mews</p>
+          <p className="text-lg md:text-xl mb-6 font-light">Bedlam Mews</p>
           
           <div className="space-y-2 text-sm">
-            <p className="font-medium text-muted-foreground">Book with confidence:</p>
+            <p className="font-medium">Book with confidence:</p>
             <div className="space-y-1">
-              <p className="flex items-center justify-center text-primary-foreground">
+              <p className="flex items-center justify-center">
                 <span className="text-primary mr-2">✓</span>
                 Direct contact with the host
               </p>
-              <p className="flex items-center justify-center text-primary-foreground">
+              <p className="flex items-center justify-center">
                 <span className="text-primary mr-2">✓</span>
                 Cancel if needed
               </p>
-              <p className="flex items-center justify-center text-primary-foreground">
+              <p className="flex items-center justify-center">
                 <span className="text-accent mr-2">⭐</span>
                 Fast & Secure payments
               </p>
@@ -42,19 +42,19 @@ export default function Home() {
       {/* Section 2: Space Details */}
       <section id="details" className="h-screen bg-primary/20 flex items-center justify-center py-20">
         <div className="text-center px-6 max-w-2xl w-full">
-          <h2 className="text-[20px] md:text-[32px] font-serif text-muted-foreground mb-4 leading-tight">Your Creative Space in Bedlam Mews</h2>
+          <h2 className="text-[20px] md:text-[32px] font-serif mb-4 leading-tight">Your Creative Space in Bedlam Mews</h2>
           
           <PhotoSlider title="Space Features" height="h-48" />
           
-          <p className="text-sm text-primary-foreground mb-6 font-light leading-relaxed">
+          <p className="text-sm mb-6 font-light leading-relaxed">
             This well-lit and versatile creative studio is perfect for rehearsals, classes, workshops, 
             meetup events, and photo or film shoots.
           </p>
           
           <div className="text-left space-y-3">
             <div>
-              <h3 className="font-medium mb-2 text-muted-foreground">What You&apos;ll Find:</h3>
-              <ul className="text-sm space-y-1 text-primary-foreground font-light">
+              <h3 className="font-medium mb-2">What You&apos;ll Find:</h3>
+              <ul className="text-sm space-y-1 font-light">
                 <li>• Exposed brick walls and wooden floors</li>
                 <li>• Large windows for natural light</li>
                 <li>• Open-plan layout accommodating 20+ people</li>
@@ -63,8 +63,8 @@ export default function Home() {
             </div>
             
             <div>
-              <h3 className="font-medium mb-2 text-muted-foreground">Perfect For:</h3>
-              <ul className="text-sm space-y-1 text-primary-foreground font-light">
+              <h3 className="font-medium mb-2">Perfect For:</h3>
+              <ul className="text-sm space-y-1 font-light">
                 <li>• Acting rehearsals and workshops</li>
                 <li>• Creative workshops and networking events</li>
                 <li>• Meeting spaces and private events</li>
@@ -79,14 +79,14 @@ export default function Home() {
       {/* Section 3: Host & Availability */}
       <section id="host" className="h-screen bg-secondary/10 flex items-center justify-center">
         <div className="text-center px-6 max-w-sm">
-          <h2 className="text-[24px] md:text-[36px] font-serif text-muted-foreground mb-8 leading-tight">Location Host</h2>
+          <h2 className="text-[24px] md:text-[36px] font-serif mb-8 leading-tight">Location Host</h2>
           
           <div className="mb-6">
             <div className="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-3 flex items-center justify-center">
               <span className="text-gray-600 text-sm">Photo</span>
             </div>
-            <h3 className="text-xl font-medium mb-2 text-primary-foreground">Elina</h3>
-            <p className="text-base text-muted-foreground mb-4 font-light">(replies in one hour)</p>
+            <h3 className="text-xl font-medium mb-2">Elina</h3>
+            <p className="text-base mb-4 font-light">(replies in one hour)</p>
             
             <a 
               href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
@@ -99,8 +99,8 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-medium mb-3 text-muted-foreground text-lg">Availability</h3>
-            <p className="text-base text-primary-foreground font-light">9:00 - 18:00 Mondays to Sundays</p>
+            <h3 className="font-medium mb-3 text-lg">Availability</h3>
+            <p className="text-base font-light">9:00 - 18:00 Mondays to Sundays</p>
           </div>
         </div>
       </section>
@@ -108,27 +108,27 @@ export default function Home() {
       {/* Section 4: Amenities */}
       <section id="amenities" className="h-screen bg-secondary/20 flex items-center justify-center">
         <div className="text-center px-6 max-w-sm">
-          <h2 className="text-[24px] md:text-[36px] font-serif text-muted-foreground mb-8 leading-tight">Features & Amenities</h2>
+          <h2 className="text-[24px] md:text-[36px] font-serif mb-8 leading-tight">Features & Amenities</h2>
           
           <div className="mb-6">
-            <h3 className="font-medium mb-4 text-muted-foreground text-lg">Features</h3>
+            <h3 className="font-medium mb-4 text-lg">Features</h3>
             <div className="flex gap-3 justify-center flex-wrap">
-              <span className="bg-primary/20 text-primary-foreground px-4 py-2 rounded-full text-base border border-primary/30">Bathroom</span>
-              <span className="bg-primary/20 text-primary-foreground px-4 py-2 rounded-full text-base border border-primary/30">Kitchen</span>
-              <span className="bg-primary/20 text-primary-foreground px-4 py-2 rounded-full text-base border border-primary/30">Blackout</span>
+              <span className="bg-primary/20 px-4 py-2 rounded-full text-base border border-primary/30">Bathroom</span>
+              <span className="bg-primary/20 px-4 py-2 rounded-full text-base border border-primary/30">Kitchen</span>
+              <span className="bg-primary/20 px-4 py-2 rounded-full text-base border border-primary/30">Blackout</span>
             </div>
           </div>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-medium mb-5 text-muted-foreground text-lg">Amenities</h3>
+            <h3 className="font-medium mb-5 text-lg">Amenities</h3>
             <div className="text-left space-y-3 text-base">
-              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span className="text-primary-foreground">Entrance size: 2m</span></p>
-              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span className="text-primary-foreground">Space Size: 44Sqm</span></p>
-              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span className="text-primary-foreground">Noise level: Quiet</span></p>
-              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span className="text-primary-foreground">Plugs and power output: Yes</span></p>
-              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span className="text-primary-foreground">On-site parking: 2</span></p>
-              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span className="text-primary-foreground">Toilets available</span></p>
-              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span className="text-primary-foreground">Wifi</span></p>
+              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Entrance size: 2m</span></p>
+              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Space Size: 44Sqm</span></p>
+              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Noise level: Quiet</span></p>
+              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Plugs and power output: Yes</span></p>
+              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>On-site parking: 2</span></p>
+              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Toilets available</span></p>
+              <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Wifi</span></p>
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function Home() {
       {/* Section 5: Location & Rules */}
       <section id="location" className="h-screen bg-secondary/10 flex items-center justify-center pb-32">
         <div className="text-center px-6 max-w-md w-full">
-          <h2 className="text-[24px] md:text-[36px] font-serif text-muted-foreground mb-6 leading-tight">Location & Rules</h2>
+          <h2 className="text-[24px] md:text-[36px] font-serif mb-6 leading-tight">Location & Rules</h2>
           
           {/* Google Maps Embed */}
           <div className="mb-6">
@@ -153,11 +153,11 @@ export default function Home() {
             ></iframe>
           </div>
           
-          <p className="text-primary-foreground text-base mb-8 font-light">Walnut Tree Walk, Lambeth SE11 6DF</p>
+          <p className="text-base mb-8 font-light">Walnut Tree Walk, Lambeth SE11 6DF</p>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-medium mb-5 text-muted-foreground text-lg">House Rules</h3>
-            <div className="text-left space-y-3 text-base text-primary-foreground font-light">
+            <h3 className="font-medium mb-5 text-lg">House Rules</h3>
+            <div className="text-left space-y-3 text-base font-light">
               <p>• No smoking in the building</p>
               <p>• Outside catering allowed</p>
               <p>• You can play music</p>

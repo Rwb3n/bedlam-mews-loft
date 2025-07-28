@@ -3,7 +3,7 @@ export default function FloatingActions() {
     <div className="fixed bottom-4 left-4 right-4 z-40 flex flex-col gap-2">
       {/* Book Now - Primary CTA */}
       <a 
-        href="https://calendly.com/demo" 
+        href="https://calendly.com/neonroobz" 
         target="_blank"
         rel="noopener noreferrer"
         className="bg-sage text-white px-8 py-4 rounded-full font-medium text-center block text-lg hover:bg-sage-dark transition-colors shadow-lg"
