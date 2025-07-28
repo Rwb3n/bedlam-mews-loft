@@ -17,7 +17,7 @@ export default function Home() {
       {/* Section 1: Hero */}
       <section id="hero" className="py-20 bg-card flex items-center justify-center pb-32">
         <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
-          <PhotoSlider title="Studio Space" height="h-64" />
+          <PhotoSlider title="Studio Space" height="h-128" />
           
           <h1 className="text-[24px] md:text-[40px] font-serif mb-2 leading-tight">
             Creative Space in the heart of London
@@ -68,11 +68,11 @@ export default function Home() {
         <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
           <h2 className="text-[20px] md:text-[32px] font-serif mb-4 leading-tight">Where Creative Breakthroughs Happen</h2>
           
-          <PhotoSlider title="Space Features" height="h-48" />
-          
           <p className="text-lg mb-6 font-light leading-relaxed text-left">
             It&apos;s deliberately simple. 44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
           </p>
+          
+          <PhotoSlider title="Space Features" height="h-48" />
           
           <div className="text-left space-y-3">
             <div>
@@ -163,7 +163,7 @@ export default function Home() {
       {/* Section 4: Location */}
       <section id="location" className="py-16 bg-secondary/10 flex items-center justify-center pb-32">
         <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
-          <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight">In the Heart of London's Creative Quarter</h2>
+          <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight">In the Heart of London&apos;s Creative Quarter</h2>
           
           <p className="text-lg mb-6 font-light leading-relaxed text-left">
             Lambeth isn&apos;t just convenient - it&apos;s where London&apos;s creative energy lives. Minutes from the South Bank, surrounded by galleries, theaters, and the kind of creative community that feeds breakthrough work.

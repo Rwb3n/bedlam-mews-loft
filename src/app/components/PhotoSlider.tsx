@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 interface PhotoSliderProps {
   title: string;
@@ -29,13 +29,14 @@ export default function PhotoSlider({ title, height = "h-64" }: PhotoSliderProps
     <div className={`${height} mb-6 overflow-hidden`}>
       <Carousel className="w-full h-full">
         <CarouselContent className="h-full">
-          {placeholderImages.map((image, index) => (
+          {placeholderImages.map((image) => (
             <CarouselItem key={image.id} className="h-full">
               <div className="h-full relative overflow-hidden rounded-lg">
-                <img 
+                <Image 
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </CarouselItem>
