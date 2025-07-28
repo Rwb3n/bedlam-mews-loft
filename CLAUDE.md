@@ -1,7 +1,8 @@
 {
   "project": {
     "name": "Bedlam Mews Loft Landing Page",
-    "vision": "Professional landing page for London creative space rental with Calendly booking integration"
+    "vision": "Professional landing page for London creative space rental with Calendly booking integration",
+    "Ai orchestrator": "Ruben Pires"
   },
   
   "architecture": {
