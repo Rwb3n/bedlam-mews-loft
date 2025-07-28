@@ -36,7 +36,7 @@ export default function FloatingActions() {
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:w-96 z-40 flex flex-col gap-2">
       {/* Pricing Display - Now at TOP */}
       <div className="flex justify-center">
-        <Badge className="text-sm font-medium">
+        <Badge className="text-sm md:text-lg font-medium">
           <Check className="w-4 h-4 mr-1" />
           spaces available from £30/hour
         </Badge>
@@ -46,7 +46,7 @@ export default function FloatingActions() {
       <Button 
         asChild
         size="lg"
-        className="text-lg shadow-lg rounded-full"
+        className="text-lg md:text-2xl md:h-14 shadow-lg rounded-full"
       >
         <a 
           href="https://calendly.com/neonroobz" 
@@ -63,7 +63,7 @@ export default function FloatingActions() {
           asChild
           variant="outline"
           size="sm"
-          className="flex-1 rounded-full font-light"
+          className="flex-1 md:h-12 md:text-lg rounded-full font-light"
         >
           <a 
             href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
@@ -76,7 +76,7 @@ export default function FloatingActions() {
         <Button 
           variant="outline"
           size="sm"
-          className="flex-1 rounded-full font-light"
+          className="flex-1 md:h-12 md:text-lg rounded-full font-light"
           onClick={handleShare}
         >
           share with friend

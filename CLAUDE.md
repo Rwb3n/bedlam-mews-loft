@@ -33,10 +33,13 @@
     "beforeCommit": "Did you run build and test all links work?"
   },
 
-  "commands": {
-    "dev": "npm run dev",
-    "build": "npm run build", 
+  "commands you run": {
     "deploy": "Push to main branch (auto-deploys to Vercel)"
+  },
+
+  "commands Ruben runs": {
+    "build": "npm run build",
+    "dev": "npm run dev",
   },
 
   "qualityGates": {
