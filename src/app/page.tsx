@@ -1,5 +1,6 @@
 import StickyHeader from './components/StickyHeader';
 import FloatingActions from './components/FloatingActions';
+import Footer from './components/Footer';
 
 export default function Home() {
   return (
@@ -158,6 +159,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }
