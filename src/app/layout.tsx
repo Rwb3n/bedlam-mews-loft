@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Castoro, Montserrat } from "next/font/google";
+import { Castoro } from "next/font/google";
 import "./globals.css";
 
 const castoro = Castoro({
@@ -10,12 +10,6 @@ const castoro = Castoro({
   display: "swap",
 });
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-montserrat",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Bedlam Mews Loft | Rehearsal Space London",
@@ -29,8 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
+      </head>
       <body
-        className={`${castoro.variable} ${montserrat.variable} font-sans antialiased`}
+        className={`${castoro.variable} font-sans antialiased`}
       >
         {children}
       </body>

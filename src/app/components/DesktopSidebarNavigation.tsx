@@ -48,7 +48,7 @@ export default function DesktopSidebarNavigation() {
     <nav className="hidden md:block fixed left-0 top-0 h-full w-64 bg-card border-r border-primary/20 z-40">
       <div className="pt-20 px-6">
         <div className="mb-8">
-          <h1 className="text-2xl font-serif text-foreground">Bedlam Mews Loft</h1>
+          <h1 className="text-3xl font-serif text-foreground">Bedlam Mews Loft</h1>
         </div>
         
         <div className="space-y-2">
@@ -56,7 +56,7 @@ export default function DesktopSidebarNavigation() {
             <button
               key={section.id}
               onClick={() => scrollToSection(section.id)}
-              className={`w-full justify-start text-left px-2 py-1.5 text-sm rounded-sm transition-colors ${
+              className={`w-full justify-start text-left px-2 py-1.5 text-lg rounded-sm transition-colors ${
                 activeSection === section.id 
                   ? "bg-primary/10 text-primary font-medium" 
                   : "hover:bg-primary/5"

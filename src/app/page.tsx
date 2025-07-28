@@ -17,9 +17,9 @@ export default function Home() {
           <h1 className="text-[24px] md:text-[40px] font-serif mb-2 leading-tight">
             Rehearsal Space in the heart of London
           </h1>
-          <p className="text-lg md:text-xl mb-6 font-light">Bedlam Mews</p>
+          <p className="text-xl md:text-2xl mb-6 font-light">Bedlam Mews</p>
           
-          <div className="space-y-2 text-sm">
+          <div className="space-y-2 text-lg">
             <p className="font-medium">Book with confidence:</p>
             <div className="space-y-1">
               <p className="flex items-center justify-center">
@@ -46,7 +46,7 @@ export default function Home() {
           
           <PhotoSlider title="Space Features" height="h-48" />
           
-          <p className="text-sm mb-6 font-light leading-relaxed">
+          <p className="text-lg mb-6 font-light leading-relaxed">
             This well-lit and versatile creative studio is perfect for rehearsals, classes, workshops, 
             meetup events, and photo or film shoots.
           </p>
@@ -54,7 +54,7 @@ export default function Home() {
           <div className="text-left space-y-3">
             <div>
               <h3 className="font-medium mb-2">What You&apos;ll Find:</h3>
-              <ul className="text-sm space-y-1 font-light">
+              <ul className="text-lg space-y-1 font-light">
                 <li>• Exposed brick walls and wooden floors</li>
                 <li>• Large windows for natural light</li>
                 <li>• Open-plan layout accommodating 20+ people</li>
@@ -64,7 +64,7 @@ export default function Home() {
             
             <div>
               <h3 className="font-medium mb-2">Perfect For:</h3>
-              <ul className="text-sm space-y-1 font-light">
+              <ul className="text-lg space-y-1 font-light">
                 <li>• Acting rehearsals and workshops</li>
                 <li>• Creative workshops and networking events</li>
                 <li>• Meeting spaces and private events</li>
@@ -83,24 +83,24 @@ export default function Home() {
           
           <div className="mb-6">
             <div className="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-3 flex items-center justify-center">
-              <span className="text-gray-600 text-sm">Photo</span>
+              <span className="text-gray-600 text-lg">Photo</span>
             </div>
-            <h3 className="text-xl font-medium mb-2">Elina</h3>
-            <p className="text-base mb-4 font-light">(replies in one hour)</p>
+            <h3 className="text-2xl font-medium mb-2">Elina</h3>
+            <p className="text-lg mb-4 font-light">(replies in one hour)</p>
             
             <a 
               href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-full text-base font-medium hover:bg-primary/80 transition-colors"
+              className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-full text-xl font-medium hover:bg-primary/80 transition-colors"
             >
               message host
             </a>
           </div>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-medium mb-3 text-lg">Availability</h3>
-            <p className="text-base font-light">9:00 - 18:00 Mondays to Sundays</p>
+            <h3 className="font-medium mb-3 text-xl">Availability</h3>
+            <p className="text-lg font-light">9:00 - 18:00 Mondays to Sundays</p>
           </div>
         </div>
       </section>
@@ -111,17 +111,17 @@ export default function Home() {
           <h2 className="text-[24px] md:text-[36px] font-serif mb-8 leading-tight">Features & Amenities</h2>
           
           <div className="mb-6">
-            <h3 className="font-medium mb-4 text-lg">Features</h3>
+            <h3 className="font-medium mb-4 text-xl">Features</h3>
             <div className="flex gap-3 justify-center flex-wrap">
-              <span className="bg-primary/20 px-4 py-2 rounded-full text-base border border-primary/30">Bathroom</span>
-              <span className="bg-primary/20 px-4 py-2 rounded-full text-base border border-primary/30">Kitchen</span>
-              <span className="bg-primary/20 px-4 py-2 rounded-full text-base border border-primary/30">Blackout</span>
+              <span className="bg-primary/20 px-4 py-2 rounded-full text-lg border border-primary/30">Bathroom</span>
+              <span className="bg-primary/20 px-4 py-2 rounded-full text-lg border border-primary/30">Kitchen</span>
+              <span className="bg-primary/20 px-4 py-2 rounded-full text-lg border border-primary/30">Blackout</span>
             </div>
           </div>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-medium mb-5 text-lg">Amenities</h3>
-            <div className="text-left space-y-3 text-base">
+            <h3 className="font-medium mb-5 text-xl">Amenities</h3>
+            <div className="text-left space-y-3 text-lg">
               <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Entrance size: 2m</span></p>
               <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Space Size: 44Sqm</span></p>
               <p className="flex items-center font-light"><span className="text-primary mr-3">✓</span><span>Noise level: Quiet</span></p>
@@ -153,11 +153,11 @@ export default function Home() {
             ></iframe>
           </div>
           
-          <p className="text-base mb-8 font-light">Walnut Tree Walk, Lambeth SE11 6DF</p>
+          <p className="text-lg mb-8 font-light">Walnut Tree Walk, Lambeth SE11 6DF</p>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-medium mb-5 text-lg">House Rules</h3>
-            <div className="text-left space-y-3 text-base font-light">
+            <h3 className="font-medium mb-5 text-xl">House Rules</h3>
+            <div className="text-left space-y-3 text-lg font-light">
               <p>• No smoking in the building</p>
               <p>• Outside catering allowed</p>
               <p>• You can play music</p>

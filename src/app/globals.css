@@ -62,7 +62,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-montserrat);
+  --font-sans: Geist;
   --font-display: var(--font-castoro);
 
   /* shadcn/ui color system using Mediterranean palette */
@@ -101,7 +101,7 @@
 }
 
 body {
-  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-family: Geist, system-ui, sans-serif;
   font-weight: 300;
 }
 

@@ -31,7 +31,7 @@ export default function PhotoSlider({ title, height = "h-64" }: PhotoSliderProps
       {/* Current Image Placeholder */}
       <div className="w-full h-full bg-gradient-to-br from-primary/30 to-muted/20 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-4xl mb-2">📸</div>
+          <div className="text-5xl mb-2">📸</div>
           <p className="font-light">
             {title} Photo {currentSlide + 1}
           </p>

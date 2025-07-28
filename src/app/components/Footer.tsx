@@ -2,14 +2,14 @@ export default function Footer() {
   return (
     <footer className="bg-secondary py-12 px-6">
       <div className="text-center max-w-sm mx-auto">
-        <h3 className="font-serif text-xl mb-4">The Loft in Bedlam Mews</h3>
-        <div className="text-base mb-6 font-light leading-relaxed">
+        <h3 className="font-serif text-2xl mb-4">The Loft in Bedlam Mews</h3>
+        <div className="text-lg mb-6 font-light leading-relaxed">
           <p>Walnut Tree Walk</p>
           <p>Lambeth</p>
           <p>SE11 6DF</p>
         </div>
         
-        <div className="space-y-3 text-base">
+        <div className="space-y-3 text-lg">
           <a 
             href="mailto:hello@bedlammewsloft.com" 
             className="block text-primary hover:text-primary/80 transition-colors font-light"
