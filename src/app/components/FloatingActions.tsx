@@ -2,15 +2,25 @@ export default function FloatingActions() {
   return (
     <div className="fixed bottom-4 left-4 right-4 z-40 flex flex-col gap-2">
       {/* Book Now - Primary CTA */}
-      <button className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium text-center">
+      <a 
+        href="https://calendly.com/demo" 
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium text-center block"
+      >
         Book Now
-      </button>
+      </a>
       
       {/* Secondary Actions */}
       <div className="flex gap-2">
-        <button className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm flex-1">
+        <a 
+          href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm flex-1 text-center block"
+        >
           message host
-        </button>
+        </a>
         <button className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm flex-1">
           share with friend
         </button>
