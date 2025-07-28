@@ -1,8 +1,14 @@
+import StickyHeader from './components/StickyHeader';
+import FloatingActions from './components/FloatingActions';
+
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <StickyHeader />
+      <FloatingActions />
+      
       {/* Section 1: Hero */}
-      <section className="h-screen bg-blue-50 flex items-center justify-center">
+      <section className="h-screen bg-blue-50 flex items-center justify-center pt-16">
         <div className="text-center px-4">
           <h1 className="text-3xl font-bold mb-4">Hero Section</h1>
           <p className="text-gray-600">Image slider + trust signals go here</p>
@@ -34,7 +40,7 @@ export default function Home() {
       </section>
 
       {/* Section 5: Location & Rules */}
-      <section className="h-screen bg-orange-50 flex items-center justify-center">
+      <section className="h-screen bg-orange-50 flex items-center justify-center pb-32">
         <div className="text-center px-4">
           <h2 className="text-3xl font-bold mb-4">Location & Rules</h2>
           <p className="text-gray-600">Google Maps + house rules go here</p>
