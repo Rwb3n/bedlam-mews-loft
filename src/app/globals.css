@@ -28,18 +28,18 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card: var(--warm-white);
+  --card-foreground: var(--warm-wood-dark);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --primary: var(--sage-green);
+  --primary-foreground: var(--soft-white);
+  --secondary: var(--warm-white);
+  --secondary-foreground: var(--warm-wood-dark);
+  --muted: var(--light-gray);
+  --muted-foreground: var(--warm-wood);
+  --accent: var(--accent-yellow);
+  --accent-foreground: var(--warm-wood-dark);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -65,22 +65,7 @@
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-castoro);
 
-  /* Custom color classes */
-  --color-sage: var(--sage-green);
-  --color-sage-light: var(--sage-green-light);
-  --color-sage-dark: var(--sage-green-dark);
-
-  --color-terracotta: var(--terracotta);
-  --color-terracotta-light: var(--terracotta-light);
-  --color-terracotta-dark: var(--terracotta-dark);
-
-  --color-wood: var(--warm-wood);
-  --color-wood-light: var(--warm-wood-light);
-  --color-wood-dark: var(--warm-wood-dark);
-
-  --color-accent: var(--accent-yellow);
-  --color-accent-light: var(--accent-yellow-light);
-  --color-accent-dark: var(--accent-yellow-dark);
+  /* shadcn/ui color system using Mediterranean palette */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

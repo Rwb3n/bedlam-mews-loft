@@ -27,12 +27,12 @@ export default function PhotoSlider({ title, height = "h-64" }: PhotoSliderProps
   };
 
   return (
-    <div className={`relative ${height} bg-sage/10 rounded-lg overflow-hidden mb-6`}>
+    <div className={`relative ${height} bg-primary/10 rounded-lg overflow-hidden mb-6`}>
       {/* Current Image Placeholder */}
-      <div className="w-full h-full bg-gradient-to-br from-sage-light/30 to-wood/20 flex items-center justify-center">
+      <div className="w-full h-full bg-gradient-to-br from-primary/30 to-muted/20 flex items-center justify-center">
         <div className="text-center">
           <div className="text-4xl mb-2">📸</div>
-          <p className="text-sage-dark font-light">
+          <p className="text-primary-foreground font-light">
             {title} Photo {currentSlide + 1}
           </p>
         </div>
@@ -41,13 +41,13 @@ export default function PhotoSlider({ title, height = "h-64" }: PhotoSliderProps
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-sage-dark w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+        className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary-foreground w-10 h-10 rounded-full flex items-center justify-center transition-colors"
       >
         ←
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-sage-dark w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-primary-foreground w-10 h-10 rounded-full flex items-center justify-center transition-colors"
       >
         →
       </button>
@@ -59,7 +59,7 @@ export default function PhotoSlider({ title, height = "h-64" }: PhotoSliderProps
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentSlide ? 'bg-sage' : 'bg-white/60'
+              index === currentSlide ? 'bg-primary' : 'bg-white/60'
             }`}
           />
         ))}
