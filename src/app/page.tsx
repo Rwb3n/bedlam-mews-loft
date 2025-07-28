@@ -10,28 +10,28 @@ export default function Home() {
       <FloatingActions />
       
       {/* Section 1: Hero */}
-      <section id="hero" className="h-screen bg-warm-white flex items-center justify-center pt-16">
+      <section id="hero" className="h-screen bg-warm-white flex items-center justify-center pt-20 pb-32">
         <div className="text-center px-6 max-w-2xl w-full">
-          <PhotoSlider title="Studio Space" height="h-80" />
+          <PhotoSlider title="Studio Space" height="h-64" />
           
-          <h1 className="text-[30px] md:text-[48px] font-[family-name:var(--font-castoro)] text-sage-dark mb-3 leading-tight">
+          <h1 className="text-[24px] md:text-[40px] font-[family-name:var(--font-castoro)] text-sage-dark mb-2 leading-tight">
             Rehearsal Space in the heart of London
           </h1>
-          <p className="text-xl md:text-2xl text-wood mb-8 font-light">Bedlam Mews</p>
+          <p className="text-lg md:text-xl text-wood mb-6 font-light">Bedlam Mews</p>
           
-          <div className="space-y-3 text-base">
+          <div className="space-y-2 text-sm">
             <p className="font-medium text-wood-dark">Book with confidence:</p>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <p className="flex items-center justify-center text-sage-dark">
-                <span className="text-sage mr-3">✓</span>
+                <span className="text-sage mr-2">✓</span>
                 Direct contact with the host
               </p>
               <p className="flex items-center justify-center text-sage-dark">
-                <span className="text-sage mr-3">✓</span>
+                <span className="text-sage mr-2">✓</span>
                 Cancel if needed
               </p>
               <p className="flex items-center justify-center text-sage-dark">
-                <span className="text-accent-dark mr-3">⭐</span>
+                <span className="text-accent-dark mr-2">⭐</span>
                 Fast & Secure payments
               </p>
             </div>
