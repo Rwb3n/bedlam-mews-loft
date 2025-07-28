@@ -33,6 +33,19 @@ export default function Footer() {
             Instagram
           </a>
         </div>
+        
+        <div className="mt-8 pt-6 border-t border-primary/20">
+          <p className="text-sm font-light">
+            Built by <a 
+              href="https://rubenpires.co.uk" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 transition-colors underline"
+            >
+              Ruben
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );

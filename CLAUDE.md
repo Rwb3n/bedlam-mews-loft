@@ -62,5 +62,17 @@
     "replaceAll": "Use replace_all: true for MultiEdit when classes repeat",
     "webShare": "Web Share API needs fallback to clipboard for desktop",
     "shadcnCLI": "NEVER use 'npx shadcn-ui@latest' - it's deprecated. Use 'npx shadcn@latest' only"
+  },
+
+  "availableComponents": {
+    "shadcn": [
+      "Avatar (AvatarImage, AvatarFallback)",
+      "Badge", 
+      "Button",
+      "Card (CardContent, CardHeader, CardTitle, CardDescription, CardAction, CardFooter)",
+      "Carousel (CarouselContent, CarouselItem, CarouselNext, CarouselPrevious)",
+      "Menubar",
+      "Separator"
+    ]
   }
 }

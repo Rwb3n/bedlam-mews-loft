@@ -1,6 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface PhotoSliderProps {
   title: string;
@@ -8,62 +15,35 @@ interface PhotoSliderProps {
 }
 
 export default function PhotoSlider({ title, height = "h-64" }: PhotoSliderProps) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  
   // Placeholder images - will be replaced with real photos
+  const placeholderImage = "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  
   const placeholderImages = [
-    { id: 1, alt: `${title} - View 1` },
-    { id: 2, alt: `${title} - View 2` },
-    { id: 3, alt: `${title} - View 3` },
-    { id: 4, alt: `${title} - View 4` }
+    { id: 1, alt: `${title} - View 1`, src: placeholderImage },
+    { id: 2, alt: `${title} - View 2`, src: placeholderImage },
+    { id: 3, alt: `${title} - View 3`, src: placeholderImage },
+    { id: 4, alt: `${title} - View 4`, src: placeholderImage }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % placeholderImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + placeholderImages.length) % placeholderImages.length);
-  };
-
   return (
-    <div className={`relative ${height} bg-primary/10 rounded-lg overflow-hidden mb-6`}>
-      {/* Current Image Placeholder */}
-      <div className="w-full h-full bg-gradient-to-br from-primary/30 to-muted/20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-5xl mb-2">📸</div>
-          <p className="font-light">
-            {title} Photo {currentSlide + 1}
-          </p>
-        </div>
-      </div>
-
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-      >
-        ←
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-      >
-        →
-      </button>
-
-      {/* Dots Indicator */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {placeholderImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentSlide ? 'bg-primary' : 'bg-white/60'
-            }`}
-          />
-        ))}
-      </div>
+    <div className={`${height} mb-6 overflow-hidden`}>
+      <Carousel className="w-full h-full">
+        <CarouselContent className="h-full">
+          {placeholderImages.map((image, index) => (
+            <CarouselItem key={image.id} className="h-full">
+              <div className="h-full relative overflow-hidden rounded-lg">
+                <img 
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="left-4" />
+        <CarouselNext className="right-4" />
+      </Carousel>
     </div>
   );
 }
