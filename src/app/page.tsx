@@ -9,7 +9,7 @@ export default function Home() {
       <FloatingActions />
       
       {/* Section 1: Hero */}
-      <section className="h-screen bg-blue-50 flex items-center justify-center pt-16">
+      <section id="hero" className="h-screen bg-blue-50 flex items-center justify-center pt-16">
         <div className="text-center px-4">
           <h1 className="text-3xl font-bold mb-2">Rehearsal Space in the heart of London</h1>
           <p className="text-lg text-gray-700 mb-6">Bedlam Mews</p>
@@ -35,7 +35,7 @@ export default function Home() {
       </section>
 
       {/* Section 2: Space Details */}
-      <section className="h-screen bg-green-50 flex items-center justify-center">
+      <section id="details" className="h-screen bg-green-50 flex items-center justify-center">
         <div className="text-center px-4 max-w-md">
           <h2 className="text-2xl font-bold mb-4">Your Creative Space in Bedlam Mews</h2>
           <p className="text-sm text-gray-700 mb-6">
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Section 3: Host & Availability */}
-      <section className="h-screen bg-yellow-50 flex items-center justify-center">
+      <section id="host" className="h-screen bg-yellow-50 flex items-center justify-center">
         <div className="text-center px-4 max-w-sm">
           <h2 className="text-2xl font-bold mb-6">Location Host</h2>
           
@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* Section 4: Amenities */}
-      <section className="h-screen bg-purple-50 flex items-center justify-center">
+      <section id="amenities" className="h-screen bg-purple-50 flex items-center justify-center">
         <div className="text-center px-4 max-w-sm">
           <h2 className="text-2xl font-bold mb-6">Features & Amenities</h2>
           
@@ -127,7 +127,7 @@ export default function Home() {
       </section>
 
       {/* Section 5: Location & Rules */}
-      <section className="h-screen bg-orange-50 flex items-center justify-center pb-32">
+      <section id="location" className="h-screen bg-orange-50 flex items-center justify-center pb-32">
         <div className="text-center px-4 max-w-md w-full">
           <h2 className="text-3xl font-bold mb-4">Location & Rules</h2>
           
