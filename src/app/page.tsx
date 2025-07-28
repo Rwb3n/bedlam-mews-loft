@@ -9,24 +9,26 @@ export default function Home() {
       <FloatingActions />
       
       {/* Section 1: Hero */}
-      <section id="hero" className="h-screen bg-blue-50 flex items-center justify-center pt-16">
-        <div className="text-center px-4">
-          <h1 className="text-3xl font-bold mb-2">Rehearsal Space in the heart of London</h1>
-          <p className="text-lg text-gray-700 mb-6">Bedlam Mews</p>
+      <section id="hero" className="h-screen bg-warm-white flex items-center justify-center pt-16">
+        <div className="text-center px-6 max-w-lg">
+          <h1 className="text-[30px] md:text-[48px] font-[family-name:var(--font-castoro)] text-sage-dark mb-3 leading-tight">
+            Rehearsal Space in the heart of London
+          </h1>
+          <p className="text-xl md:text-2xl text-wood mb-8 font-light">Bedlam Mews</p>
           
-          <div className="space-y-2 text-sm">
-            <p className="font-medium">Book with confidence:</p>
-            <div className="space-y-1">
-              <p className="flex items-center justify-center">
-                <span className="text-green-600 mr-2">✓</span>
+          <div className="space-y-3 text-base">
+            <p className="font-medium text-wood-dark">Book with confidence:</p>
+            <div className="space-y-2">
+              <p className="flex items-center justify-center text-sage-dark">
+                <span className="text-sage mr-3">✓</span>
                 Direct contact with the host
               </p>
-              <p className="flex items-center justify-center">
-                <span className="text-green-600 mr-2">✓</span>
+              <p className="flex items-center justify-center text-sage-dark">
+                <span className="text-sage mr-3">✓</span>
                 Cancel if needed
               </p>
-              <p className="flex items-center justify-center">
-                <span className="text-yellow-500 mr-2">⭐</span>
+              <p className="flex items-center justify-center text-sage-dark">
+                <span className="text-accent-dark mr-3">⭐</span>
                 Fast & Secure payments
               </p>
             </div>
@@ -35,18 +37,18 @@ export default function Home() {
       </section>
 
       {/* Section 2: Space Details */}
-      <section id="details" className="h-screen bg-green-50 flex items-center justify-center">
-        <div className="text-center px-4 max-w-md">
-          <h2 className="text-2xl font-bold mb-4">Your Creative Space in Bedlam Mews</h2>
-          <p className="text-sm text-gray-700 mb-6">
+      <section id="details" className="h-screen bg-sage-light/20 flex items-center justify-center">
+        <div className="text-center px-6 max-w-lg">
+          <h2 className="text-[24px] md:text-[36px] font-[family-name:var(--font-castoro)] text-wood-dark mb-6 leading-tight">Your Creative Space in Bedlam Mews</h2>
+          <p className="text-base text-sage-dark mb-8 font-light leading-relaxed">
             This well-lit and versatile creative studio is perfect for rehearsals, classes, workshops, 
             meetup events, and photo or film shoots.
           </p>
           
           <div className="text-left space-y-4">
             <div>
-              <h3 className="font-semibold mb-2">What You&apos;ll Find:</h3>
-              <ul className="text-sm space-y-1 text-gray-700">
+              <h3 className="font-medium mb-3 text-wood-dark text-lg">What You&apos;ll Find:</h3>
+              <ul className="text-base space-y-2 text-sage-dark font-light">
                 <li>• Exposed brick walls and wooden floors</li>
                 <li>• Large windows for natural light</li>
                 <li>• Open-plan layout accommodating 20+ people</li>
@@ -55,8 +57,8 @@ export default function Home() {
             </div>
             
             <div>
-              <h3 className="font-semibold mb-2">Perfect For:</h3>
-              <ul className="text-sm space-y-1 text-gray-700">
+              <h3 className="font-medium mb-3 text-wood-dark text-lg">Perfect For:</h3>
+              <ul className="text-base space-y-2 text-sage-dark font-light">
                 <li>• Acting rehearsals and workshops</li>
                 <li>• Creative workshops and networking events</li>
                 <li>• Meeting spaces and private events</li>
@@ -69,67 +71,67 @@ export default function Home() {
       </section>
 
       {/* Section 3: Host & Availability */}
-      <section id="host" className="h-screen bg-yellow-50 flex items-center justify-center">
-        <div className="text-center px-4 max-w-sm">
-          <h2 className="text-2xl font-bold mb-6">Location Host</h2>
+      <section id="host" className="h-screen bg-accent/10 flex items-center justify-center">
+        <div className="text-center px-6 max-w-sm">
+          <h2 className="text-[24px] md:text-[36px] font-[family-name:var(--font-castoro)] text-wood-dark mb-8 leading-tight">Location Host</h2>
           
           <div className="mb-6">
             <div className="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-3 flex items-center justify-center">
               <span className="text-gray-600 text-sm">Photo</span>
             </div>
-            <h3 className="text-lg font-semibold mb-1">Elina</h3>
-            <p className="text-sm text-gray-600 mb-3">(replies in one hour)</p>
+            <h3 className="text-xl font-medium mb-2 text-sage-dark">Elina</h3>
+            <p className="text-base text-wood mb-4 font-light">(replies in one hour)</p>
             
             <a 
               href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full text-sm"
+              className="inline-block bg-sage text-white px-6 py-3 rounded-full text-base font-medium hover:bg-sage-dark transition-colors"
             >
               message host
             </a>
           </div>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-semibold mb-2">Availability</h3>
-            <p className="text-sm text-gray-700">9:00 - 18:00 Mondays to Sundays</p>
+            <h3 className="font-medium mb-3 text-wood-dark text-lg">Availability</h3>
+            <p className="text-base text-sage-dark font-light">9:00 - 18:00 Mondays to Sundays</p>
           </div>
         </div>
       </section>
 
       {/* Section 4: Amenities */}
-      <section id="amenities" className="h-screen bg-purple-50 flex items-center justify-center">
-        <div className="text-center px-4 max-w-sm">
-          <h2 className="text-2xl font-bold mb-6">Features & Amenities</h2>
+      <section id="amenities" className="h-screen bg-terracotta/10 flex items-center justify-center">
+        <div className="text-center px-6 max-w-sm">
+          <h2 className="text-[24px] md:text-[36px] font-[family-name:var(--font-castoro)] text-wood-dark mb-8 leading-tight">Features & Amenities</h2>
           
           <div className="mb-6">
-            <h3 className="font-semibold mb-3">Features</h3>
-            <div className="flex gap-2 justify-center">
-              <span className="bg-white px-3 py-1 rounded-full text-sm border">Bathroom</span>
-              <span className="bg-white px-3 py-1 rounded-full text-sm border">Kitchen</span>
-              <span className="bg-white px-3 py-1 rounded-full text-sm border">Blackout</span>
+            <h3 className="font-medium mb-4 text-wood-dark text-lg">Features</h3>
+            <div className="flex gap-3 justify-center flex-wrap">
+              <span className="bg-sage/20 text-sage-dark px-4 py-2 rounded-full text-base border border-sage/30">Bathroom</span>
+              <span className="bg-sage/20 text-sage-dark px-4 py-2 rounded-full text-base border border-sage/30">Kitchen</span>
+              <span className="bg-sage/20 text-sage-dark px-4 py-2 rounded-full text-base border border-sage/30">Blackout</span>
             </div>
           </div>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-semibold mb-4">Amenities</h3>
-            <div className="text-left space-y-2 text-sm">
-              <p className="flex items-center"><span className="text-green-600 mr-2">✓</span>Entrance size: 2m</p>
-              <p className="flex items-center"><span className="text-green-600 mr-2">✓</span>Space Size: 44Sqm</p>
-              <p className="flex items-center"><span className="text-green-600 mr-2">✓</span>Noise level: Quiet</p>
-              <p className="flex items-center"><span className="text-green-600 mr-2">✓</span>Plugs and power output: Yes</p>
-              <p className="flex items-center"><span className="text-green-600 mr-2">✓</span>On-site parking: 2</p>
-              <p className="flex items-center"><span className="text-green-600 mr-2">✓</span>Toilets available</p>
-              <p className="flex items-center"><span className="text-green-600 mr-2">✓</span>Wifi</p>
+            <h3 className="font-medium mb-5 text-wood-dark text-lg">Amenities</h3>
+            <div className="text-left space-y-3 text-base">
+              <p className="flex items-center font-light"><span className="text-sage mr-3">✓</span><span className="text-sage-dark">Entrance size: 2m</span></p>
+              <p className="flex items-center font-light"><span className="text-sage mr-3">✓</span><span className="text-sage-dark">Space Size: 44Sqm</span></p>
+              <p className="flex items-center font-light"><span className="text-sage mr-3">✓</span><span className="text-sage-dark">Noise level: Quiet</span></p>
+              <p className="flex items-center font-light"><span className="text-sage mr-3">✓</span><span className="text-sage-dark">Plugs and power output: Yes</span></p>
+              <p className="flex items-center font-light"><span className="text-sage mr-3">✓</span><span className="text-sage-dark">On-site parking: 2</span></p>
+              <p className="flex items-center font-light"><span className="text-sage mr-3">✓</span><span className="text-sage-dark">Toilets available</span></p>
+              <p className="flex items-center font-light"><span className="text-sage mr-3">✓</span><span className="text-sage-dark">Wifi</span></p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Section 5: Location & Rules */}
-      <section id="location" className="h-screen bg-orange-50 flex items-center justify-center pb-32">
-        <div className="text-center px-4 max-w-md w-full">
-          <h2 className="text-3xl font-bold mb-4">Location & Rules</h2>
+      <section id="location" className="h-screen bg-wood/10 flex items-center justify-center pb-32">
+        <div className="text-center px-6 max-w-md w-full">
+          <h2 className="text-[24px] md:text-[36px] font-[family-name:var(--font-castoro)] text-wood-dark mb-6 leading-tight">Location & Rules</h2>
           
           {/* Google Maps Embed */}
           <div className="mb-6">
@@ -145,11 +147,11 @@ export default function Home() {
             ></iframe>
           </div>
           
-          <p className="text-gray-600 text-sm mb-6">Walnut Tree Walk, Lambeth SE11 6DF</p>
+          <p className="text-sage-dark text-base mb-8 font-light">Walnut Tree Walk, Lambeth SE11 6DF</p>
           
           <div className="border-t border-gray-300 pt-6">
-            <h3 className="font-semibold mb-4">House Rules</h3>
-            <div className="text-left space-y-2 text-sm text-gray-700">
+            <h3 className="font-medium mb-5 text-wood-dark text-lg">House Rules</h3>
+            <div className="text-left space-y-3 text-base text-sage-dark font-light">
               <p>• No smoking in the building</p>
               <p>• Outside catering allowed</p>
               <p>• You can play music</p>

@@ -6,7 +6,7 @@ export default function FloatingActions() {
         href="https://calendly.com/demo" 
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium text-center block"
+        className="bg-sage text-white px-8 py-4 rounded-full font-medium text-center block text-lg hover:bg-sage-dark transition-colors shadow-lg"
       >
         Book Now
       </a>
@@ -17,17 +17,17 @@ export default function FloatingActions() {
           href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm flex-1 text-center block"
+          className="bg-warm-white border border-sage/30 text-sage-dark px-4 py-3 rounded-full text-sm flex-1 text-center block hover:bg-sage/10 transition-colors font-light"
         >
           message host
         </a>
-        <button className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm flex-1">
+        <button className="bg-warm-white border border-sage/30 text-sage-dark px-4 py-3 rounded-full text-sm flex-1 hover:bg-sage/10 transition-colors font-light">
           share with friend
         </button>
       </div>
       
       {/* Pricing Display */}
-      <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm text-center">
+      <div className="bg-accent/20 text-wood-dark px-6 py-3 rounded-full text-base text-center font-medium">
         spaces available £30/hour
       </div>
     </div>

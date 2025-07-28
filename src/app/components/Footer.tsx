@@ -1,18 +1,18 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 py-8 px-4">
+    <footer className="bg-wood/10 py-12 px-6">
       <div className="text-center max-w-sm mx-auto">
-        <h3 className="font-bold text-lg mb-2">The Loft in Bedlam Mews</h3>
-        <div className="text-sm text-gray-700 mb-4">
+        <h3 className="font-[family-name:var(--font-castoro)] text-xl mb-4 text-wood-dark">The Loft in Bedlam Mews</h3>
+        <div className="text-base text-sage-dark mb-6 font-light leading-relaxed">
           <p>Walnut Tree Walk</p>
           <p>Lambeth</p>
           <p>SE11 6DF</p>
         </div>
         
-        <div className="space-y-2 text-sm">
+        <div className="space-y-3 text-base">
           <a 
             href="mailto:hello@bedlammewsloft.com" 
-            className="block text-blue-600 hover:underline"
+            className="block text-sage hover:text-sage-dark transition-colors font-light"
           >
             Email
           </a>
@@ -20,7 +20,7 @@ export default function Footer() {
             href="https://wa.me/447700000000" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block text-blue-600 hover:underline"
+            className="block text-sage hover:text-sage-dark transition-colors font-light"
           >
             WhatsApp
           </a>
@@ -28,7 +28,7 @@ export default function Footer() {
             href="https://instagram.com/bedlammewsloft" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block text-blue-600 hover:underline"
+            className="block text-sage hover:text-sage-dark transition-colors font-light"
           >
             Instagram
           </a>
