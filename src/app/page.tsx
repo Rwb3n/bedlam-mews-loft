@@ -9,9 +9,6 @@ export default function Home() {
       <Header />
       <FloatingActions />
       
-      {/* Main content with desktop sidebar offset */}
-      <main className="md:ml-64">
-      
       {/* Section 1: Hero */}
       <section id="hero" className="h-screen bg-card flex items-center justify-center pt-20 pb-32">
         <div className="text-center px-6 max-w-2xl w-full">
@@ -172,7 +169,6 @@ export default function Home() {
       </section>
       
       <Footer />
-      </main>
     </div>
   );
 }

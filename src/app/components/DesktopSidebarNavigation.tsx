@@ -53,14 +53,17 @@ export default function DesktopSidebarNavigation() {
         
         <div className="space-y-2">
           {sections.map((section) => (
-            <Button
+            <button
               key={section.id}
-              variant={activeSection === section.id ? "default" : "ghost"}
-              className="w-full justify-start text-left"
               onClick={() => scrollToSection(section.id)}
+              className={`w-full justify-start text-left px-2 py-1.5 text-sm rounded-sm transition-colors ${
+                activeSection === section.id 
+                  ? "bg-primary/10 text-primary font-medium" 
+                  : "hover:bg-primary/5"
+              }`}
             >
               {section.name}
-            </Button>
+            </button>
           ))}
         </div>
       </div>

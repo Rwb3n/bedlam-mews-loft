@@ -57,6 +57,7 @@
     "useClient": "Add 'use client' directive for onClick handlers in App Router",
     "asChild": "Use asChild pattern for shadcn Buttons wrapping <a> tags",
     "replaceAll": "Use replace_all: true for MultiEdit when classes repeat",
-    "webShare": "Web Share API needs fallback to clipboard for desktop"
+    "webShare": "Web Share API needs fallback to clipboard for desktop",
+    "shadcnCLI": "NEVER use 'npx shadcn-ui@latest' - it's deprecated. Use 'npx shadcn@latest' only"
   }
 }

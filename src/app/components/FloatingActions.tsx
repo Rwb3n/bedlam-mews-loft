@@ -38,7 +38,7 @@ export default function FloatingActions() {
       <div className="flex justify-center">
         <Badge className="text-sm md:text-lg font-medium">
           <Check className="w-4 h-4 mr-1" />
-          spaces available from £30/hour
+          slots available from £30/hour
         </Badge>
       </div>
       

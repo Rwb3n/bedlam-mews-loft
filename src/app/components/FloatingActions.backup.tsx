@@ -28,7 +28,7 @@ export default function FloatingActions() {
       
       {/* Pricing Display */}
       <div className="bg-accent/20 text-wood-dark px-6 py-3 rounded-full text-base text-center font-medium">
-        spaces available £30/hour
+        slots available £30/hour
       </div>
     </div>
   );
