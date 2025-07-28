@@ -45,7 +45,7 @@ export default function Home() {
           
           <div className="text-left space-y-4">
             <div>
-              <h3 className="font-semibold mb-2">What You'll Find:</h3>
+              <h3 className="font-semibold mb-2">What You&apos;ll Find:</h3>
               <ul className="text-sm space-y-1 text-gray-700">
                 <li>• Exposed brick walls and wooden floors</li>
                 <li>• Large windows for natural light</li>
