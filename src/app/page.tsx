@@ -1,4 +1,4 @@
-import StickyHeader from './components/StickyHeader';
+import Header from './components/Header';
 import FloatingActions from './components/FloatingActions';
 import Footer from './components/Footer';
 import PhotoSlider from './components/PhotoSlider';
@@ -6,8 +6,11 @@ import PhotoSlider from './components/PhotoSlider';
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <StickyHeader />
+      <Header />
       <FloatingActions />
+      
+      {/* Main content with desktop sidebar offset */}
+      <main className="md:ml-64">
       
       {/* Section 1: Hero */}
       <section id="hero" className="h-screen bg-card flex items-center justify-center pt-20 pb-32">
@@ -169,6 +172,7 @@ export default function Home() {
       </section>
       
       <Footer />
+      </main>
     </div>
   );
 }

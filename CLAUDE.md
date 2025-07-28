@@ -13,22 +13,20 @@
   },
   
   "documentation": {
-    "specs": "docs/enhancement-specs.md - Plain English feature requirements",
-    "migration": "docs/library-migration-plan.md - Risk-gated upgrade strategy", 
-    "colors": "docs/color-migration-mapping.md - Custom to shadcn color mapping",
-    "changelog": "docs/project-changelog_1.md + project-changelog_2.md"
-  },
+    "[component]_[stage]_specs.md": "specs for components"},
 
   "principles": {
     "plainEnglish": "Use simple language for discussions and documentation",
     "noCustomWork": "Use professional libraries over custom solutions",
     "riskGates": "Test each technical risk before moving forward",
     "singleSourceOfTruth": "One consistent color/component system",
-    "mobileFirst": "Mobile-responsive with 5 full-height sections"
+    "mobileFirst": "Mobile-responsive with 5 full-height sections",
+    "KISS": "Keep it simple, no unnecessary complexity",
+    "DRY": "Don't repeat yourself, use shadcn/ui components"
   },
   
   "ask yourself": {
-    "beforeCustomCSS": "Does shadcn/ui have a component for this?",
+    "beforeCustomCSS": "Do we have a library for this?",
     "beforeColors": "Are you using bg-primary/text-foreground semantic naming?",
     "beforeCommit": "Did you run build and test all links work?"
   },

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function StickyHeader() {
+export default function MobileNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
@@ -14,7 +14,7 @@ export default function StickyHeader() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-primary/20">
+    <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-primary/20">
       <div className="flex items-center justify-between px-6 py-4">
         <h1 className="text-xl font-serif">Bedlam Mews Loft</h1>
         <button 
