@@ -13,7 +13,7 @@ import { Milestone } from 'lucide-react';
 
 export default function Home() {
   return (
-    <>
+    <main className="pt-18 lg:pt-0">
       {/* Zone 1: Hero Zone - Full Width, Independent */}
       <HeroZone />
       
@@ -27,7 +27,7 @@ export default function Home() {
         <section id="details" className="w-full bg-primary/20 py-16">
           <div className="lg:mr-[27rem] flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
-              <h2 className="text-[20px] md:text-[32px] font-serif mb-4 leading-tight text-left">Where Creative Breakthroughs Happen</h2>
+              <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">Where Creative Breakthroughs Happen</h2>
               
               <p className="text-lg mb-6 font-light leading-relaxed text-left">
                 44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. It&apos;s deliberately simple. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
@@ -56,7 +56,7 @@ export default function Home() {
         <section id="amenities" className="w-full bg-secondary/20 py-16">
           <div className="lg:mr-[27rem] flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
-              <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-left">Everything Ready for Your Vision</h2>
+              <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">Everything Ready for Your Vision</h2>
               
               <p className="text-lg mb-8 font-light leading-relaxed text-left">
                 Walk in and start creating. No setup time, no missing pieces, no excuses - just everything your project needs to come alive.
@@ -133,7 +133,7 @@ export default function Home() {
         <section id="location" className="w-full bg-secondary/10 pb-16">
           <div className="lg:mr-[27rem] flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
-              <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-left">In the Heart of London&apos;s Creative Quarter</h2>
+              <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">In the Heart of London&apos;s Creative Quarter</h2>
               
               <p className="text-lg mb-6 font-light leading-relaxed text-left">
                 Lambeth isn&apos;t just convenient - it&apos;s where London&apos;s creative energy lives. Minutes from the South Bank, surrounded by galleries, theaters, and the kind of creative community that feeds breakthrough work.
@@ -270,6 +270,6 @@ export default function Home() {
           </div>
         </section>
       </ContentZone>
-    </>
+    </main>
   );
 }
