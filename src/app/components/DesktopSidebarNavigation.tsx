@@ -8,9 +8,9 @@ export default function DesktopSidebarNavigation() {
   const sections = [
     { id: 'hero', name: 'Home' },
     { id: 'details', name: 'Space Details' },
-    { id: 'host', name: 'Host' },
     { id: 'amenities', name: 'Amenities' },
-    { id: 'location', name: 'Location' }
+    { id: 'location', name: 'Location' },
+    { id: 'host', name: 'Host' }
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -22,7 +22,7 @@ export default function DesktopSidebarNavigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'details', 'host', 'amenities', 'location'];
+      const sections = ['hero', 'details', 'amenities', 'location', 'host'];
       
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -44,10 +44,10 @@ export default function DesktopSidebarNavigation() {
   }, []);
 
   return (
-    <nav className="hidden lg:block fixed right-0 top-0 h-full w-[27rem] bg-card border-l border-primary/20 z-40">
-      <div className="pt-20 px-6">
+    <nav className="hidden lg:block fixed right-0 top-0 h-full w-[27rem] z-40">
+      <div className="pt-16 px-6">
         <div className="mb-8">
-          <h1 className="text-3xl font-serif text-foreground">Bedlam Mews Loft</h1>
+          <h1 className="text-3xl font-serif text-foreground text-center">Bedlam Mews Loft</h1>
         </div>
         
         <div className="space-y-2">
@@ -55,7 +55,7 @@ export default function DesktopSidebarNavigation() {
             <button
               key={section.id}
               onClick={() => scrollToSection(section.id)}
-              className={`w-full justify-start text-left px-2 py-1.5 text-lg rounded-sm transition-colors ${
+              className={`w-full justify-center text-center px-2 py-3 text-xl rounded-sm transition-colors ${
                 activeSection === section.id 
                   ? "bg-primary/10 text-primary font-medium" 
                   : "hover:bg-primary/5"

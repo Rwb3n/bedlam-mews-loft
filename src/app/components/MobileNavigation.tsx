@@ -16,9 +16,9 @@ export default function MobileNavigation() {
   const sections = [
     { id: 'hero', name: 'Home' },
     { id: 'details', name: 'Space Details' },
-    { id: 'host', name: 'Host' },
     { id: 'amenities', name: 'Amenities' },
-    { id: 'location', name: 'Location' }
+    { id: 'location', name: 'Location' },
+    { id: 'host', name: 'Host' }
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -30,7 +30,7 @@ export default function MobileNavigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'details', 'host', 'amenities', 'location'];
+      const sections = ['hero', 'details', 'amenities', 'location', 'host'];
       
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -68,7 +68,7 @@ export default function MobileNavigation() {
             </MenubarTrigger>
             <MenubarContent 
               className="w-screen left-0 right-0 mx-0 rounded-none border-l-0 border-r-0"
-              sideOffset={0}
+              sideOffset={14}
               alignOffset={0}
             >
               {sections.map((section) => (
