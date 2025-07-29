@@ -10,11 +10,12 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import type { CarouselApi } from "@/components/ui/carousel";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PhotoSliderProps {
   title: string;
@@ -27,6 +28,9 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
   const [current, setCurrent] = useState(0)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalImageIndex, setModalImageIndex] = useState(0)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [imageLoading, setImageLoading] = useState(false)
   
   // Local studio image for all slides
   const studioImage = "/img/studio/studio-placehold.png"
@@ -51,6 +55,69 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
   const handleImageClick = (index: number) => {
     setModalImageIndex(index)
     setModalOpen(true)
+  }
+
+  const handlePrevImage = () => {
+    setImageLoading(true)
+    setModalImageIndex((prev) => 
+      prev === 0 ? placeholderImages.length - 1 : prev - 1
+    )
+  }
+
+  const handleNextImage = () => {
+    setImageLoading(true)
+    setModalImageIndex((prev) => 
+      prev === placeholderImages.length - 1 ? 0 : prev + 1
+    )
+  }
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!modalOpen) return
+      
+      switch (event.key) {
+        case 'ArrowLeft':
+          handlePrevImage()
+          break
+        case 'ArrowRight':
+          handleNextImage()
+          break
+        case 'Escape':
+          setModalOpen(false)
+          break
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [modalOpen])
+
+  // Touch gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+    
+    if (isLeftSwipe) {
+      handleNextImage()
+    } else if (isRightSwipe) {
+      handlePrevImage()
+    }
+    
+    setTouchStart(null)
+    setTouchEnd(null)
   }
 
   return (
@@ -100,8 +167,16 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
 
       {/* Image Modal */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="max-w-4xl w-full h-full max-h-screen p-0 bg-black/90">
-          <div className="relative w-full h-full flex items-center justify-center">
+        <DialogContent className="!max-w-[95vw] !w-[95vw] !h-[95vh] p-0 bg-secondary/95 backdrop-blur-sm border-0 [&>button]:hidden">
+          <DialogTitle className="sr-only">
+            {placeholderImages[modalImageIndex]?.alt || 'Image viewer'}
+          </DialogTitle>
+          <div 
+            className="relative w-full h-full flex items-center justify-center"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             {/* Close Button */}
             <button
               onClick={() => setModalOpen(false)}
@@ -110,8 +185,29 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
               <X className="w-6 h-6 text-white" />
             </button>
             
+            {/* Previous Button - Hidden on mobile (swipe instead) */}
+            <button
+              onClick={handlePrevImage}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors hidden sm:block"
+            >
+              <ChevronLeft className="w-8 h-8 text-white" />
+            </button>
+            
+            {/* Next Button - Hidden on mobile (swipe instead) */}
+            <button
+              onClick={handleNextImage}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors hidden sm:block"
+            >
+              <ChevronRight className="w-8 h-8 text-white" />
+            </button>
+            
             {/* Modal Image */}
             <div className="relative max-w-full max-h-full">
+              {imageLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                  <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
               <Image
                 src={placeholderImages[modalImageIndex].src}
                 alt={placeholderImages[modalImageIndex].alt}
@@ -119,7 +215,17 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
                 height={900}
                 className="max-w-full max-h-full object-contain"
                 priority
+                onLoad={() => setImageLoading(false)}
+                onError={() => setImageLoading(false)}
               />
+            </div>
+            
+            {/* Image Counter */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 rounded-full px-4 py-2">
+              <span className="text-white text-sm">
+                {modalImageIndex + 1} of {placeholderImages.length}
+              </span>
+              <span className="text-white/60 text-xs ml-2 sm:hidden">• Swipe to navigate</span>
             </div>
           </div>
         </DialogContent>
