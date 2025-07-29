@@ -1,40 +1,100 @@
+import { Separator } from "@/components/ui/separator";
+
 export default function Footer() {
   return (
-    <footer className="bg-secondary py-12 px-6">
-      <div className="text-center max-w-sm mx-auto">
-        <h3 className="font-serif text-2xl mb-4">The Loft in Bedlam Mews</h3>
-        <div className="text-lg mb-6 font-light leading-relaxed">
-          <p>Walnut Tree Walk</p>
-          <p>Lambeth</p>
-          <p>SE11 6DF</p>
+    <footer className="py-16 pb-40 lg:pb-16 bg-secondary flex items-center justify-center">
+      <div className="px-6 max-w-2xl lg:max-w-4xl w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 relative">
+          
+          {/* Left Column: Business Info + Address */}
+          <div className="text-center lg:text-left">
+            <h3 className="font-serif text-2xl mb-4">The Loft in Bedlam Mews</h3>
+            <div className="text-lg mb-6 font-light leading-relaxed">
+              <p>Walnut Tree Walk</p>
+              <p>Lambeth</p>
+              <p>SE11 6DF</p>
+            </div>
+            <div className="text-lg font-light">
+              <p className="mb-2">8am - till late</p>
+              <p>7 days a week</p>
+            </div>
+            
+            {/* Mobile separator - inside left column */}
+            <Separator className="lg:hidden mt-6" />
+          </div>
+          
+          {/* Right Column: Contact + Booking CTA */}
+          <div className="text-center">
+            <h4 className="font-medium text-xl mb-4">Get In Touch</h4>
+            <div className="flex justify-center gap-6 mb-6">
+              <div className="text-center">
+                <div className="text-2xl mb-2">📧</div>
+                <a 
+                  href="mailto:hello@bedlammewsloft.com" 
+                  className="text-primary hover:text-primary/80 transition-colors font-light text-lg"
+                >
+                  Email
+                </a>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl mb-2">📱</div>
+                <a 
+                  href="https://wa.me/447700000000" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 transition-colors font-light text-lg"
+                >
+                  WhatsApp
+                </a>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl mb-2">📷</div>
+                <a 
+                  href="https://instagram.com/bedlammewsloft" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 transition-colors font-light text-lg"
+                >
+                  Instagram
+                </a>
+              </div>
+            </div>
+            
+            <a 
+              href="https://calendly.com/bedlammewsloft" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-full text-lg font-medium hover:bg-primary/80 transition-colors"
+            >
+              Book Your Session
+            </a>
+          </div>
+          
+          {/* Separator between columns - positioned absolutely */}
+          <Separator 
+            orientation="vertical" 
+            className="hidden lg:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 h-32 w-px" 
+          />
+          
         </div>
         
-        <div className="space-y-3 text-lg">
-          <a 
-            href="mailto:hello@bedlammewsloft.com" 
-            className="block text-primary hover:text-primary/80 transition-colors font-light"
-          >
-            Email
-          </a>
-          <a 
-            href="https://wa.me/447700000000" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="block text-primary hover:text-primary/80 transition-colors font-light"
-          >
-            WhatsApp
-          </a>
-          <a 
-            href="https://instagram.com/bedlammewsloft" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="block text-primary hover:text-primary/80 transition-colors font-light"
-          >
-            Instagram
-          </a>
-        </div>
-        
-        <div className="mt-8 pt-6 border-t border-primary/20">
+        <Separator className="mt-8 mb-6" />
+        <div className="text-center">
+          <div className="flex justify-center gap-4 text-sm font-light mb-3">
+            <a 
+              href="/terms-conditions" 
+              className="text-primary hover:text-primary/80 transition-colors underline"
+            >
+              Terms & Conditions
+            </a>
+            <span className="text-muted-foreground">•</span>
+            <a 
+              href="/privacy-policy" 
+              className="text-primary hover:text-primary/80 transition-colors underline"
+            >
+              Privacy Policy
+            </a>
+          </div>
           <p className="text-sm font-light">
             Built by <a 
               href="https://rubenpires.co.uk" 
