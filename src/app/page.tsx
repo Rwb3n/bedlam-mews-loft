@@ -50,14 +50,14 @@ export default function Home() {
             
             {/* Scroll indicator */}
             <div className="flex justify-center mt-8 -mb-4">
-              <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
+              <ChevronDown className="w-6 h-6 lg:w-16 lg:h-16 text-muted-foreground animate-bounce" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Credential Banner */}
-      <section className="py-12 bg-card/50">
+      <section className="py-6 bg-card/50">
         <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full mx-auto">
           <p className="text-lg mb-6 font-light text-center">Where BBC shoots, Netflix creates, and National Theatre rehearses:</p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -84,7 +84,7 @@ export default function Home() {
           
           <PhotoSlider title="Space Features" showDots={true} />
           
-          <div className="text-left space-y-3">
+          <div className="text-left space-y-3 mt-6">
             <div>
               <h3 className="font-medium mb-2">Why Creative Professionals Choose This Space:</h3>
               <ul className="text-lg space-y-1 font-light">
@@ -185,7 +185,7 @@ export default function Home() {
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4967.197565568589!2d-0.12108382346542577!3d51.49635327179558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f12.1!3m3!1m2!1s0x487604c59b5d3c45%3A0x7ff893c1b7b4d7c5!2sWalnut%20Tree%20Walk%2C%20London%20SE11%206DF%2C%20UK!5e0!3m2!1sen!2sus!4v1643273689582!5m2!1sen!2sus"
               width="100%"
-              height="200"
+              height="300"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
@@ -194,7 +194,7 @@ export default function Home() {
             ></iframe>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
             <div className="flex flex-col p-4">
               <Button 
                 asChild 
