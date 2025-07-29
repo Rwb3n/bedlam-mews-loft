@@ -24,7 +24,13 @@ export default function MobileNavigation() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerHeight = 80; // Mobile header height
+      const sectionPadding = 32; // Half the py-16 section padding
+      const elementPosition = element.offsetTop - headerHeight + sectionPadding;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

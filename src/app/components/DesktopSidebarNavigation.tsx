@@ -16,7 +16,12 @@ export default function DesktopSidebarNavigation() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const sectionPadding = 16; // Reduced offset for better desktop positioning
+      const elementPosition = element.offsetTop + sectionPadding;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

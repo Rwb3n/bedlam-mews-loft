@@ -8,10 +8,10 @@ export default function Footer() {
           
           {/* Left Column: Business Info + Address */}
           <div className="text-center lg:text-left">
-            <h3 className="font-serif text-2xl mb-4">The Loft in Bedlam Mews</h3>
+            <h3 className="font-serif text-2xl mb-4">Bedlam Mews Loft</h3>
             <div className="text-lg mb-6 font-light leading-relaxed">
               <p>Walnut Tree Walk</p>
-              <p>Lambeth</p>
+              <p>North Lambeth</p>
               <p>SE11 6DF</p>
             </div>
             <div className="text-lg font-light">
@@ -26,38 +26,38 @@ export default function Footer() {
           {/* Right Column: Contact + Booking CTA */}
           <div className="text-center">
             <h4 className="font-medium text-xl mb-4">Get In Touch</h4>
-            <div className="flex justify-center gap-6 mb-6">
-              <div className="text-center">
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <a 
+                href="mailto:hello@bedlammewsloft.com" 
+                className="text-center block hover:opacity-80 transition-opacity"
+              >
                 <div className="text-2xl mb-2">📧</div>
-                <a 
-                  href="mailto:hello@bedlammewsloft.com" 
-                  className="text-primary hover:text-primary/80 transition-colors font-light text-lg"
-                >
+                <div className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
                   Email
-                </a>
-              </div>
-              <div className="text-center">
+                </div>
+              </a>
+              <a 
+                href="https://wa.me/447700000000" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-center block hover:opacity-80 transition-opacity"
+              >
                 <div className="text-2xl mb-2">📱</div>
-                <a 
-                  href="https://wa.me/447700000000" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/80 transition-colors font-light text-lg"
-                >
+                <div className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
                   WhatsApp
-                </a>
-              </div>
-              <div className="text-center">
+                </div>
+              </a>
+              <a 
+                href="https://instagram.com/bedlammewsloft" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-center block hover:opacity-80 transition-opacity"
+              >
                 <div className="text-2xl mb-2">📷</div>
-                <a 
-                  href="https://instagram.com/bedlammewsloft" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/80 transition-colors font-light text-lg"
-                >
+                <div className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
                   Instagram
-                </a>
-              </div>
+                </div>
+              </a>
             </div>
             
             <a 

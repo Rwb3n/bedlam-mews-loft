@@ -28,26 +28,6 @@ export default function Home() {
             </h1>
             <p className="text-xl md:text-2xl mb-6 font-light">Bedlam Mews, North Lambeth, SE11 6DF</p>
             
-            <Card className="max-w-lg mx-auto">
-              <CardContent className="pt-1 pb-4 px-10">
-                <p className="font-medium mb-4 text-lg">Book with confidence:</p>
-                <div className="space-y-2">
-                  <p className="flex items-center">
-                    <span className="mr-2">💬</span>
-                    Direct contact with the host
-                  </p>
-                  <p className="flex items-center">
-                    <span className="mr-2">🕐</span>
-                    Cancel anytime up to 24 hours before
-                  </p>
-                  <p className="flex items-center">
-                    <span className="mr-2">🔒</span>
-                    Secure payments via PayPal
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-            
             {/* Scroll indicator */}
             <div className="flex justify-center mt-8 -mb-4">
               <ChevronDown className="w-6 h-6 lg:w-16 lg:h-16 text-muted-foreground animate-bounce" />
@@ -82,7 +62,9 @@ export default function Home() {
             It&apos;s deliberately simple. 44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
           </p>
           
-          <PhotoSlider title="Space Features" showDots={true} />
+          <div className="py-4">
+            <PhotoSlider title="Space Features" showDots={true} />
+          </div>
           
           <div className="text-left space-y-3 mt-6">
             <div>
@@ -159,20 +141,34 @@ export default function Home() {
             {/* Accessibility */}
             <div>
               <h3 className="font-medium mb-4 text-xl text-left">Accessibility</h3>
-              <div className="flex flex-wrap gap-3">
-                <span className="bg-orange-100 px-4 py-2 rounded-full text-sm border-2 border-orange-200 flex items-center font-semibold"><span className="text-orange-500 mr-2 text-xl">!</span>Please note: Access requires two flights of stairs - not wheelchair accessible</span>
+              <div className="p-6 bg-orange-50 rounded-lg border border-orange-200">
+                <div className="mb-3">
+                  <span className="bg-orange-100 px-3 py-1 rounded-full text-sm font-semibold text-orange-600 border border-orange-200 inline-flex items-center">
+                    <span className="bg-orange-300 text-orange-800 rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">!</span>Please note
+                  </span>
+                </div>
+                <p className="text-base font-light text-orange-800">
+                  Access requires two flights of stairs - not wheelchair accessible
+                </p>
               </div>
             </div>
           </div>
           
-          <div className="mt-8 p-6 bg-primary/10 rounded-lg">
+          <Separator className="my-6" />
+          
+          <div className="p-6 bg-primary/10 rounded-lg">
+            <div className="mb-3">
+              <span className="bg-primary/20 px-3 py-1 rounded-full text-sm font-semibold text-primary border border-primary/30 inline-flex items-center">
+                <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">?</span>Questions
+              </span>
+            </div>
             <p className="text-lg font-light">Questions about setup or special requirements? <Button asChild variant="link" className="p-0 h-auto font-medium text-lg underline"><a href="#host">Let&apos;s chat</a></Button> - Elina responds within the hour.</p>
           </div>
         </div>
       </section>
 
       {/* Section 4: Location */}
-      <section id="location" className="pb-16 bg-secondary/10 flex items-center justify-center">
+      <section id="location" className="py-16 bg-secondary/10 flex items-center justify-center">
         <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
           <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-left">In the Heart of London&apos;s Creative Quarter</h2>
           
@@ -264,7 +260,26 @@ export default function Home() {
                 {/* Availability Block */}
                 <div className="flex-1 text-center flex flex-col justify-center">
                   <CardTitle className="text-xl mb-4">Space Availability</CardTitle>
-                  <p className="text-lg font-light">8:00 - till late Mondays to Sundays</p>
+                  <p className="text-lg font-light mb-6">8:00 - till late Mondays to Sundays</p>
+                  
+                  {/* Book with confidence elements */}
+                  <div>
+                    <p className="font-medium mb-3 text-base">Book with confidence:</p>
+                    <div className="space-y-2 text-sm">
+                      <p className="flex items-center justify-center">
+                        <span className="mr-2">💬</span>
+                        Direct contact with the host
+                      </p>
+                      <p className="flex items-center justify-center">
+                        <span className="mr-2">🕐</span>
+                        Cancel anytime up to 24 hours before
+                      </p>
+                      <p className="flex items-center justify-center">
+                        <span className="mr-2">🔒</span>
+                        Secure payments via PayPal
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </CardContent>
