@@ -16,7 +16,7 @@ interface PhotoSliderProps {
 
 export default function PhotoSlider({ title, height = "h-64" }: PhotoSliderProps) {
   // Local studio image for all slides
-  const studioImage = "/img/studio/studio-placehold.avif";
+  const studioImage = "/img/studio/studio-placehold.png";
   
   const placeholderImages = [
     { id: 1, alt: `${title} - View 1`, src: studioImage },
