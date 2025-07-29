@@ -59,7 +59,7 @@ export default function Home() {
           <h2 className="text-[20px] md:text-[32px] font-serif mb-4 leading-tight text-left">Where Creative Breakthroughs Happen</h2>
           
           <p className="text-lg mb-6 font-light leading-relaxed text-left">
-            It&apos;s deliberately simple. 44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
+            44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. It&apos;s deliberately simple. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
           </p>
           
           <div className="py-4">
