@@ -224,7 +224,7 @@ export default function Home() {
                   <div className="flex items-center justify-center gap-4 mb-4">
                     <Avatar className="w-16 h-16">
                       <AvatarImage 
-                        src="https://res.cloudinary.com/spotlightuk/image/upload/e_sharpen:62,q_auto:best,c_limit,fl_keep_attribution,w_2580/v3/remote_media_prodaws/e395fdea-3be6-430f-acc7-f692dc11003c" 
+                        src="/img/studio/avatar.png" 
                         alt="Elina - Host" 
                       />
                       <AvatarFallback>E</AvatarFallback>
