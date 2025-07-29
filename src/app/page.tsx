@@ -72,7 +72,7 @@ export default function Home() {
             It&apos;s deliberately simple. 44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
           </p>
           
-          <PhotoSlider title="Space Features" height="h-48" />
+          <PhotoSlider title="Space Features" height="h-96" showDots={true} />
           
           <div className="text-left space-y-3">
             <div>
