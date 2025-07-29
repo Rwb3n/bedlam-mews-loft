@@ -202,9 +202,9 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
             </button>
             
             {/* Modal Image */}
-            <div className="relative max-w-full max-h-full">
+            <div className="absolute inset-0">
               {imageLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-10">
                   <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 </div>
               )}
@@ -213,7 +213,7 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
                 alt={placeholderImages[modalImageIndex].alt}
                 width={1200}
                 height={900}
-                className="max-w-full max-h-full object-contain"
+                className="w-full h-full object-cover"
                 priority
                 onLoad={() => setImageLoading(false)}
                 onError={() => setImageLoading(false)}
