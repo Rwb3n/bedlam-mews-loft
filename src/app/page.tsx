@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import { ChevronDown } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -28,7 +29,7 @@ export default function Home() {
             <p className="text-xl md:text-2xl mb-6 font-light">Bedlam Mews, North Lambeth, SE11 6DF</p>
             
             <Card className="max-w-lg mx-auto">
-              <CardContent className="pt-1 pb-4 px-12">
+              <CardContent className="pt-1 pb-4 px-10">
                 <p className="font-medium mb-4 text-lg">Book with confidence:</p>
                 <div className="space-y-2">
                   <p className="flex items-center">
@@ -46,6 +47,11 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
+            
+            {/* Scroll indicator */}
+            <div className="flex justify-center mt-8 -mb-4">
+              <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
+            </div>
           </div>
         </div>
       </section>
@@ -76,7 +82,7 @@ export default function Home() {
             It&apos;s deliberately simple. 44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
           </p>
           
-          <PhotoSlider title="Space Features" height="h-96" showDots={true} />
+          <PhotoSlider title="Space Features" showDots={true} />
           
           <div className="text-left space-y-3">
             <div>
