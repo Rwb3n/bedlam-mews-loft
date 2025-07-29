@@ -63,7 +63,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist);
-  --font-display: var(--font-sorts-mill-goudy);
+  --font-serif: var(--font-sorts-mill-goudy);
 
   /* shadcn/ui color system using Mediterranean palette */
   --color-sidebar-ring: var(--sidebar-ring);

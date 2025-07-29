@@ -1,4 +1,5 @@
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   return (
@@ -60,14 +61,15 @@ export default function Footer() {
               </a>
             </div>
             
-            <a 
-              href="https://calendly.com/bedlammewsloft" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-full text-lg font-medium hover:bg-primary/80 transition-colors"
-            >
-              Book Your Session
-            </a>
+            <Button asChild size="lg" className="text-lg rounded-full">
+              <a 
+                href="https://calendly.com/bedlammewsloft" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Book Your Session
+              </a>
+            </Button>
           </div>
           
           {/* Separator between columns - positioned absolutely */}

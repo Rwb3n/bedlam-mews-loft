@@ -157,17 +157,18 @@ export default function Home() {
                 <div className="flex flex-col p-4">
                   <p className="text-lg font-light mb-4 text-left">Bedlam Mews, Walnut Tree Walk, Lambeth SE11 6DF</p>
                   
-                  <a 
-                    href="https://www.google.com/maps/dir/?api=1&destination=Walnut+Tree+Walk,+London+SE11+6DF,+UK" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="bg-primary text-primary-foreground px-6 py-3 rounded-full text-lg font-medium hover:bg-primary/80 transition-colors flex items-center"
-                  >
-                    <span className="bg-white rounded-full w-6 h-6 flex items-center justify-center mr-2">
-                      <Milestone className="w-4 h-4 text-primary" />
-                    </span>
-                    <span className="flex-1 text-center">Get Directions</span>
-                  </a>
+                  <Button asChild size="lg" className="text-lg rounded-full flex items-center">
+                    <a 
+                      href="https://www.google.com/maps/dir/?api=1&destination=Walnut+Tree+Walk,+London+SE11+6DF,+UK" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <span className="bg-white rounded-full w-6 h-6 flex items-center justify-center mr-2">
+                        <Milestone className="w-4 h-4 text-primary" />
+                      </span>
+                      <span className="flex-1 text-center">Get Directions</span>
+                    </a>
+                  </Button>
                 </div>
                 
                 <div className="p-4 bg-primary/5 rounded-lg">
@@ -197,7 +198,7 @@ export default function Home() {
           <div className="lg:mr-[27rem] flex items-center justify-center">
             <div className="px-6 max-w-2xl lg:max-w-4xl w-full">
               <Card>
-                <CardContent className="p-8">
+                <CardContent className="p-4">
                   <div className="flex flex-col lg:flex-row lg:items-center gap-8">
                 {/* Host Info Block */}
                 <div className="flex-1 text-center">
@@ -216,14 +217,15 @@ export default function Home() {
                   
                   <p className="text-lg mb-4 font-light">(replies within 1 hour)</p>
                   
-                  <a 
-                    href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-full text-xl font-medium hover:bg-primary/80 transition-colors"
-                  >
-                    message host
-                  </a>
+                  <Button asChild size="lg" className="text-xl rounded-full">
+                    <a 
+                      href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      message host
+                    </a>
+                  </Button>
                 </div>
                 
                 {/* Separator */}
