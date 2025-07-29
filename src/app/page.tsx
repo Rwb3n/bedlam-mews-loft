@@ -66,7 +66,7 @@ export default function Home() {
                 
                 {/* Space Features */}
                 <div>
-                  <h3 className="font-medium mb-4 text-xl text-left">Space Features</h3>
+                  <h3 className="font-serif font-medium mb-4 text-xl text-left">Space Features</h3>
                   <div className="flex flex-wrap gap-3">
                 <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>44 sqm open-plan layout</Badge>
                 <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>2m tall entrance</Badge>
@@ -78,7 +78,7 @@ export default function Home() {
                 
                 {/* Comfort & Convenience */}
                 <div>
-                  <h3 className="font-medium mb-4 text-xl text-left">Comfort & Convenience</h3>
+                  <h3 className="font-serif font-medium mb-4 text-xl text-left">Comfort & Convenience</h3>
                   <div className="flex flex-wrap gap-3">
                 <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Kitchen Sink</Badge>
                 <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Private shower</Badge>
@@ -91,7 +91,7 @@ export default function Home() {
                 
                 {/* House Guidelines */}
                 <div>
-                  <h3 className="font-medium mb-4 text-xl text-left">House Guidelines</h3>
+                  <h3 className="font-serif font-medium mb-4 text-xl text-left">House Guidelines</h3>
                   <div className="flex flex-wrap gap-3">
                 <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Smoke-free building</Badge>
                 <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Family-friendly space</Badge>
@@ -101,7 +101,7 @@ export default function Home() {
                 
                 {/* Accessibility */}
                 <div>
-                  <h3 className="font-medium mb-4 text-xl text-left">Accessibility</h3>
+                  <h3 className="font-serif font-medium mb-4 text-xl text-left">Accessibility</h3>
                   <div className="p-6 bg-orange-50 rounded-lg border border-orange-200">
                     <div className="mb-3">
                       <Badge variant="secondary" className="bg-orange-100 text-orange-600 border-orange-200 px-3 py-1 text-sm font-semibold inline-flex items-center">
@@ -171,7 +171,7 @@ export default function Home() {
                 </div>
                 
                 <div className="p-4 bg-primary/5 rounded-lg">
-                  <h3 className="font-medium mb-2 text-lg text-left">Transport Links</h3>
+                  <h3 className="font-serif font-medium mb-2 text-lg text-left">Transport Links</h3>
                   <div className="text-left space-y-2 text-base font-light">
                     <p className="flex items-start">
                       <span className="mr-2">🚇</span>
@@ -211,7 +211,7 @@ export default function Home() {
                       />
                       <AvatarFallback>E</AvatarFallback>
                     </Avatar>
-                    <h3 className="text-2xl font-medium">Elina</h3>
+                    <h3 className="text-2xl font-serif font-medium">Elina</h3>
                   </div>
                   
                   <p className="text-lg mb-4 font-light">(replies within 1 hour)</p>

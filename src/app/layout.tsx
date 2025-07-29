@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Castoro } from "next/font/google";
+import { Sorts_Mill_Goudy, Geist } from "next/font/google";
 import "./globals.css";
 
-const castoro = Castoro({
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-geist",
+  display: "swap",
+});
+
+const sortsMillGoudy = Sorts_Mill_Goudy({
   subsets: ["latin"],
   weight: ["400"],
-  style: ["normal", "italic"],
-  variable: "--font-castoro",
+  style: ["italic"],
+  variable: "--font-sorts-mill-goudy",
   display: "swap",
 });
 
@@ -23,13 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
-      </head>
+      <head />
       <body
-        className={`${castoro.variable} font-sans antialiased`}
+        className={`${geist.variable} ${sortsMillGoudy.variable} font-sans antialiased`}
       >
         {children}
       </body>

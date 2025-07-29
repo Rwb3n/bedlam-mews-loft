@@ -27,8 +27,8 @@ export default function HeroZone() {
         {/* Text content block - centered */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full text-white">
-            <h1 className="text-[24px] md:text-[40px] font-serif mb-2 leading-tight">
-              Rehearsal Space for hire in the heart of London
+            <h1 className="text-[32px] md:text-[56px] font-serif mb-2 leading-tight">
+              Rehearsal Space for hire<br />in the heart of London
             </h1>
             <p className="text-xl md:text-2xl mb-6 font-light">Bedlam Mews, North Lambeth, SE11 6DF</p>
           </div>
