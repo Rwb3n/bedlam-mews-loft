@@ -97,24 +97,43 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
   // Touch gesture handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
+    // On mobile landscape (rotated modal), use Y coordinate for horizontal swipes
+    const isMobile = window.innerWidth < 640
+    setTouchStart(isMobile ? e.targetTouches[0].clientY : e.targetTouches[0].clientX)
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
+    // On mobile landscape (rotated modal), use Y coordinate for horizontal swipes
+    const isMobile = window.innerWidth < 640
+    setTouchEnd(isMobile ? e.targetTouches[0].clientY : e.targetTouches[0].clientX)
   }
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return
     
     const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 50
-    const isRightSwipe = distance < -50
+    const isMobile = window.innerWidth < 640
     
-    if (isLeftSwipe) {
-      handleNextImage()
-    } else if (isRightSwipe) {
-      handlePrevImage()
+    if (isMobile) {
+      // On rotated mobile modal: swipe up = next, swipe down = previous
+      const isUpSwipe = distance > 50
+      const isDownSwipe = distance < -50
+      
+      if (isUpSwipe) {
+        handleNextImage()
+      } else if (isDownSwipe) {
+        handlePrevImage()
+      }
+    } else {
+      // Desktop: normal left/right swipes
+      const isLeftSwipe = distance > 50
+      const isRightSwipe = distance < -50
+      
+      if (isLeftSwipe) {
+        handleNextImage()
+      } else if (isRightSwipe) {
+        handlePrevImage()
+      }
     }
     
     setTouchStart(null)
