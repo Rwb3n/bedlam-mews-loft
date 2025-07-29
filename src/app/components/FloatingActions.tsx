@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Check } from "lucide-react"
+import { useScrollZone } from '../hooks/useScrollZone';
 
 export default function FloatingActions() {
+  const isContentZone = useScrollZone();
   const handleShare = async () => {
     const shareData = {
       title: 'Bedlam Mews Loft - Rehearsal Space London',
@@ -33,10 +35,12 @@ export default function FloatingActions() {
     }
   };
   return (
-    <div className="fixed bottom-4 left-4 right-4 lg:left-auto lg:right-6 lg:w-96 z-40 flex flex-col gap-2">
+    <div className={`fixed bottom-4 left-4 right-4 lg:left-auto lg:right-6 lg:w-[27rem] lg:pl-6 lg:pr-0 z-40 transition-all duration-300 ${
+      isContentZone ? 'block lg:flex' : 'block lg:hidden'
+    } flex flex-col gap-2`}>
       {/* Pricing Display - Now at TOP */}
       <div className="flex justify-center">
-        <Badge className="text-base lg:text-lg font-medium w-full flex items-center">
+        <Badge variant="secondary" className="text-base lg:text-lg font-medium w-full flex items-center">
           <span className="bg-green-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2">
             <Check className="w-3 h-3" />
           </span>

@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Footer() {
   return (
-    <footer className="py-16 pb-40 lg:pb-16 bg-secondary flex items-center justify-center">
+    <footer className="pb-20 lg:pb-4">
       <div className="px-6 max-w-2xl lg:max-w-4xl w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 relative">
           
@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="text-center lg:text-left">
             <h3 className="font-serif text-2xl mb-4">Bedlam Mews Loft</h3>
             <div className="text-lg mb-6 font-light leading-relaxed">
-              <p>Walnut Tree Walk</p>
+              <p>off Walnut Tree Walk</p>
               <p>North Lambeth</p>
               <p>SE11 6DF</p>
             </div>

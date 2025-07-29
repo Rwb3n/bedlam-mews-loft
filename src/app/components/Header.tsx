@@ -1,11 +1,11 @@
 import MobileNavigation from './MobileNavigation';
-import DesktopSidebarNavigation from './DesktopSidebarNavigation';
+import DesktopNavigation from './DesktopNavigation';
 
 export default function Header() {
   return (
     <>
       <MobileNavigation />
-      <DesktopSidebarNavigation />
+      <DesktopNavigation />
     </>
   );
 }

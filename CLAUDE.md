@@ -21,6 +21,7 @@
   "principles": {
     "plainEnglish": "Use simple language for discussions and documentation",
     "noCustomWork": "Use professional libraries over custom solutions",
+    "nohacks": "Avoid hacks, use proper libraries, patterns, and components",
     "riskGates": "Test each technical risk before moving forward",
     "singleSourceOfTruth": "One consistent color/component system",
     "mobileFirst": "Mobile-responsive with 5 full-height sections",

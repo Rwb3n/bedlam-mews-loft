@@ -14,7 +14,6 @@ export default function MobileNavigation() {
   const [activeSection, setActiveSection] = useState('hero');
 
   const sections = [
-    { id: 'hero', name: 'Home' },
     { id: 'details', name: 'Space Details' },
     { id: 'amenities', name: 'Amenities' },
     { id: 'location', name: 'Location' },
@@ -36,7 +35,7 @@ export default function MobileNavigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'details', 'amenities', 'location', 'host'];
+      const sections = ['details', 'amenities', 'location', 'host'];
       
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -60,7 +59,12 @@ export default function MobileNavigation() {
   return (
     <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-primary/20">
       <div className="flex items-center justify-between px-6 py-4">
-        <h1 className="text-2xl font-serif">Bedlam Mews Loft</h1>
+        <h1 
+          className="text-2xl font-serif cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => scrollToSection('hero')}
+        >
+          Bedlam Mews Loft
+        </h1>
         <Menubar>
           <MenubarMenu>
             <MenubarTrigger asChild>
