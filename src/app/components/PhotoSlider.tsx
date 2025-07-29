@@ -55,6 +55,7 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
   const handleImageClick = (index: number) => {
     setModalImageIndex(index)
     setModalOpen(true)
+    setImageLoading(false)
   }
 
   const handlePrevImage = () => {
@@ -110,10 +111,23 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
     const isLeftSwipe = distance > 50
     const isRightSwipe = distance < -50
     
-    if (isLeftSwipe) {
-      handleNextImage()
-    } else if (isRightSwipe) {
-      handlePrevImage()
+    // Check if mobile (small screen)
+    const isMobile = window.innerWidth < 640
+    
+    if (isMobile) {
+      // On mobile landscape (rotated), swipe directions are reversed
+      if (isLeftSwipe) {
+        handlePrevImage() // Left swipe = previous (due to rotation)
+      } else if (isRightSwipe) {
+        handleNextImage() // Right swipe = next (due to rotation)
+      }
+    } else {
+      // Desktop normal behavior
+      if (isLeftSwipe) {
+        handleNextImage()
+      } else if (isRightSwipe) {
+        handlePrevImage()
+      }
     }
     
     setTouchStart(null)
@@ -167,12 +181,12 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
 
       {/* Image Modal */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="!max-w-[95vw] !w-[95vw] !h-[95vh] p-0 bg-secondary/95 backdrop-blur-sm border-0 [&>button]:hidden">
+        <DialogContent className="!max-w-[95vw] !w-[95vw] !h-[95vh] sm:!max-w-[95vw] sm:!w-[95vw] sm:!h-[95vh] p-0 bg-secondary/95 backdrop-blur-sm border-0 [&>button]:hidden max-sm:!max-w-[95vh] max-sm:!w-[95vh] max-sm:!h-[95vw] max-sm:!transform max-sm:!rotate-90">
           <DialogTitle className="sr-only">
             {placeholderImages[modalImageIndex]?.alt || 'Image viewer'}
           </DialogTitle>
           <div 
-            className="relative w-full h-full flex items-center justify-center"
+            className="relative w-full h-full flex items-center justify-center max-sm:!transform max-sm:!-rotate-90"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -180,7 +194,7 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
             {/* Close Button */}
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute top-4 right-4 z-50 bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors"
+              className="absolute top-4 right-4 z-50 bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors max-sm:!transform max-sm:!rotate-90 max-sm:!top-4 max-sm:!left-4 max-sm:!right-auto"
             >
               <X className="w-6 h-6 text-white" />
             </button>
@@ -202,7 +216,7 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
             </button>
             
             {/* Modal Image */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 max-sm:!transform max-sm:!rotate-90">
               {imageLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-10">
                   <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -217,15 +231,16 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
                 priority
                 onLoad={() => setImageLoading(false)}
                 onError={() => setImageLoading(false)}
+                key={modalImageIndex}
               />
             </div>
             
             {/* Image Counter */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 rounded-full px-4 py-2">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 rounded-full px-4 py-2 max-sm:!transform max-sm:!rotate-90 max-sm:!bottom-4 max-sm:!right-4 max-sm:!left-auto max-sm:!translate-x-0">
               <span className="text-white text-sm">
                 {modalImageIndex + 1} of {placeholderImages.length}
               </span>
-              <span className="text-white/60 text-xs ml-2 sm:hidden">• Swipe to navigate</span>
+              <span className="text-white/60 text-xs ml-2 sm:hidden max-sm:block">• Swipe to navigate</span>
             </div>
           </div>
         </DialogContent>
