@@ -143,13 +143,18 @@ export default function HeroZone() {
         // KEY 1: Framing (Visual only - no layout impact)
         const borderRadius = progress * 1; // 0rem → 1rem
         
-        // KEY 2: Scaling (Size transformation)
-        const scale = 1 - (progress * 0.05); // 1.0 → 0.95 (smaller)
+        // KEY 2: Scaling (Size transformation) - Mobile optimized
+        const scaleAmount = isMobile ? 0.025 : 0.05; // Mobile: 2.5% vs Desktop: 5%
+        const scale = 1 - (progress * scaleAmount);
         
-        // KEY 3: Recession (Spatial movement)
-        const translateZ = -(progress * 50); // 0px → -50px (moves back)
-        const translateY = -(progress * 300); // 0px → -300px (up/away)
-        const opacity = 1 - (progress * 0.15); // 1.0 → 0.85 (dimmer)
+        // KEY 3: Recession (Spatial movement) - Mobile optimized
+        const translateZAmount = isMobile ? 25 : 50; // Mobile: -25px vs Desktop: -50px
+        const translateYAmount = isMobile ? 150 : 300; // Mobile: -150px vs Desktop: -300px
+        const opacityAmount = isMobile ? 0.1 : 0.15; // Mobile: 0.9 vs Desktop: 0.85
+        
+        const translateZ = -(progress * translateZAmount);
+        const translateY = -(progress * translateYAmount);
+        const opacity = 1 - (progress * opacityAmount);
         
         // Apply all 3 keys in coordinated transformation
         gsap.set(heroSectionRef.current, {
