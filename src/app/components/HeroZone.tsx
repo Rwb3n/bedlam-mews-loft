@@ -4,7 +4,11 @@ import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { EasePack } from 'gsap/EasePack';
 import SplitText from './SplitText';
+
+// Register EasePack for expoScale, slow, rough eases
+gsap.registerPlugin(EasePack);
 // import DesktopTitle from './DesktopTitle'; // Disabled for grid migration
 
 export default function HeroZone() {
@@ -105,11 +109,26 @@ export default function HeroZone() {
     
     window.addEventListener('scroll', handleScrollPause, { passive: true });
 
+    // Create ease functions once (outside the update loop for performance)
+    let customEase, baseEase;
+    try {
+      customEase = gsap.parseEase("expoScale(0.5,7)");
+      baseEase = gsap.parseEase("power1.in");
+    } catch (error) {
+      console.warn("Failed to create custom ease, falling back to circ.in:", error);
+      customEase = gsap.parseEase("circ.in");
+      baseEase = null;
+    }
+
     // ACT 2: User-Controlled Hero Transformation (3 Keys)
     const updateHeroTransformation = (scrollY: number) => {
       const maxScroll = 400; // 0-400px scroll range
       const rawProgress = Math.min(scrollY / maxScroll, 1); // 0-1 raw progress
-      const progress = gsap.parseEase("circ.out")(rawProgress); // Easing applied
+      
+      // Apply compound easing if available, otherwise fallback
+      const progress = (customEase && baseEase) 
+        ? customEase(baseEase(rawProgress)) 
+        : customEase ? customEase(rawProgress) : rawProgress;
       
       if (heroSectionRef.current) {
         // KEY 1: Framing (Visual only - no layout impact)
