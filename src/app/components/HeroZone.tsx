@@ -11,9 +11,13 @@ export default function HeroZone() {
   const heroRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLImageElement>(null);
   const chevronRef = useRef<SVGSVGElement>(null);
+  const heroSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!heroRef.current || !backgroundRef.current || !chevronRef.current) return;
+    if (!heroRef.current || !backgroundRef.current || !chevronRef.current || !heroSectionRef.current) return;
+    
+    const heroContainer = heroRef.current;
+    const heroSection = heroSectionRef.current;
 
     // Ken Burns Background Effect (90s single cycle)
     const kenBurnsTimeline = gsap.timeline({ repeat: 0 });
@@ -46,110 +50,151 @@ export default function HeroZone() {
       ease: "none"
     });
 
-    // ChevronDown Dramatic Entrance (starts at 3.0s)
+    // ChevronDown Clean Animation - After framing completes
     const chevronElement = chevronRef.current;
+    
+    // Set initial state
     gsap.set(chevronElement, {
       opacity: 0,
-      scale: 0,
-      rotation: -180,
-      y: -50
+      filter: 'blur(8px)'
     });
-
-    // ChevronDown entrance animation
-    const chevronEntranceTimeline = gsap.timeline({ delay: 3.0 });
-    chevronEntranceTimeline.to(chevronElement, {
-      opacity: 1,
-      scale: 1.2,
-      rotation: 0,
-      y: -5,
-      duration: 0.3,
-      ease: "back.out(1.7)"
+    
+    // DISABLED: Auto-framing animation - Moving to scroll-controlled
+    // const framingTimeline = gsap.timeline({ delay: 3.0 });
+    // ... auto-framing disabled for reorganization
+    
+    // ACT 1 Addition: Chevron entrance after text completes
+    const chevronTimeline = gsap.timeline({ delay: 3.2 }); // After address completes
+    
+    // Elegant blur focus + fade in
+    chevronTimeline.to(chevronElement, {
+      opacity: 0.8,
+      filter: 'blur(0px)',
+      duration: 0.8,
+      ease: 'power2.out'
     });
-    chevronEntranceTimeline.to(chevronElement, {
-      scale: 0.95,
-      y: 2,
-      duration: 0.15,
-      ease: "power2.out"
-    });
-    chevronEntranceTimeline.to(chevronElement, {
-      scale: 1.0,
-      y: 0,
-      duration: 0.15,
-      ease: "power2.out"
-    });
-
-    // Smart Bounce System (starts at 3.6s)
+    
+    // Gentle bounce system - starts after entrance completes
     let bounceCount = 0;
     let isScrolling = false;
     let scrollTimeout: NodeJS.Timeout;
-
-    const smartBounce = () => {
-      if (bounceCount >= 8 || isScrolling) return;
+    
+    const gentleBounce = () => {
+      if (bounceCount >= 6 || isScrolling) return; // Max 6 cycles
       
       gsap.to(chevronElement, {
-        y: 8,
-        duration: 1.0,
-        ease: "power2.inOut",
+        y: 6,
+        duration: 1.5,
+        ease: 'power2.inOut',
         yoyo: true,
         repeat: 1,
         onComplete: () => {
           bounceCount++;
-          setTimeout(smartBounce, 200); // 200ms pause between bounces
+          setTimeout(gentleBounce, 300); // 300ms pause between bounces
         }
       });
     };
-
-    // Start smart bounce after entrance
-    setTimeout(smartBounce, 3600);
-
-    // Scroll detection for smart bounce
-    const handleScroll = () => {
+    
+    // Start gentle bounce after entrance completes
+    setTimeout(gentleBounce, 4000); // 3.2s + 0.8s entrance
+    
+    // Pause bouncing during scroll
+    const handleScrollPause = () => {
       isScrolling = true;
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         isScrolling = false;
       }, 150);
     };
+    
+    window.addEventListener('scroll', handleScrollPause, { passive: true });
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Scroll-based Hero Shrinking
-    const handleScrollShrinking = () => {
+    // ACT 2: User-Controlled Hero Transformation (2 Keys)
+    const handleHeroTransformation = () => {
       const scrollY = window.scrollY;
-      const maxScroll = 600;
-      const progress = Math.min(scrollY / maxScroll, 1);
+      const maxScroll = 400; // 0-400px scroll range
+      const rawProgress = Math.min(scrollY / maxScroll, 1); // 0-1 raw progress
+      const progress = gsap.parseEase("power2.out")(rawProgress); // Easing applied
       
-      if (heroRef.current) {
-        const scale = 1 - (progress * 0.15); // Scale from 1.0 to 0.85
-        const translateY = 28 + (progress * 100); // Start 28px down, move DOWN to 128px max
+      // KEY 1: Framing (3 steps)
+      if (heroRef.current && heroSectionRef.current) {
+        // Step 1: Responsive Padding
+        const screenWidth = window.innerWidth;
+        let maxPadding = 1; // rem - Mobile default
+        let maxHeight = 95; // vh - Mobile gets more height
         
+        if (screenWidth >= 768) {
+          maxPadding = 1.5; // md+
+          maxHeight = 92; // Tablet slightly less
+        }
+        if (screenWidth >= 1024) {
+          maxPadding = 2; // lg+
+          maxHeight = 90; // Desktop least height
+        }
+        
+        const currentPadding = progress * maxPadding; // 0rem → maxPadding
+        const currentBorderRadius = progress * 1; // 0rem → 1rem
+        const currentHeight = 100 - (progress * (100 - maxHeight)); // 100vh → responsive vh
+        
+        // Apply Key 1 transformations
         gsap.set(heroRef.current, {
-          scale: scale,
+          padding: `${currentPadding}rem`,
+          transformOrigin: 'center center'
+        });
+        
+        gsap.set(heroSectionRef.current, {
+          borderRadius: `${currentBorderRadius}rem`,
+          height: `${currentHeight}vh`,
+          transformOrigin: 'center center'
+        });
+      }
+      
+      // KEY 2: Recession (5 steps)
+      if (heroSectionRef.current) {
+        // Step 1: TranslateZ - moves back in 3D space
+        const translateZ = -(progress * 50); // 0px → -50px (moves back)
+        
+        // Step 2: TranslateY - flushed up out of screen  
+        const translateY = -(progress * 300); // 0px → -300px (up/away)
+        
+        // Step 3: Scale - appears smaller/further
+        const scale = 1 - (progress * 0.05); // 1.0 → 0.95 (smaller)
+        
+        // Step 4: Opacity - becomes less prominent
+        const opacity = 1 - (progress * 0.15); // 1.0 → 0.85 (dimmer)
+        
+        // Step 5: Blur - REMOVED per request
+        
+        // Apply Key 2 transformations (on top of Key 1)
+        gsap.set(heroSectionRef.current, {
+          z: translateZ,
           y: translateY,
-          transformOrigin: "center center"
+          scale: scale,
+          opacity: opacity,
+          force3D: true
         });
       }
     };
+    
+    window.addEventListener('scroll', handleHeroTransformation, { passive: true });
 
-    window.addEventListener('scroll', handleScrollShrinking, { passive: true });
-
-    // Cleanup
+    // Cleanup - Act 1 + Chevron + Act 2
     return () => {
       kenBurnsTimeline.kill();
-      chevronEntranceTimeline.kill();
+      chevronTimeline.kill();
       gsap.killTweensOf(chevronElement);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('scroll', handleScrollShrinking);
+      window.removeEventListener('scroll', handleScrollPause);
+      window.removeEventListener('scroll', handleHeroTransformation);
       clearTimeout(scrollTimeout);
     };
   }, []);
 
   return (
-    // Hero Container with base spacing and rounded corners
-    <div className="w-full px-4 py-4 md:px-6 md:py-6 lg:px-8 lg:py-8">
+    // Hero Container - starts full screen, animates to framed
+    <div ref={heroRef} className="w-full" id="hero-container">
       <section 
-        ref={heroRef}
-        className="relative w-full aspect-[4/3] md:aspect-[3/2] lg:aspect-[5/2] overflow-hidden rounded-2xl"
+        ref={heroSectionRef}
+        className="relative w-full h-screen overflow-hidden"
         id="hero"
       >
         {/* Background Image Layer with Ken Burns */}
@@ -164,7 +209,7 @@ export default function HeroZone() {
         />
         
         {/* Content Overlay Layer */}
-        <div className="absolute inset-0 flex flex-col justify-between items-center text-white py-4 lg:py-16 xl:py-20">
+        <div className="absolute inset-0 flex flex-col justify-between items-center text-white py-14 sm:py-14 md:py-16 lg:py-18 xl:py-20 2xl:py-20">
           {/* Spacer */}
           <div></div>
           
@@ -218,7 +263,7 @@ export default function HeroZone() {
           {/* Scroll Indicator with Smart Bounce */}
           <ChevronDown 
             ref={chevronRef}
-            className="w-8 h-8 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-10 xl:h-10 2xl:w-12 2xl:h-12 text-white/80" 
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 text-white/80" 
             aria-label="Scroll down"
           />
         </div>

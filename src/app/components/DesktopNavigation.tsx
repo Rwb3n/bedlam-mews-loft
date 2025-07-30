@@ -59,8 +59,8 @@ export default function DesktopNavigation() {
       const heroH1 = document.querySelector('#hero h1, #hero .title-container');
       const shouldReveal = heroH1 && heroH1.getBoundingClientRect().top <= 0;
       
-      // Progressive reveal animation (only once)
-      if (shouldReveal && !isRevealed && navRef.current && titleRef.current && navItemsRef.current) {
+      // Progressive reveal animation (DISABLED for hero testing)
+      if (false && shouldReveal && !isRevealed && navRef.current && titleRef.current && navItemsRef.current) {
         setIsRevealed(true);
         
         // Get all navigation items

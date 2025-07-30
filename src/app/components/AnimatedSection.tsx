@@ -28,7 +28,7 @@ export default function AnimatedSection({
 
     const sectionElement = sectionRef.current;
 
-    if (animationType === 'layered-emergence' && trigger === 'hero-exit') {
+    if (false && animationType === 'layered-emergence' && trigger === 'hero-exit') { // DISABLED for hero testing
       // Continuous scroll-based parallax for first ContentZone section
       // Coordinated with hero shrinking animation (0px→600px scroll range)
       
@@ -74,7 +74,7 @@ export default function AnimatedSection({
       };
     }
 
-    if (animationType === 'elegant-fade' && trigger === 'intersection') {
+    if (false && animationType === 'elegant-fade' && trigger === 'intersection') { // DISABLED for hero testing
       // Elegant fade for Section 2 (Amenities)
       const observer = new IntersectionObserver(
         (entries) => {
