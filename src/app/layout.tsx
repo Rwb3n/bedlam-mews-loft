@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sorts_Mill_Goudy, Geist } from "next/font/google";
 import "./globals.css";
+import ScrollSmootherInit from "./components/ScrollSmoother";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -34,7 +35,12 @@ export default function RootLayout({
       <body
         className={`${geist.variable} ${sortsMillGoudy.variable} font-sans antialiased`}
       >
-        {children}
+        <ScrollSmootherInit />
+        <div id="smooth-wrapper">
+          <div id="smooth-content">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );
