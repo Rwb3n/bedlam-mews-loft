@@ -13,7 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { CarouselApi } from "@/components/ui/carousel";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -58,19 +58,19 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
     setImageLoading(false)
   }
 
-  const handlePrevImage = () => {
+  const handlePrevImage = useCallback(() => {
     setImageLoading(true)
     setModalImageIndex((prev) => 
       prev === 0 ? placeholderImages.length - 1 : prev - 1
     )
-  }
+  }, [placeholderImages.length])
 
-  const handleNextImage = () => {
+  const handleNextImage = useCallback(() => {
     setImageLoading(true)
     setModalImageIndex((prev) => 
       prev === placeholderImages.length - 1 ? 0 : prev + 1
     )
-  }
+  }, [placeholderImages.length])
 
   // Keyboard navigation
   useEffect(() => {
@@ -92,7 +92,7 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [modalOpen])
+  }, [modalOpen, handleNextImage, handlePrevImage])
 
   // Touch gesture handlers
   const handleTouchStart = (e: React.TouchEvent) => {

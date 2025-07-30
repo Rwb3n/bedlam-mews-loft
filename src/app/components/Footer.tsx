@@ -1,5 +1,5 @@
-import { Separator } from "@/components/ui/separator";
-import FloatingActions from './FloatingActions';
+// import { Separator } from "@/components/ui/separator"; // Not used
+// import FloatingActions from './FloatingActions'; // Not used
 
 export default function Footer() {
   return (

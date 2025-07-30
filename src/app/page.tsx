@@ -5,12 +5,13 @@ import FloatingActions from './components/FloatingActions';
 import Footer from './components/Footer';
 import PhotoSlider from './components/PhotoSlider';
 import DesktopNavigation from './components/DesktopNavigation';
+import AnimatedSection from './components/AnimatedSection';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import { Milestone, SquareArrowOutUpRight, MessageCircle } from 'lucide-react';
+import { Milestone, MessageCircle } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -32,8 +33,15 @@ export default function Home() {
           <FloatingActions />
         </div>
         
-        {/* Section 2: Space Details */}
-        <section id="details" className="w-full bg-primary/20 pt-8 pb-16">
+        {/* Section 2: Space Details - Layered Emergence */}
+        <AnimatedSection 
+          id="details" 
+          className="w-full pt-8 pb-16"
+          animationType="layered-emergence"
+          trigger="hero-exit"
+        >
+          {/* Inner container with proper spacing and background */}
+          <div className="mx-4 md:mx-6 lg:mx-8 bg-primary/20 rounded-2xl px-0 py-8">
           <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
               <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">Where Creative Breakthroughs Happen</h2>
@@ -59,7 +67,8 @@ export default function Home() {
               
             </div>
           </div>
-        </section>
+          </div>
+        </AnimatedSection>
 
         {/* Section 3: Amenities */}
         <section id="amenities" className="w-full bg-secondary/20 pt-8 pb-16">
