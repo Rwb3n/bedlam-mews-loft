@@ -121,7 +121,7 @@ export default function HeroZone() {
       
       if (heroRef.current) {
         const scale = 1 - (progress * 0.15); // Scale from 1.0 to 0.85
-        const translateY = -(progress * 30); // Move up 30px max
+        const translateY = 28 + (progress * 100); // Start 28px down, move DOWN to 128px max
         
         gsap.set(heroRef.current, {
           scale: scale,

@@ -71,7 +71,12 @@ export default function Home() {
         </AnimatedSection>
 
         {/* Section 3: Amenities */}
-        <section id="amenities" className="w-full bg-secondary/20 pt-8 pb-16">
+        <AnimatedSection 
+          id="amenities" 
+          className="w-full bg-secondary/20 pt-8 pb-16"
+          animationType="elegant-fade"
+          trigger="intersection"
+        >
           <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
               <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">Everything Ready for Your Vision</h2>
@@ -144,7 +149,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Section 4: Location */}
         <section id="location" className="w-full bg-secondary/10 pt-8 pb-16">

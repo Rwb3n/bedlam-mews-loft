@@ -9,7 +9,7 @@
     "framework": "Next.js 15 + React 19 + TypeScript",
     "styling": "Tailwind CSS v4 + shadcn/ui components",
     "fonts": "Geist (sans-serif, primary) + Sorts Mill Goudy (serif, headings)",
-    "animations": "Framer Motion",
+    "animations": "GSAP only",
     "deployment": "Vercel",
     "breakpoints": "Mobile (375px), sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px) - full responsive system",
     "layout": "CSS Grid 3-column [1.1fr_1.1fr_0.8fr] with ContentZone wrapper",
@@ -95,7 +95,9 @@
     "buttonPattern": "Primary buttons use direct icons, secondary use white circular containers",
     "asymmetricSpacing": "Use pl-X pr-Y pattern for better visual balance than symmetric padding",
     "responsiveBreakpoints": "Always test typography scaling across all 6 breakpoints for readability",
-    "spacingConventions": "Use space-y for content relationships, padding for container structure - never mix approaches"
+    "spacingConventions": "Use space-y for content relationships, padding for container structure - never mix approaches",
+    "animationLibrary": "GSAP only - for all animations including scroll-based, transitions, and complex sequences",
+    "scrollAnimations": "All scroll-based parallax uses gsap.set() for 60fps performance. No Framer Motion anywhere"
   },
 
   "availableComponents": {

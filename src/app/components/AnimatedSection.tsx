@@ -29,44 +29,48 @@ export default function AnimatedSection({
     const sectionElement = sectionRef.current;
 
     if (animationType === 'layered-emergence' && trigger === 'hero-exit') {
-      // Layered emergence animation for first ContentZone section
-      const handleScroll = () => {
-        // Check if hero H1 has exited viewport (same trigger as sidebar)
-        const heroH1 = document.querySelector('#hero h1, #hero .title-container');
-        const shouldAnimate = heroH1 && heroH1.getBoundingClientRect().top <= 0;
+      // Continuous scroll-based parallax for first ContentZone section
+      // Coordinated with hero shrinking animation (0px→600px scroll range)
+      
+      // Set initial performance hints
+      gsap.set(sectionElement, {
+        willChange: 'transform, opacity'
+      });
+      
+      const handleParallaxScroll = () => {
+        const scrollY = window.scrollY;
+        const maxScroll = 600; // Match hero shrinking range
+        const progress = Math.min(scrollY / maxScroll, 1); // 0-1 progress
         
-        if (shouldAnimate && !isAnimatedRef.current) {
-          isAnimatedRef.current = true;
-          
-          // Initial state - below/behind
-          gsap.set(sectionElement, {
-            opacity: 0.7,
-            y: 80,
-            z: -30,
-            scale: 0.96,
-            willChange: 'transform, opacity'
-          });
-          
-          // Layered emergence animation (1200ms total)
-          gsap.to(sectionElement, {
-            opacity: 1.0,
-            y: 0,
-            z: 0,
-            scale: 1.0,
-            duration: 1.2,
-            ease: 'cubic-bezier(0.23, 1, 0.32, 1)',
-            onComplete: () => {
-              gsap.set(sectionElement, { clearProps: 'willChange' });
-            }
-          });
-        }
+        // Parallax movement specs from animation plan:
+        // OPTION 1: Section starts closer to normal, creates hero overlap
+        // scrollY: 0px    → opacity: 0.7, translateY: 0px,   translateZ: -30px, scale: 0.96
+        // scrollY: 200px  → opacity: 0.85, translateY: -16px, translateZ: -15px, scale: 0.98
+        // scrollY: 400px  → opacity: 1.0,  translateY: -32px, translateZ: 0px,   scale: 1.0
+        // scrollY: 600px  → opacity: 1.0,  translateY: -40px, translateZ: 10px,  scale: 1.02
+        
+        const opacity = 0.7 + (progress * 0.3);     // 0.7 → 1.0
+        const translateY = 0 - (progress * 40);      // 0px → -40px  
+        const translateZ = -30 + (progress * 40);    // -30px → 10px
+        const scale = 0.96 + (progress * 0.06);      // 0.96 → 1.02
+        
+        // Apply continuous parallax transformation
+        gsap.set(sectionElement, {
+          opacity: opacity,
+          y: translateY,
+          z: translateZ,
+          scale: scale,
+          transformOrigin: 'center center',
+          force3D: true // Hardware acceleration
+        });
       };
 
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll(); // Check initial state
+      window.addEventListener('scroll', handleParallaxScroll, { passive: true });
+      handleParallaxScroll(); // Set initial state
 
       return () => {
-        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('scroll', handleParallaxScroll);
+        gsap.set(sectionElement, { clearProps: 'willChange' });
       };
     }
 
@@ -80,7 +84,7 @@ export default function AnimatedSection({
               
               gsap.set(sectionElement, {
                 opacity: 0,
-                y: 30,
+                y: 15,
                 filter: 'blur(2px)',
                 willChange: 'transform, opacity, filter'
               });
