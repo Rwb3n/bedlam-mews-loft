@@ -26,6 +26,17 @@ export default function DesktopNavigation() {
     }
   };
 
+  const scrollToHero = () => {
+    const element = document.getElementById('hero');
+    if (element) {
+      const elementPosition = element.offsetTop;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['details', 'amenities', 'location', 'host'];
@@ -50,25 +61,34 @@ export default function DesktopNavigation() {
   }, []);
 
   return (
-    <nav className={`fixed right-0 top-16 h-[calc(100vh-4rem)] w-[27rem] z-40 transition-all duration-300 ${
-      isContentZone ? 'hidden lg:block' : 'hidden lg:hidden'
+    <nav className={`transition-all duration-300 ${
+      true ? 'block' : 'hidden'  // Always show for now
     }`}>
-      <div className="h-full flex items-center justify-center pl-0 pr-6" style={{ paddingBottom: '176px' }}>
-        <div className="space-y-4 w-full">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              className={`w-full justify-center text-center px-6 py-4 text-xl rounded-sm transition-colors ${
-                activeSection === section.id 
-                  ? "bg-primary/10 text-primary font-medium" 
-                  : "hover:bg-primary/5"
-              }`}
-            >
-              {section.name}
-            </button>
-          ))}
-        </div>
+      {/* Sidebar Title */}
+      <div className="mb-6 text-center">
+        <h1 
+          className="text-3xl font-serif text-foreground cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={scrollToHero}
+        >
+          Bedlam Mews Loft
+        </h1>
+      </div>
+      
+      {/* Navigation Buttons */}
+      <div className="space-y-4 w-full">
+        {sections.map((section) => (
+          <button
+            key={section.id}
+            onClick={() => scrollToSection(section.id)}
+            className={`w-full justify-center text-center px-6 py-4 text-xl rounded-sm transition-colors ${
+              activeSection === section.id 
+                ? "bg-primary/10 text-primary font-medium" 
+                : "hover:bg-primary/5"
+            }`}
+          >
+            {section.name}
+          </button>
+        ))}
       </div>
     </nav>
   );

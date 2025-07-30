@@ -156,7 +156,7 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
                     alt={image.alt}
                     width={800}
                     height={600}
-                    className="w-full h-auto object-cover"
+                    className="w-full aspect-video object-cover"
                     priority={false}
                   />
                 </div>

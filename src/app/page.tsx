@@ -4,28 +4,37 @@ import ContentZone from './components/ContentZone';
 import FloatingActions from './components/FloatingActions';
 import Footer from './components/Footer';
 import PhotoSlider from './components/PhotoSlider';
+import DesktopNavigation from './components/DesktopNavigation';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import { Milestone } from 'lucide-react';
+import { Milestone, SquareArrowOutUpRight, MessageCircle } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className="pt-18 lg:pt-0">
+    <main className="lg:pt-0">
       {/* Zone 1: Hero Zone - Full Width, Independent */}
       <HeroZone />
       
       {/* Zone 2: Content Zone - Clean Structure */}
-      <ContentZone>
+      <ContentZone sidebar={
+        <>
+          <DesktopNavigation />
+          <FloatingActions />
+        </>
+      }>
         <Header />
-        <FloatingActions />
         
-
+        {/* Mobile/Tablet FloatingActions - only show when sidebar is hidden */}
+        <div className="lg:hidden">
+          <FloatingActions />
+        </div>
+        
         {/* Section 2: Space Details */}
-        <section id="details" className="w-full bg-primary/20 py-16">
-          <div className="lg:mr-[27rem] flex items-center justify-center">
+        <section id="details" className="w-full bg-primary/20 pt-8 pb-16">
+          <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
               <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">Where Creative Breakthroughs Happen</h2>
               
@@ -33,12 +42,12 @@ export default function Home() {
                 44 square meters of open space, natural light, and the kind of blank-canvas flexibility that lets your project breathe. It&apos;s deliberately simple. No distractions, no constraints - just the raw potential that&apos;s launched careers, sparked collaborations, and turned rough ideas into standing ovations.
               </p>
               
-              <div className="py-4">
+              <div className="my-6">
                 <PhotoSlider title="Space Features" showDots={true} />
               </div>
               
               {/* Credential Banner - Moved from above */}
-              <div className="mt-8 mb-6">
+              <div className="my-6">
                 <p className="text-lg mb-6 font-light text-center">Join the creative community that includes:</p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Badge variant="secondary" className="text-sm px-4 py-2">Logo 1</Badge>
@@ -53,58 +62,57 @@ export default function Home() {
         </section>
 
         {/* Section 3: Amenities */}
-        <section id="amenities" className="w-full bg-secondary/20 py-16">
-          <div className="lg:mr-[27rem] flex items-center justify-center">
+        <section id="amenities" className="w-full bg-secondary/20 pt-8 pb-16">
+          <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
               <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">Everything Ready for Your Vision</h2>
               
-              <p className="text-lg mb-8 font-light leading-relaxed text-left">
+              <p className="text-lg mb-6 font-light leading-relaxed text-left">
                 Walk in and start creating. No setup time, no missing pieces, no excuses - just everything your project needs to come alive.
               </p>
               
-              <div className="space-y-8">
+              <div className="space-y-6">
                 
                 {/* Space Features */}
                 <div>
-                  <h3 className="font-serif font-medium mb-4 text-xl text-left">Space Features</h3>
+                  <h3 className="font-medium mb-4 text-xl text-left">Space Features</h3>
                   <div className="flex flex-wrap gap-3">
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>44 sqm open-plan layout</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>2m tall entrance</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Quiet area - perfect for focus</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Full lighting control</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Multiple power outlets</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>44 sqm open-plan layout</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>2m tall entrance</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Quiet area - perfect for focus</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Full lighting control</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Multiple power outlets</Badge>
                   </div>
                 </div>
                 
                 {/* Comfort & Convenience */}
-                <div>
-                  <h3 className="font-serif font-medium mb-4 text-xl text-left">Comfort & Convenience</h3>
+                <div className="mt-8">
+                  <h3 className="font-medium mb-4 text-xl text-left">Comfort & Convenience</h3>
                   <div className="flex flex-wrap gap-3">
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Kitchen Sink</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Private shower</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>WC</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Heating and cooling</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>On-site parking (upon request)</Badge>
-
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Kitchen Sink</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Private shower</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>WC</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Heating and cooling</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>On-site parking (upon request)</Badge>
                   </div>
                 </div>
                 
                 {/* House Guidelines */}
-                <div>
-                  <h3 className="font-serif font-medium mb-4 text-xl text-left">House Guidelines</h3>
+                <div className="mt-8">
+                  <h3 className="font-medium mb-4 text-xl text-left">House Guidelines</h3>
                   <div className="flex flex-wrap gap-3">
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Smoke-free building</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Family-friendly space</Badge>
-                <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Pet-friendly</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Smoke-free building</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Family-friendly space</Badge>
+                    <Badge variant="secondary" className="text-sm px-4 py-2 flex items-center"><span className="text-primary mr-2">✓</span>Pet-friendly</Badge>
                   </div>
                 </div>
                 
                 {/* Accessibility */}
-                <div>
-                  <h3 className="font-serif font-medium mb-4 text-xl text-left">Accessibility</h3>
+                <div className="mt-8">
+                  <h3 className="font-medium mb-4 text-xl text-left">Accessibility</h3>
                   <div className="p-6 bg-orange-50 rounded-lg border border-orange-200">
                     <div className="mb-3">
-                      <Badge variant="secondary" className="bg-orange-100 text-orange-600 border-orange-200 px-3 py-1 text-sm font-semibold inline-flex items-center">
+                      <Badge variant="secondary" className="bg-orange-100 text-orange-600 border-orange-200 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
                         <span className="bg-orange-300 text-orange-800 rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">!</span>Please note
                       </Badge>
                     </div>
@@ -119,7 +127,7 @@ export default function Home() {
               
               <div className="p-6 bg-primary/10 rounded-lg">
                 <div className="mb-3">
-                  <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 px-3 py-1 text-sm font-semibold inline-flex items-center">
+                  <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
                     <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">?</span>Questions
                   </Badge>
                 </div>
@@ -130,8 +138,8 @@ export default function Home() {
         </section>
 
         {/* Section 4: Location */}
-        <section id="location" className="w-full bg-secondary/10 pb-16">
-          <div className="lg:mr-[27rem] flex items-center justify-center">
+        <section id="location" className="w-full bg-secondary/10 pt-8 pb-16">
+          <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
               <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">In the Heart of London&apos;s Creative Quarter</h2>
               
@@ -153,38 +161,36 @@ export default function Home() {
             ></iframe>
               </div>
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
                 <div className="flex flex-col p-4">
-                  <p className="text-lg font-light mb-4 text-left">Bedlam Mews, Walnut Tree Walk, Lambeth SE11 6DF</p>
+                  <p className="text-lg font-light mb-4 text-left">Bedlam Mews, Walnut Tree Walk, <span className="whitespace-nowrap">Lambeth, SE11 6DF</span></p>
                   
-                  <Button asChild size="lg" className="text-lg rounded-full flex items-center">
+                  <Button asChild size="lg" className="text-lg rounded-full flex items-center pl-3 pr-8">
                     <a 
                       href="https://www.google.com/maps/dir/?api=1&destination=Walnut+Tree+Walk,+London+SE11+6DF,+UK" 
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
-                      <span className="bg-white rounded-full w-6 h-6 flex items-center justify-center mr-2">
-                        <Milestone className="w-4 h-4 text-primary" />
-                      </span>
+                      <Milestone className="w-4 h-4 text-primary-foreground" />
                       <span className="flex-1 text-center">Get Directions</span>
                     </a>
                   </Button>
                 </div>
                 
-                <div className="p-4 bg-primary/5 rounded-lg">
-                  <h3 className="font-serif font-medium mb-2 text-lg text-left">Transport Links</h3>
-                  <div className="text-left space-y-2 text-base font-light">
+                <div className="flex flex-col p-4 bg-primary/5 rounded-lg">
+                  <h3 className="font-medium mb-4 text-lg text-left">Transport Links</h3>
+                  <div className="text-left space-y-3 text-base font-light">
                     <p className="flex items-start">
                       <span className="mr-2">🚇</span>
-                      <span><strong>Nearest Tube:</strong> Lambeth North (15 min walk)</span>
+                      <span><strong>Nearest Tube:</strong> <span className="whitespace-nowrap">Lambeth North (15 min walk)</span></span>
                     </p>
                     <p className="flex items-start">
                       <span className="mr-2">🚌</span>
-                      <span><strong>Nearest Bus Stop:</strong> 133, 59, 159, 333</span>
+                      <span><strong>Nearest Bus Stop:</strong> <span className="whitespace-nowrap">133, 59, 159, 333</span></span>
                     </p>
                     <p className="flex items-start">
                       <span className="mr-2">🚆</span>
-                      <span><strong>Nearest Train:</strong> Elephant & Castle (20 min walk)</span>
+                      <span><strong>Nearest Train:</strong> <span className="whitespace-nowrap">Elephant & Castle (20 min walk)</span></span>
                     </p>
                   </div>
                 </div>
@@ -194,12 +200,12 @@ export default function Home() {
         </section>
 
         {/* Section 5: Host & Availability */}
-        <section id="host" className="w-full bg-secondary/20 pb-16">
-          <div className="lg:mr-[27rem] flex items-center justify-center">
+        <section id="host" className="w-full bg-secondary/20 pt-8 pb-16">
+          <div className="flex items-center justify-center">
             <div className="px-6 max-w-2xl lg:max-w-4xl w-full">
               <Card>
                 <CardContent className="p-4">
-                  <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-8">
                 {/* Host Info Block */}
                 <div className="flex-1 text-center">
                   <CardTitle className="text-xl mb-4">Your Creative Ally</CardTitle>
@@ -212,25 +218,26 @@ export default function Home() {
                       />
                       <AvatarFallback>E</AvatarFallback>
                     </Avatar>
-                    <h3 className="text-2xl font-serif font-medium">Elina</h3>
+                    <h3 className="text-2xl font-medium">Elina</h3>
                   </div>
                   
                   <p className="text-lg mb-4 font-light">(replies within 1 hour)</p>
                   
-                  <Button asChild size="lg" className="text-xl rounded-full">
+                  <Button asChild size="lg" className="text-xl rounded-full pl-3 pr-8 w-full">
                     <a 
                       href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      message host
+                      <MessageCircle className="w-4 h-4 text-primary-foreground" />
+                      <span className="flex-1 text-center">message host</span>
                     </a>
                   </Button>
                 </div>
                 
                 {/* Separator */}
-                <Separator orientation="vertical" className="hidden lg:block h-32" />
-                <Separator orientation="horizontal" className="lg:hidden" />
+                <Separator orientation="vertical" className="hidden sm:block h-32" />
+                <Separator orientation="horizontal" className="sm:hidden" />
                 
                 {/* Availability Block */}
                 <div className="flex-1 text-center flex flex-col justify-center">
@@ -265,13 +272,11 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Footer */}
-        <section className="w-full bg-secondary py-16">
-          <div className="lg:mr-[27rem] flex items-center justify-center">
-            <Footer />
-          </div>
-        </section>
       </ContentZone>
+      
+      {/* Footer - Full Width, Outside Grid */}
+      <Footer />
+      
     </main>
   );
 }

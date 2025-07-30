@@ -8,11 +8,12 @@
   "architecture": {
     "framework": "Next.js 15 + React 19 + TypeScript",
     "styling": "Tailwind CSS v4 + shadcn/ui components",
-    "fonts": "Castoro (serif) + Geist (sans-serif)",
+    "fonts": "Geist (sans-serif, primary) + Sorts Mill Goudy (serif, headings)",
     "animations": "Framer Motion",
     "deployment": "Vercel",
     "breakpoints": "Mobile/tablet (up to 1023px), Desktop (1024px+) using lg: prefix",
-    "layout": "Mobile navigation + 2-column desktop (content | right sidebar 432px)"
+    "layout": "CSS Grid 3-column [1.1fr_1.1fr_0.8fr] with ContentZone wrapper",
+    "currentLayout": "HeroZone + ContentZone(content + DesktopNavigation sidebar) + Footer(3-column + FloatingActions)"
   },
   
   "documentation": {
@@ -57,12 +58,32 @@
     "Committing without testing build and functionality"
   ],
 
+  "designPatterns": {
+    "buttonSpacing": {
+      "primary": "pl-3 pr-8 asymmetric padding for visual balance with icons",
+      "secondary": "pl-2 pr-4 proportionally scaled asymmetric padding",
+      "structure": "Direct icon + text for primary, white circular containers for secondary",
+      "iconSizing": "w-4 h-4 for primary buttons, w-3 h-3 for secondary buttons",
+      "colors": "text-primary-foreground for primary icons, text-primary for secondary"
+    },
+    "badgeSpacing": {
+      "padding": "pl-1 pr-3 py-1 for asymmetric visual balance",
+      "iconGap": "mr-2 between icon and text",
+      "principle": "4px left + 8px gap = 12px total left, 12px right for optical balance"
+    }
+  },
+
   "gotchas": {
     "useClient": "Add 'use client' directive for onClick handlers in App Router",
     "asChild": "Use asChild pattern for shadcn Buttons wrapping <a> tags",
     "replaceAll": "Use replace_all: true for MultiEdit when classes repeat",
     "webShare": "Web Share API needs fallback to clipboard for desktop",
-    "shadcnCLI": "NEVER use 'npx shadcn-ui@latest' - it's deprecated. Use 'npx shadcn@latest' only"
+    "shadcnCLI": "NEVER use 'npx shadcn-ui@latest' - it's deprecated. Use 'npx shadcn@latest' only",
+    "wFull": "Always add w-full to semantic footer/section elements for proper width",
+    "maxWidth": "Tailwind v4 max-w-7xl may render as 1024px instead of 1280px - use explicit style={{maxWidth: '1280px'}} if needed",
+    "gridLayout": "ContentZone uses CSS Grid [1.1fr_1.1fr_0.8fr] - content spans first 2 columns, sidebar in 3rd column",
+    "buttonPattern": "Primary buttons use direct icons, secondary use white circular containers",
+    "asymmetricSpacing": "Use pl-X pr-Y pattern for better visual balance than symmetric padding"
   },
 
   "availableComponents": {
@@ -74,6 +95,19 @@
       "Carousel (CarouselContent, CarouselItem, CarouselNext, CarouselPrevious)",
       "Menubar",
       "Separator"
+    ],
+    "custom": [
+      "ContentZone (children, sidebar) - CSS Grid wrapper with 3-column layout",
+      "FloatingActions (context: 'content' | 'footer') - Mobile-first with progressive enhancement",
+      "PhotoSlider (title, height, showDots) - 16:9 aspect ratio carousel with modal",
+      "useIntersectionObserver hook - For scroll-based visibility logic"
     ]
+  },
+
+  "recentArchitecturalChanges": {
+    "three-column-migration": "Migrated from fixed positioning to CSS Grid 3-column layout",
+    "footer-enhancement": "Footer matches ContentZone structure with FloatingActions integration",
+    "mobile-first-floatingActions": "Progressive enhancement from mobile fixed to desktop sticky positioning",
+    "font-standardization": "Geist as primary sans-serif, Sorts Mill Goudy for headings/serif text"
   }
 }

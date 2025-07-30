@@ -2,11 +2,16 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Check } from "lucide-react"
-import { useScrollZone } from '../hooks/useScrollZone';
+import { Check, SquareArrowOutUpRight, MessageCircle, Share2 } from "lucide-react"
 
-export default function FloatingActions() {
-  const isContentZone = useScrollZone();
+interface FloatingActionsProps {
+  showTransition?: boolean;
+}
+
+export default function FloatingActions({ 
+  showTransition = true 
+}: FloatingActionsProps) {
+
   const handleShare = async () => {
     const shareData = {
       title: 'Bedlam Mews Loft - Rehearsal Space London',
@@ -34,58 +39,71 @@ export default function FloatingActions() {
       }
     }
   };
+
+  const containerClasses = `
+    fixed bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-2xl px-6
+    lg:static lg:left-auto lg:right-auto lg:transform-none lg:translate-x-0 lg:w-auto lg:max-w-none lg:px-0 z-40 
+    flex flex-col gap-1 items-center
+    ${showTransition ? 'transition-opacity duration-300 ease-in-out' : ''}
+  `.trim().replace(/\s+/g, ' ');
+
+  // Always visible - scroll logic disabled
+
   return (
-    <div className={`fixed bottom-4 left-4 right-4 lg:left-auto lg:right-6 lg:w-[27rem] lg:pl-6 lg:pr-0 z-40 transition-all duration-300 ${
-      isContentZone ? 'block lg:flex' : 'block lg:hidden'
-    } flex flex-col gap-2`}>
+    <div className={containerClasses}>
       {/* Pricing Display - Now at TOP */}
-      <div className="flex justify-center">
-        <Badge variant="secondary" className="text-base lg:text-lg font-medium w-full flex items-center">
-          <span className="bg-green-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2">
-            <Check className="w-3 h-3" />
-          </span>
-          <span className="flex-1 text-center">slots available from £30/hour</span>
-        </Badge>
-      </div>
+      <Badge variant="secondary" className="text-sm md:text-base font-medium w-full flex items-center pl-1 pr-3 py-1">
+        <span className="bg-green-500 text-white rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center mr-2">
+          <Check className="w-2 h-2 md:w-3 md:h-3" />
+        </span>
+        <span className="flex-1 text-center">slots available from £30/hour</span>
+      </Badge>
       
       {/* Book Now - Primary CTA */}
       <Button 
         asChild
         size="lg"
-        className="text-xl lg:text-3xl lg:h-14 shadow-lg rounded-full"
+        className="text-lg md:text-xl shadow-lg rounded-full pl-3 pr-8 w-full"
       >
         <a 
           href="https://calendly.com/neonroobz" 
           target="_blank"
           rel="noopener noreferrer"
         >
-          Book Now
+          <SquareArrowOutUpRight className="w-4 h-4 text-primary-foreground" />
+          <span className="flex-1 text-center">Book Now</span>
         </a>
       </Button>
       
       {/* Secondary Actions */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 w-full">
         <Button
           asChild
           variant="outline"
-          size="sm"
-          className="flex-1 lg:h-12 lg:text-xl rounded-full font-light"
+          size="default"
+          className="flex-1 text-xs md:text-sm rounded-full font-light pl-2 pr-4"
         >
           <a 
             href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
             target="_blank"
             rel="noopener noreferrer"
           >
-            message host
+            <span className="bg-white rounded-full w-5 h-5 flex items-center justify-center">
+              <MessageCircle className="w-3 h-3 text-primary" />
+            </span>
+            <span className="flex-1 text-center">message host</span>
           </a>
         </Button>
         <Button 
           variant="outline"
-          size="sm"
-          className="flex-1 lg:h-12 lg:text-xl rounded-full font-light"
+          size="default"
+          className="flex-1 text-xs md:text-sm rounded-full font-light pl-2 pr-4"
           onClick={handleShare}
         >
-          share with friend
+          <span className="bg-white rounded-full w-5 h-5 flex items-center justify-center">
+            <Share2 className="w-3 h-3 text-primary" />
+          </span>
+          <span className="flex-1 text-center">share with friend</span>
         </Button>
       </div>
     </div>
