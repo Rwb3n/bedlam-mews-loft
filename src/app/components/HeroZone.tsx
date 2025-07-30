@@ -109,14 +109,23 @@ export default function HeroZone() {
     
     window.addEventListener('scroll', handleScrollPause, { passive: true });
 
-    // Create ease functions once (outside the update loop for performance)
+    // Create responsive ease functions (mobile-optimized)
     let customEase, baseEase;
+    const isMobile = window.innerWidth < 768; // md breakpoint
+    
     try {
-      customEase = gsap.parseEase("expoScale(0.5,7)");
-      baseEase = gsap.parseEase("power1.in");
+      if (isMobile) {
+        // Gentler easing for mobile touch scrolling
+        customEase = gsap.parseEase("power2.out");
+        baseEase = null; // Single ease for mobile
+      } else {
+        // More dramatic easing for desktop mouse/scrollbar
+        customEase = gsap.parseEase("expoScale(0.5,7)");
+        baseEase = gsap.parseEase("power1.in");
+      }
     } catch (error) {
-      console.warn("Failed to create custom ease, falling back to circ.in:", error);
-      customEase = gsap.parseEase("circ.in");
+      console.warn("Failed to create custom ease, falling back to sine.out:", error);
+      customEase = gsap.parseEase("sine.out");
       baseEase = null;
     }
 
