@@ -8,16 +8,12 @@ import SplitText from './SplitText';
 // import DesktopTitle from './DesktopTitle'; // Disabled for grid migration
 
 export default function HeroZone() {
-  const heroRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLImageElement>(null);
   const chevronRef = useRef<SVGSVGElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!heroRef.current || !backgroundRef.current || !chevronRef.current || !heroSectionRef.current) return;
-    
-    const heroContainer = heroRef.current;
-    const heroSection = heroSectionRef.current;
+    if (!backgroundRef.current || !chevronRef.current || !heroSectionRef.current) return;
 
     // Ken Burns Background Effect (90s single cycle)
     const kenBurnsTimeline = gsap.timeline({ repeat: 0 });
@@ -109,74 +105,53 @@ export default function HeroZone() {
     
     window.addEventListener('scroll', handleScrollPause, { passive: true });
 
-    // ACT 2: User-Controlled Hero Transformation (2 Keys)
-    const handleHeroTransformation = () => {
-      const scrollY = window.scrollY;
+    // ACT 2: User-Controlled Hero Transformation (3 Keys)
+    const updateHeroTransformation = (scrollY: number) => {
       const maxScroll = 400; // 0-400px scroll range
       const rawProgress = Math.min(scrollY / maxScroll, 1); // 0-1 raw progress
-      const progress = gsap.parseEase("power2.out")(rawProgress); // Easing applied
+      const progress = gsap.parseEase("circ.out")(rawProgress); // Easing applied
       
-      // KEY 1: Framing (3 steps)
-      if (heroRef.current && heroSectionRef.current) {
-        // Step 1: Responsive Padding
-        const screenWidth = window.innerWidth;
-        let maxPadding = 1; // rem - Mobile default
-        let maxHeight = 95; // vh - Mobile gets more height
-        
-        if (screenWidth >= 768) {
-          maxPadding = 1.5; // md+
-          maxHeight = 92; // Tablet slightly less
-        }
-        if (screenWidth >= 1024) {
-          maxPadding = 2; // lg+
-          maxHeight = 90; // Desktop least height
-        }
-        
-        const currentPadding = progress * maxPadding; // 0rem → maxPadding
-        const currentBorderRadius = progress * 1; // 0rem → 1rem
-        const currentHeight = 100 - (progress * (100 - maxHeight)); // 100vh → responsive vh
-        
-        // Apply Key 1 transformations
-        gsap.set(heroRef.current, {
-          padding: `${currentPadding}rem`,
-          transformOrigin: 'center center'
-        });
-        
-        gsap.set(heroSectionRef.current, {
-          borderRadius: `${currentBorderRadius}rem`,
-          height: `${currentHeight}vh`,
-          transformOrigin: 'center center'
-        });
-      }
-      
-      // KEY 2: Recession (5 steps)
       if (heroSectionRef.current) {
-        // Step 1: TranslateZ - moves back in 3D space
-        const translateZ = -(progress * 50); // 0px → -50px (moves back)
+        // KEY 1: Framing (Visual only - no layout impact)
+        const borderRadius = progress * 1; // 0rem → 1rem
         
-        // Step 2: TranslateY - flushed up out of screen  
-        const translateY = -(progress * 300); // 0px → -300px (up/away)
-        
-        // Step 3: Scale - appears smaller/further
+        // KEY 2: Scaling (Size transformation)
         const scale = 1 - (progress * 0.05); // 1.0 → 0.95 (smaller)
         
-        // Step 4: Opacity - becomes less prominent
+        // KEY 3: Recession (Spatial movement)
+        const translateZ = -(progress * 50); // 0px → -50px (moves back)
+        const translateY = -(progress * 300); // 0px → -300px (up/away)
         const opacity = 1 - (progress * 0.15); // 1.0 → 0.85 (dimmer)
         
-        // Step 5: Blur - REMOVED per request
-        
-        // Apply Key 2 transformations (on top of Key 1)
+        // Apply all 3 keys in coordinated transformation
         gsap.set(heroSectionRef.current, {
+          borderRadius: `${borderRadius}rem`,
+          scale: scale,
           z: translateZ,
           y: translateY,
-          scale: scale,
           opacity: opacity,
+          transformOrigin: 'center center',
           force3D: true
         });
       }
     };
+
+    // Handler for smooth scroll events
+    const handleSmoothScroll = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const scrollY = customEvent.detail?.scrollTop ?? window.scrollY;
+      updateHeroTransformation(scrollY);
+    };
+
+    // Handler for regular scroll events (fallback)
+    const handleRegularScroll = () => {
+      updateHeroTransformation(window.scrollY);
+    };
     
-    window.addEventListener('scroll', handleHeroTransformation, { passive: true });
+    // Listen to smooth scroll events instead of raw scroll
+    window.addEventListener('smoothScroll', handleSmoothScroll, { passive: true });
+    // Fallback to regular scroll for initial state or if ScrollSmoother isn't ready
+    window.addEventListener('scroll', handleRegularScroll, { passive: true });
 
     // Cleanup - Act 1 + Chevron + Act 2
     return () => {
@@ -184,14 +159,15 @@ export default function HeroZone() {
       chevronTimeline.kill();
       gsap.killTweensOf(chevronElement);
       window.removeEventListener('scroll', handleScrollPause);
-      window.removeEventListener('scroll', handleHeroTransformation);
+      window.removeEventListener('smoothScroll', handleSmoothScroll);
+      window.removeEventListener('scroll', handleRegularScroll);
       clearTimeout(scrollTimeout);
     };
   }, []);
 
   return (
     // Hero Container - starts full screen, animates to framed
-    <div ref={heroRef} className="w-full" id="hero-container">
+    <div className="w-full" id="hero-container">
       <section 
         ref={heroSectionRef}
         className="relative w-full h-screen overflow-hidden"

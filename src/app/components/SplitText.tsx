@@ -85,10 +85,13 @@ const SplitText: React.FC<SplitTextProps> = ({
       return;
     }
 
-    // Set will-change for performance
+    // Set will-change for performance AND initial state to prevent flash
     targets.forEach((t) => {
       (t as HTMLElement).style.willChange = "transform, opacity";
     });
+    
+    // Immediately set initial state to prevent FOUC
+    gsap.set(targets, { ...from, immediateRender: true, force3D: true });
 
     const createTimeline = () => {
       const tl = gsap.timeline({

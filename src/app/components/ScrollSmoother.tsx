@@ -16,6 +16,12 @@ export default function ScrollSmootherInit() {
       effects: true, // Enable data-speed and data-lag attributes
       smoothTouch: 0.1, // Minimal smoothing on touch devices
       normalizeScroll: true, // Better mobile behavior
+      onUpdate: (self) => {
+        // Dispatch custom event with smooth scroll position for other components
+        window.dispatchEvent(new CustomEvent('smoothScroll', { 
+          detail: { scrollTop: self.scrollTop() } 
+        }));
+      }
     });
 
     // Cleanup
