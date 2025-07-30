@@ -97,7 +97,9 @@
     "responsiveBreakpoints": "Always test typography scaling across all 6 breakpoints for readability",
     "spacingConventions": "Use space-y for content relationships, padding for container structure - never mix approaches",
     "animationLibrary": "GSAP only - for all animations including scroll-based, transitions, and complex sequences",
-    "scrollAnimations": "All scroll-based parallax uses gsap.set() for 60fps performance. No Framer Motion anywhere"
+    "scrollAnimations": "All scroll-based parallax uses gsap.set() for 60fps performance. No Framer Motion anywhere",
+    "heroAnimations": "Hero Zone uses methodical 2-Act system: fixed entrance timeline + user-controlled scroll transformation",
+    "animationTesting": "Other section animations (parallax, sidebar, etc.) disabled during hero system implementation - restore methodically"
   },
 
   "availableComponents": {
@@ -127,6 +129,24 @@
     "font-standardization": "Geist as primary sans-serif, Sorts Mill Goudy for headings/serif text",
     "herozone-responsive-system": "Complete typography and layout overhaul with 6-breakpoint progressive scaling",
     "mobile-navigation-optimization": "Clean blur backdrop system with improved button styling and accessibility",
-    "spacing-system-normalization": "Unified space-y/padding conventions across all components"
+    "spacing-system-normalization": "Unified space-y/padding conventions across all components",
+    "hero-animation-system-2act": "Complete 2-Act hero animation system: Act 1 (fixed entrance 0-4.8s) + Act 2 (user-controlled scroll transformation)"
+  },
+
+  "heroAnimationSystem": {
+    "architecture": "2-Act system with GSAP-only implementation",
+    "act1": {
+      "duration": "0-4.8s fixed timeline",
+      "elements": "Text animations (SplitText) + Ken Burns background + Chevron entrance + gentle bouncing",
+      "responsive": "Chevron positioning py-14→py-20, sizes w-12→w-26 across breakpoints"
+    },
+    "act2": {
+      "trigger": "User scroll 0-400px with power2.out easing",
+      "key1_framing": "Responsive padding (1rem→2rem) + border radius (0→1rem) + height (100vh→90-95vh)",
+      "key2_recession": "TranslateZ (-50px) + TranslateY (-300px) + Scale (0.95) + Opacity (0.85)",
+      "coordination": "Both keys synchronized, fully reversible user control"
+    },
+    "performance": "Hardware accelerated transforms, 60fps, no conflicts with other animations",
+    "status": "Complete and deployed, other section animations temporarily disabled for testing"
   }
 }

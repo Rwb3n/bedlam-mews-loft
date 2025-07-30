@@ -49,7 +49,7 @@ export default function DesktopNavigation() {
       gsap.set(titleRef.current, { opacity: 0, x: 30 });
       
       const navItems = navItemsRef.current.querySelectorAll('button');
-      gsap.set(navItems, { opacity: 0, x: 20 });
+      gsap.set(Array.from(navItems), { opacity: 0, x: 20 });
     }
   }, []);
 
@@ -64,35 +64,37 @@ export default function DesktopNavigation() {
         setIsRevealed(true);
         
         // Get all navigation items
-        const navItems = navItemsRef.current.querySelectorAll('button');
+        const navItems = navItemsRef.current?.querySelectorAll('button');
         
-        // Progressive reveal timeline
-        const revealTimeline = gsap.timeline();
-        
-        // 0.0s → Sidebar container fades in (300ms)
-        revealTimeline.to(navRef.current, {
-          opacity: 1,
-          visibility: 'visible',
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-        
-        // 0.1s → "Bedlam Mews Loft" title slides from right (500ms)
-        revealTimeline.to(titleRef.current, {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          ease: 'cubic-bezier(0.4, 0, 0.2, 1)'
-        }, 0.1);
-        
-        // 0.4s → Navigation items stagger in (300ms each, 100ms stagger)
-        revealTimeline.to(navItems, {
-          opacity: 1,
-          x: 0,
-          duration: 0.3,
-          stagger: 0.1,
-          ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        }, 0.4);
+        if (navItems) {
+          // Progressive reveal timeline
+          const revealTimeline = gsap.timeline();
+          
+          // 0.0s → Sidebar container fades in (300ms)
+          revealTimeline.to(navRef.current, {
+            opacity: 1,
+            visibility: 'visible',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          
+          // 0.1s → "Bedlam Mews Loft" title slides from right (500ms)
+          revealTimeline.to(titleRef.current, {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          }, 0.1);
+          
+          // 0.4s → Navigation items stagger in (300ms each, 100ms stagger)
+          revealTimeline.to(Array.from(navItems!), {
+            opacity: 1,
+            x: 0,
+            duration: 0.3,
+            stagger: 0.1,
+            ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          }, 0.4);
+        }
       }
       
       // Update active section
