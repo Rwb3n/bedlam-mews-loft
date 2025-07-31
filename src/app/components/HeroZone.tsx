@@ -131,6 +131,20 @@ export default function HeroZone() {
 
     // ACT 2: User-Controlled Hero Transformation (3 Keys)
     const updateHeroTransformation = (scrollY: number) => {
+      // Step 1: Explicit reset at scroll zero
+      if (scrollY === 0 && heroSectionRef.current) {
+        gsap.set(heroSectionRef.current, {
+          scale: 1,
+          y: 0,
+          z: 0,
+          opacity: 1,
+          borderRadius: '0rem',
+          transformOrigin: 'center center',
+          force3D: true
+        });
+        return;
+      }
+
       const maxScroll = 400; // 0-400px scroll range
       const rawProgress = Math.min(scrollY / maxScroll, 1); // 0-1 raw progress
       
