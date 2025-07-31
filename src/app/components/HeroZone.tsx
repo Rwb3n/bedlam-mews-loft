@@ -174,21 +174,12 @@ export default function HeroZone() {
       }
     };
 
-    // Handler for smooth scroll events
-    const handleSmoothScroll = (event: Event) => {
-      const customEvent = event as CustomEvent;
-      const scrollY = customEvent.detail?.scrollTop ?? window.scrollY;
-      updateHeroTransformation(scrollY);
-    };
-
-    // Handler for regular scroll events (fallback)
+    // Handler for regular scroll events
     const handleRegularScroll = () => {
       updateHeroTransformation(window.scrollY);
     };
     
-    // Listen to smooth scroll events instead of raw scroll
-    window.addEventListener('smoothScroll', handleSmoothScroll, { passive: true });
-    // Fallback to regular scroll for initial state or if ScrollSmoother isn't ready
+    // Listen to regular scroll events
     window.addEventListener('scroll', handleRegularScroll, { passive: true });
 
     // Cleanup - Act 1 + Chevron + Act 2
@@ -197,7 +188,6 @@ export default function HeroZone() {
       chevronTimeline.kill();
       gsap.killTweensOf(chevronElement);
       window.removeEventListener('scroll', handleScrollPause);
-      window.removeEventListener('smoothScroll', handleSmoothScroll);
       window.removeEventListener('scroll', handleRegularScroll);
       clearTimeout(scrollTimeout);
     };
