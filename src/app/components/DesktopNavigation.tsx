@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 // import { useScrollZone } from '../hooks/useScrollZone'; // Disabled for development
 
 interface DesktopNavigationProps {
-  floatingActionsRef?: React.RefObject<HTMLDivElement>;
+  floatingActionsRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export default function DesktopNavigation({ floatingActionsRef }: DesktopNavigationProps) {
