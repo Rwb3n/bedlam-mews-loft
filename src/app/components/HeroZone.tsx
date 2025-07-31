@@ -15,34 +15,35 @@ export default function HeroZone() {
   const backgroundRef = useRef<HTMLImageElement>(null);
   const chevronRef = useRef<SVGSVGElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (!backgroundRef.current || !chevronRef.current || !heroSectionRef.current) return;
+    if (!imageRef.current || !chevronRef.current || !heroSectionRef.current) return;
 
     // Ken Burns Background Effect (90s single cycle)
     const kenBurnsTimeline = gsap.timeline({ repeat: 0 });
-    kenBurnsTimeline.to(backgroundRef.current, {
+    kenBurnsTimeline.to(imageRef.current, {
       scale: 1.02,
       x: -10,
       y: -5,
       duration: 22.5,
       ease: "none"
     });
-    kenBurnsTimeline.to(backgroundRef.current, {
+    kenBurnsTimeline.to(imageRef.current, {
       scale: 1.05,
       x: -20,
       y: -10,
       duration: 22.5,
       ease: "none"
     });
-    kenBurnsTimeline.to(backgroundRef.current, {
+    kenBurnsTimeline.to(imageRef.current, {
       scale: 1.03,
       x: -15,
       y: -8,
       duration: 22.5,
       ease: "none"
     });
-    kenBurnsTimeline.to(backgroundRef.current, {
+    kenBurnsTimeline.to(imageRef.current, {
       scale: 1.01,
       x: -5,
       y: -3,
@@ -132,16 +133,22 @@ export default function HeroZone() {
     // ACT 2: User-Controlled Hero Transformation (3 Keys)
     const updateHeroTransformation = (scrollY: number) => {
       // Step 1: Explicit reset at scroll zero
-      if (scrollY === 0 && heroSectionRef.current) {
-        gsap.set(heroSectionRef.current, {
-          scale: 1,
-          y: 0,
-          z: 0,
-          opacity: 1,
-          borderRadius: '0rem',
-          transformOrigin: 'center center',
-          force3D: true
-        });
+      if (scrollY === 0) {
+        if (heroSectionRef.current) {
+          gsap.set(heroSectionRef.current, {
+            borderRadius: '0rem'
+          });
+        }
+        if (imageRef.current) {
+          gsap.set(imageRef.current, {
+            scale: 1,
+            y: 0,
+            z: 0,
+            opacity: 1,
+            transformOrigin: 'center center',
+            force3D: true
+          });
+        }
         return;
       }
 
@@ -158,10 +165,16 @@ export default function HeroZone() {
         progress = rawProgress; // Fallback to linear if no easing available
       }
       
+      // KEY 1: Framing (Visual only - no layout impact) - Container only
       if (heroSectionRef.current) {
-        // KEY 1: Framing (Visual only - no layout impact)
         const borderRadius = progress * 1; // 0rem → 1rem
-        
+        gsap.set(heroSectionRef.current, {
+          borderRadius: `${borderRadius}rem`
+        });
+      }
+      
+      // KEY 2 & 3: Visual transforms - Image only
+      if (imageRef.current) {
         // KEY 2: Scaling (Size transformation) - Mobile optimized
         const scaleAmount = isMobile ? 0.025 : 0.05; // Mobile: 2.5% vs Desktop: 5%
         const scale = 1 - (progress * scaleAmount);
@@ -175,9 +188,8 @@ export default function HeroZone() {
         const translateY = -(progress * translateYAmount);
         const opacity = 1 - (progress * opacityAmount);
         
-        // Apply all 3 keys in coordinated transformation
-        gsap.set(heroSectionRef.current, {
-          borderRadius: `${borderRadius}rem`,
+        // Apply visual transforms to image
+        gsap.set(imageRef.current, {
           scale: scale,
           z: translateZ,
           y: translateY,
@@ -217,7 +229,7 @@ export default function HeroZone() {
       >
         {/* Background Image Layer with Ken Burns */}
         <Image
-          ref={backgroundRef}
+          ref={imageRef}
           src="/img/studio/studio-placehold.png"
           alt="Bedlam Mews Loft - Creative Space"
           width={1920}
