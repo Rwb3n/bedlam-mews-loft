@@ -223,9 +223,7 @@ export default function HeroZone() {
         />
         
         {/* Content Overlay Layer */}
-        <div className="absolute inset-0 flex flex-col justify-between items-center text-white py-14 sm:py-14 md:py-16 lg:py-18 xl:py-20 2xl:py-20">
-          {/* Spacer */}
-          <div></div>
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white py-14 sm:py-14 md:py-16 lg:py-18 xl:py-20 2xl:py-20">
           
           {/* Main Content with SplitText Animations */}
           <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full space-y-2 xl:space-y-4">
@@ -274,12 +272,14 @@ export default function HeroZone() {
             </div>
           </div>
           
-          {/* Scroll Indicator with Smart Bounce */}
-          <ChevronDown 
-            ref={chevronRef}
-            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 text-white/80" 
-            aria-label="Scroll down"
-          />
+          {/* Scroll Indicator with Smart Bounce - Halved distance from address */}
+          <div className="mt-8 sm:mt-8 md:mt-12 lg:mt-16 xl:mt-20 2xl:mt-20">
+            <ChevronDown 
+              ref={chevronRef}
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 text-white/80" 
+              aria-label="Scroll down"
+            />
+          </div>
         </div>
       </section>
     </div>
