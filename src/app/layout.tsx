@@ -35,12 +35,13 @@ export default function RootLayout({
       <body
         className={`${geist.variable} ${sortsMillGoudy.variable} font-sans antialiased`}
       >
-        <ScrollSmootherInit />
-        <div id="smooth-wrapper">
-          <div id="smooth-content">
+        {/* ScrollSmootherInit disabled for sticky test */}
+        {/* <ScrollSmootherInit /> */}
+        {/* <div id="smooth-wrapper"> */}
+          {/* <div id="smooth-content"> */}
             {children}
-          </div>
-        </div>
+          {/* </div> */}
+        {/* </div> */}
       </body>
     </html>
   );

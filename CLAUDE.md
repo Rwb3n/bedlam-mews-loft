@@ -2,7 +2,7 @@
   "project": {
     "name": "Bedlam Mews Loft Landing Page",
     "vision": "Professional landing page for London creative space rental with Calendly booking integration",
-    "Ai orchestrator": "Ruben Pires"
+    "Ai orchestrator": "Ruben Pires, never execute code without Ruben's approval"
   },
   
   "architecture": {
@@ -33,7 +33,8 @@
   "ask yourself": {
     "beforeCustomCSS": "Do we have a library for this?",
     "beforeColors": "Are you using bg-primary/text-foreground semantic naming?",
-    "beforeCommit": "Did you run build and test all links work?"
+    "beforeCommit": "Did you run build and test all links work?",
+    "beforeScrollAnimations": "Does this conflict with CSS sticky positioning? ScrollSmoother breaks native sticky behavior"
   },
 
   "commands you run": {
@@ -99,7 +100,9 @@
     "animationLibrary": "GSAP only - for all animations including scroll-based, transitions, and complex sequences",
     "scrollAnimations": "All scroll-based parallax uses gsap.set() for 60fps performance. No Framer Motion anywhere",
     "heroAnimations": "Hero Zone uses methodical 2-Act system: fixed entrance timeline + user-controlled scroll transformation",
-    "animationTesting": "Other section animations (parallax, sidebar, etc.) disabled during hero system implementation - restore methodically"
+    "animationTesting": "Other section animations (parallax, sidebar, etc.) disabled during hero system implementation - restore methodically",
+    "scrollSmootherConflict": "ScrollSmoother breaks CSS sticky positioning - these are mutually exclusive. Choose one or the other, never both",
+    "debuggingScrollIssues": "When position: sticky stops working, disable ScrollSmoother first - it overrides native browser scroll behavior"
   },
 
   "availableComponents": {

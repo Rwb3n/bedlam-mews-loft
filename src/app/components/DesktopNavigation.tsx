@@ -41,89 +41,56 @@ export default function DesktopNavigation() {
     }
   };
 
-  // Initial setup - set sidebar to hidden state immediately
+  // GATE 1: Temporarily disable all animations to test pure sticky
   useEffect(() => {
-    if (navRef.current && titleRef.current && navItemsRef.current) {
-      gsap.set(navRef.current, { opacity: 0, visibility: 'hidden' });
-      gsap.set(titleRef.current, { 
-        opacity: 0, 
-        y: 20,
-        scale: 0.9 
-      });
-      
-      const navItems = navItemsRef.current.querySelectorAll('button');
-      gsap.set(Array.from(navItems), { 
-        opacity: 0, 
-        y: 15,
-        scale: 0.95 
-      });
-    }
+    // Commented out for Gate 1 testing
+    // if (navRef.current && titleRef.current && navItemsRef.current) {
+    //   gsap.set(navRef.current, { opacity: 0, visibility: 'hidden' });
+    //   gsap.set(titleRef.current, { 
+    //     opacity: 0, 
+    //     y: 20,
+    //     scale: 0.9 
+    //   });
+    //   
+    //   const navItems = navItemsRef.current.querySelectorAll('button');
+    //   gsap.set(Array.from(navItems), { 
+    //     opacity: 0, 
+    //     y: 15,
+    //     scale: 0.95 
+    //   });
+    // }
   }, []);
 
   useEffect(() => {
-    // Scroll-controlled bi-directional sidebar animation
-    const handleSidebarAnimation = (event?: Event) => {
-      // Get smooth scroll position from ScrollSmoother or fallback
-      const customEvent = event as CustomEvent;
-      const scrollY = customEvent?.detail?.scrollTop ?? window.scrollY;
-      
-      // Animation trigger: starts at 400px, completes at 600px
-      const startScroll = 400;  // Hero H1 exit point
-      const endScroll = 600;    // Full reveal point
-      const scrollRange = endScroll - startScroll;
-      
-      if (scrollY < startScroll) {
-        // Before trigger: sidebar hidden
-        updateSidebarState(0);
-      } else if (scrollY >= endScroll) {
-        // After trigger: sidebar fully revealed
-        updateSidebarState(1);
-      } else {
-        // During trigger: progressive reveal based on scroll position
-        const rawProgress = (scrollY - startScroll) / scrollRange; // 0-1
-        const progress = gsap.parseEase("power2.out")(rawProgress); // Smooth easing
-        updateSidebarState(progress);
-      }
-    };
+    // GATE 1: Disable animation logic to test pure sticky
+    // const handleSidebarAnimation = (event?: Event) => {
+    //   // Get smooth scroll position from ScrollSmoother or fallback
+    //   const customEvent = event as CustomEvent;
+    //   const scrollY = customEvent?.detail?.scrollTop ?? window.scrollY;
+    //   
+    //   // Animation trigger: starts at 400px, completes at 600px
+    //   const startScroll = 400;  // Hero H1 exit point
+    //   const endScroll = 600;    // Full reveal point
+    //   const scrollRange = endScroll - startScroll;
+    //   
+    //   if (scrollY < startScroll) {
+    //     // Before trigger: sidebar hidden
+    //     updateSidebarState(0);
+    //   } else if (scrollY >= endScroll) {
+    //     // After trigger: sidebar fully revealed
+    //     updateSidebarState(1);
+    //   } else {
+    //     // During trigger: progressive reveal based on scroll position
+    //     const rawProgress = (scrollY - startScroll) / scrollRange; // 0-1
+    //     const progress = gsap.parseEase("power2.out")(rawProgress); // Smooth easing
+    //     updateSidebarState(progress);
+    //   }
+    // };
 
-    // Update sidebar elements based on progress (0-1)
-    const updateSidebarState = (progress: number) => {
-      if (!navRef.current || !titleRef.current || !navItemsRef.current) return;
-      
-      const navItems = navItemsRef.current.querySelectorAll('button');
-      
-      // Container fade (0-0.2 progress range)
-      const containerOpacity = Math.min(progress / 0.2, 1);
-      gsap.set(navRef.current, {
-        opacity: containerOpacity,
-        visibility: containerOpacity > 0 ? 'visible' : 'hidden'
-      });
-      
-      // Title bounce in (0.2-0.5 progress range)
-      const titleProgress = Math.max(0, Math.min((progress - 0.2) / 0.3, 1));
-      const titleY = (1 - titleProgress) * 20; // 20px to 0px
-      const titleScale = 0.9 + (titleProgress * 0.1); // 0.9 to 1.0 (subtle bounce)
-      gsap.set(titleRef.current, {
-        opacity: titleProgress,
-        y: titleY,
-        scale: titleScale
-      });
-      
-      // Nav items sequential bounce (0.5-1.0 progress range)
-      const itemsProgress = Math.max(0, (progress - 0.5) / 0.5);
-      navItems.forEach((item, index) => {
-        const itemDelay = index * 0.2; // Stagger delay per item
-        const itemProgress = Math.max(0, Math.min(itemsProgress - itemDelay, 1));
-        
-        const itemY = (1 - itemProgress) * 15; // 15px to 0px (smaller bounce)
-        const itemScale = 0.95 + (itemProgress * 0.05); // 0.95 to 1.0 (subtle bounce)
-        gsap.set(item, {
-          opacity: itemProgress,
-          y: itemY,
-          scale: itemScale
-        });
-      });
-    };
+    // GATE 1: Disable animation state updates
+    // const updateSidebarState = (progress: number) => {
+    //   // Animation logic disabled for Gate 1 testing
+    // };
 
     // Active section tracking (separate from animation)
     const handleActiveSection = () => {
@@ -141,18 +108,18 @@ export default function DesktopNavigation() {
       }
     };
 
-    // Listen to smooth scroll events and regular scroll
-    window.addEventListener('smoothScroll', handleSidebarAnimation, { passive: true });
-    window.addEventListener('scroll', handleSidebarAnimation, { passive: true });
+    // GATE 1: Only keep active section tracking, disable animations
+    // window.addEventListener('smoothScroll', handleSidebarAnimation, { passive: true });
+    // window.addEventListener('scroll', handleSidebarAnimation, { passive: true });
     window.addEventListener('scroll', handleActiveSection, { passive: true });
     
     // Set initial states
-    handleSidebarAnimation();
+    // handleSidebarAnimation();
     handleActiveSection();
     
     return () => {
-      window.removeEventListener('smoothScroll', handleSidebarAnimation);
-      window.removeEventListener('scroll', handleSidebarAnimation);
+      // window.removeEventListener('smoothScroll', handleSidebarAnimation);
+      // window.removeEventListener('scroll', handleSidebarAnimation);
       window.removeEventListener('scroll', handleActiveSection);
     };
   }, []);
@@ -160,6 +127,7 @@ export default function DesktopNavigation() {
   return (
     <nav 
       ref={navRef}
+      className="sticky top-8"
       style={{ willChange: 'opacity, visibility' }}
     >
       {/* Sidebar Title */}
