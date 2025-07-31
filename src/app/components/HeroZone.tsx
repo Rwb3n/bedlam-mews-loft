@@ -20,95 +20,61 @@ export default function HeroZone() {
   useEffect(() => {
     if (!imageRef.current || !chevronRef.current || !heroSectionRef.current) return;
 
-    // Ken Burns Background Effect (90s single cycle)
-    const kenBurnsTimeline = gsap.timeline({ repeat: 0 });
-    kenBurnsTimeline.to(imageRef.current, {
-      scale: 1.02,
-      x: -10,
-      y: -5,
-      duration: 22.5,
-      ease: "none"
-    });
-    kenBurnsTimeline.to(imageRef.current, {
-      scale: 1.05,
-      x: -20,
-      y: -10,
-      duration: 22.5,
-      ease: "none"
-    });
-    kenBurnsTimeline.to(imageRef.current, {
-      scale: 1.03,
-      x: -15,
-      y: -8,
-      duration: 22.5,
-      ease: "none"
-    });
-    kenBurnsTimeline.to(imageRef.current, {
-      scale: 1.01,
-      x: -5,
-      y: -3,
-      duration: 22.5,
-      ease: "none"
+    // Set initial clean state for image (prevent any residual transforms)
+    gsap.set(imageRef.current, {
+      scale: 1,
+      x: 0,
+      y: 0,
+      z: 0,
+      opacity: 1,
+      transformOrigin: 'center center',
+      force3D: true,
+      clearProps: 'all' // Clear any existing properties
     });
 
-    // ChevronDown Clean Animation - After framing completes
+    // Ken Burns Background Effect (90s single cycle) - DISABLED
+    // const kenBurnsTimeline = gsap.timeline({ repeat: 0 });
+    // kenBurnsTimeline.to(imageRef.current, {
+    //   scale: 1.02,
+    //   x: -10,
+    //   y: -5,
+    //   duration: 22.5,
+    //   ease: "none"
+    // });
+    // kenBurnsTimeline.to(imageRef.current, {
+    //   scale: 1.05,
+    //   x: -20,
+    //   y: -10,
+    //   duration: 22.5,
+    //   ease: "none"
+    // });
+    // kenBurnsTimeline.to(imageRef.current, {
+    //   scale: 1.03,
+    //   x: -15,
+    //   y: -8,
+    //   duration: 22.5,
+    //   ease: "none"
+    // });
+    // kenBurnsTimeline.to(imageRef.current, {
+    //   scale: 1.01,
+    //   x: -5,
+    //   y: -3,
+    //   duration: 22.5,
+    //   ease: "none"
+    // });
+
+    // DISABLED: ChevronDown Clean Animation - For debugging transforms
     const chevronElement = chevronRef.current;
     
-    // Set initial state
+    // Set chevron to visible state (no animation)
     gsap.set(chevronElement, {
-      opacity: 0,
-      filter: 'blur(8px)'
-    });
-    
-    // DISABLED: Auto-framing animation - Moving to scroll-controlled
-    // const framingTimeline = gsap.timeline({ delay: 3.0 });
-    // ... auto-framing disabled for reorganization
-    
-    // ACT 1 Addition: Chevron entrance after text completes
-    const chevronTimeline = gsap.timeline({ delay: 3.2 }); // After address completes
-    
-    // Elegant blur focus + fade in
-    chevronTimeline.to(chevronElement, {
       opacity: 0.8,
-      filter: 'blur(0px)',
-      duration: 0.8,
-      ease: 'power2.out'
+      filter: 'blur(0px)'
     });
     
-    // Gentle bounce system - starts after entrance completes
-    let bounceCount = 0;
-    let isScrolling = false;
-    let scrollTimeout: NodeJS.Timeout;
-    
-    const gentleBounce = () => {
-      if (bounceCount >= 6 || isScrolling) return; // Max 6 cycles
-      
-      gsap.to(chevronElement, {
-        y: 6,
-        duration: 1.5,
-        ease: 'power2.inOut',
-        yoyo: true,
-        repeat: 1,
-        onComplete: () => {
-          bounceCount++;
-          setTimeout(gentleBounce, 300); // 300ms pause between bounces
-        }
-      });
-    };
-    
-    // Start gentle bounce after entrance completes
-    setTimeout(gentleBounce, 4000); // 3.2s + 0.8s entrance
-    
-    // Pause bouncing during scroll
-    const handleScrollPause = () => {
-      isScrolling = true;
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        isScrolling = false;
-      }, 150);
-    };
-    
-    window.addEventListener('scroll', handleScrollPause, { passive: true });
+    // DISABLED: All chevron animations for debugging
+    // const chevronTimeline = gsap.timeline({ delay: 3.2 });
+    // ... chevron animations disabled for debugging
 
     // Create responsive ease functions (mobile-optimized)
     let customEase, baseEase;
@@ -200,22 +166,31 @@ export default function HeroZone() {
       }
     };
 
-    // Handler for regular scroll events
+    // Throttled handler for regular scroll events
+    let scrollTicking = false;
     const handleRegularScroll = () => {
-      updateHeroTransformation(window.scrollY);
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          updateHeroTransformation(window.scrollY);
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
     };
     
     // Listen to regular scroll events
     window.addEventListener('scroll', handleRegularScroll, { passive: true });
 
-    // Cleanup - Act 1 + Chevron + Act 2
+    // Cleanup - Act 2 only (Act 1 disabled for debugging)
     return () => {
-      kenBurnsTimeline.kill();
-      chevronTimeline.kill();
+      // kenBurnsTimeline.kill(); // DISABLED
+      // chevronTimeline.kill(); // DISABLED
       gsap.killTweensOf(chevronElement);
-      window.removeEventListener('scroll', handleScrollPause);
+      gsap.killTweensOf(imageRef.current); // Kill any transforms on image
+      gsap.killTweensOf(heroSectionRef.current); // Kill any transforms on container
+      // window.removeEventListener('scroll', handleScrollPause); // DISABLED
       window.removeEventListener('scroll', handleRegularScroll);
-      clearTimeout(scrollTimeout);
+      // clearTimeout(scrollTimeout); // DISABLED
     };
   }, []);
 
@@ -243,47 +218,22 @@ export default function HeroZone() {
           
           {/* Main Content with SplitText Animations */}
           <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full space-y-2 xl:space-y-4">
-            {/* Main Title - Character by Character (starts 0.3s) */}
+            {/* DISABLED: Main Title - Static for debugging */}
             <div className="title-container">
-              <SplitText
-                text="Bedlam Mews Loft"
-                className="text-[40px] sm:text-[56px] md:text-[72px] lg:text-[86px] xl:text-[86px] 2xl:text-[96px] font-serif leading-tight"
-                splitType="chars"
-                delay={60}
-                duration={0.8}
-                ease="power3.out"
-                from={{ opacity: 0, y: 40, rotationX: 90 }}
-                to={{ opacity: 1, y: 0, rotationX: 0 }}
-                trigger="immediate"
-                startDelay={0.3}
-                textAlign="center"
-              />
+              <h1 className="text-[40px] sm:text-[56px] md:text-[72px] lg:text-[86px] xl:text-[86px] 2xl:text-[96px] font-serif leading-tight">
+                Bedlam Mews Loft
+              </h1>
             </div>
             
-            {/* Subtitle - Word by Word (starts 1.4s) */}
+            {/* DISABLED: Subtitle - Static for debugging */}
             <div className="subtitle-container">
-              <SplitText
-                text="Rehearsal Space for hire in the heart of London"
-                className="text-[20px] sm:text-[28px] md:text-[36px] lg:text-[43px] xl:text-[43px] 2xl:text-[48px] font-sans leading-tight"
-                splitType="words"
-                delay={120}
-                duration={0.6}
-                ease="power2.out"
-                from={{ opacity: 0, y: 30, scale: 0.8 }}
-                to={{ opacity: 1, y: 0, scale: 1.0 }}
-                trigger="immediate"
-                startDelay={1.4}
-                textAlign="center"
-              />
+              <h2 className="text-[20px] sm:text-[28px] md:text-[36px] lg:text-[43px] xl:text-[43px] 2xl:text-[48px] font-sans leading-tight">
+                Rehearsal Space for hire in the heart of London
+              </h2>
             </div>
             
-            {/* Address - Single Unit (starts 2.6s) */}
-            <div 
-              className="address-container text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl 2xl:text-2xl font-light opacity-0"
-              style={{
-                animation: 'fadeInUp 0.5s ease-out 2.6s forwards'
-              }}
-            >
+            {/* DISABLED: Address - Static for debugging */}
+            <div className="address-container text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl 2xl:text-2xl font-light">
               Bedlam Mews, North Lambeth, SE11 6DF
             </div>
           </div>
