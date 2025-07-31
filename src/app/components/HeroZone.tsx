@@ -135,9 +135,14 @@ export default function HeroZone() {
       const rawProgress = Math.min(scrollY / maxScroll, 1); // 0-1 raw progress
       
       // Apply compound easing if available, otherwise fallback
-      const progress = baseEase 
-        ? customEase(baseEase(rawProgress)) 
-        : customEase(rawProgress);
+      let progress;
+      if (baseEase && customEase) {
+        progress = customEase(baseEase(rawProgress));
+      } else if (customEase) {
+        progress = customEase(rawProgress);
+      } else {
+        progress = rawProgress; // Fallback to linear if no easing available
+      }
       
       if (heroSectionRef.current) {
         // KEY 1: Framing (Visual only - no layout impact)
