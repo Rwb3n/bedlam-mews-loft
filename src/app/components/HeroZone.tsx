@@ -135,9 +135,9 @@ export default function HeroZone() {
       const rawProgress = Math.min(scrollY / maxScroll, 1); // 0-1 raw progress
       
       // Apply compound easing if available, otherwise fallback
-      const progress = (customEase && baseEase) 
+      const progress = baseEase 
         ? customEase(baseEase(rawProgress)) 
-        : customEase ? customEase(rawProgress) : rawProgress;
+        : customEase(rawProgress);
       
       if (heroSectionRef.current) {
         // KEY 1: Framing (Visual only - no layout impact)
@@ -149,7 +149,7 @@ export default function HeroZone() {
         
         // KEY 3: Recession (Spatial movement) - Mobile optimized
         const translateZAmount = isMobile ? 25 : 50; // Mobile: -25px vs Desktop: -50px
-        const translateYAmount = isMobile ? 150 : 300; // Mobile: -150px vs Desktop: -300px
+        const translateYAmount = isMobile ? 75 : 150; // Mobile: -75px (-50%) vs Desktop: -150px
         const opacityAmount = isMobile ? 0.1 : 0.15; // Mobile: 0.9 vs Desktop: 0.85
         
         const translateZ = -(progress * translateZAmount);
