@@ -153,7 +153,7 @@ export default function HeroZone() {
         const scale = 1 - (progress * scaleAmount);
         
         // KEY 3: Recession (Spatial movement) - Mobile optimized
-        const translateZAmount = isMobile ? 25 : 50; // Mobile: -25px vs Desktop: -50px
+        const translateZAmount = 50; // Both: -50px
         const translateYAmount = isMobile ? 112.5 : 150; // Mobile: -112.5px (+50% from -75px) vs Desktop: -150px
         const opacityAmount = isMobile ? 0.1 : 0.15; // Mobile: 0.9 vs Desktop: 0.85
         
