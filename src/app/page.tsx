@@ -1,7 +1,12 @@
+'use client';
+
+import { useRef, useState } from 'react';
 import Header from './components/Header';
 import HeroZone from './components/HeroZone';
 import ContentZone from './components/ContentZone';
-import FloatingActions from './components/FloatingActions';
+import DesktopFloatingActions from './components/DesktopFloatingActions';
+import MobileFloatingActions from './components/MobileFloatingActions';
+import MobileNavigation from './components/MobileNavigation';
 import Footer from './components/Footer';
 import PhotoSlider from './components/PhotoSlider';
 import DesktopNavigation from './components/DesktopNavigation';
@@ -14,6 +19,9 @@ import { Separator } from '@/components/ui/separator';
 import { Milestone, MessageCircle } from 'lucide-react';
 
 export default function Home() {
+  const desktopFloatingActionsRef = useRef<HTMLDivElement>(null);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
   return (
     <main className="lg:pt-0">
       {/* Zone 1: Hero Zone - Full Width, Independent */}
@@ -22,17 +30,16 @@ export default function Home() {
       {/* Zone 2: Content Zone - Clean Structure */}
       <ContentZone sidebar={
         <>
-          <DesktopNavigation />
-          <FloatingActions />
+          <DesktopNavigation floatingActionsRef={desktopFloatingActionsRef} />
+          <DesktopFloatingActions ref={desktopFloatingActionsRef} />
         </>
       }>
         <Header />
         
         {/* Mobile/Tablet FloatingActions - only show when sidebar is hidden */}
         <div className="lg:hidden">
-          <FloatingActions />
+          <MobileFloatingActions visible={!isMobileNavOpen} />
         </div>
-        
         {/* Section 2: Space Details - Layered Emergence */}
         <AnimatedSection 
           id="details" 
@@ -287,6 +294,9 @@ export default function Home() {
         </section>
         
       </ContentZone>
+      
+      {/* Mobile Navigation - Floating, outside ContentZone */}
+      <MobileNavigation onNavStateChange={setIsMobileNavOpen} />
       
       {/* Footer - Full Width, Outside Grid */}
       <Footer />

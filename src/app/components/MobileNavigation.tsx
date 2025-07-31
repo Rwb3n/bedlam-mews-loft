@@ -1,18 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-// import { Button } from '@/components/ui/button'; // Not used anymore
-import { CircleHelp } from 'lucide-react';
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarTrigger,
-} from '@/components/ui/menubar';
+import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { gsap } from 'gsap';
+import { CircleHelp, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-export default function MobileNavigation() {
-  const [activeSection, setActiveSection] = useState('hero');
+interface MobileNavigationProps {
+  onNavStateChange?: (isOpen: boolean) => void;
+}
+
+export default function MobileNavigation({ onNavStateChange }: MobileNavigationProps) {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  
+  const iconRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const sections = [
     { id: 'details', name: 'Space Details' },
@@ -21,109 +25,123 @@ export default function MobileNavigation() {
     { id: 'host', name: 'Host' }
   ];
 
+  // Handle mounting for portal
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Set base animation states
+  useEffect(() => {
+    if (modalRef.current && contentRef.current) {
+      // Set initial hidden state for future animations
+      gsap.set(modalRef.current, {
+        opacity: 0,
+        visibility: 'hidden'
+      });
+      gsap.set(contentRef.current, {
+        opacity: 0,
+        y: 50
+      });
+    }
+  }, [mounted]);
+
+  // Notify parent of state changes
+  useEffect(() => {
+    onNavStateChange?.(isNavOpen);
+  }, [isNavOpen, onNavStateChange]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerHeight = 80; // Mobile header height
-      const sectionPadding = 32; // Half the py-16 section padding
+      const headerHeight = 0; // No header now
+      const sectionPadding = 32;
       const elementPosition = element.offsetTop - headerHeight + sectionPadding;
       window.scrollTo({
         top: elementPosition,
         behavior: 'smooth'
       });
+      setIsNavOpen(false); // Close modal after navigation
     }
   };
 
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
+
+  // Handle escape key
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['details', 'amenities', 'location', 'host'];
-      
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // Consider section active if it's in the top half of viewport
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isNavOpen) {
+        closeNav();
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Set initial active section
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isNavOpen]);
+
+  const ModalContent = () => (
+    <div
+      ref={modalRef}
+      className="fixed inset-0 z-50 bg-background/95 backdrop-blur-md"
+      onClick={closeNav}
+    >
+      <div
+        ref={contentRef}
+        className="flex flex-col items-center justify-center h-full px-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={closeNav}
+          className="absolute top-6 right-6 rounded-full"
+        >
+          <X className="w-6 h-6" />
+        </Button>
+
+        {/* Navigation items */}
+        <div className="flex flex-col items-center space-y-8 max-w-sm w-full">
+          {sections.map((section) => (
+            <Button
+              key={section.id}
+              variant="ghost"
+              onClick={() => scrollToSection(section.id)}
+              className="text-2xl font-medium py-4 px-6 w-full rounded-lg hover:bg-primary/10"
+            >
+              {section.name}
+            </Button>
+          ))}
+        </div>
+
+        {/* Space for FloatingActions will be added later */}
+        <div className="mt-12">
+          {/* FloatingActions will appear here when nav is open */}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <header className="lg:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur">
-      <div className="flex items-center justify-between px-6 py-4">
-        <h1 
-          className="text-2xl font-serif cursor-pointer hover:opacity-80 transition-opacity"
-          onClick={() => scrollToSection('hero')}
-        >
-          Bedlam Mews Loft
-        </h1>
-        <Menubar className="bg-transparent border-none p-0">
-          <MenubarMenu>
-            <MenubarTrigger 
-              className="
-                bg-white hover:bg-gray-50 
-                text-primary 
-                rounded-full p-2 
-                data-[state=open]:bg-gray-50
-                focus:ring-2 focus:ring-primary/50 focus:outline-none
-                transition-all duration-200
-              "
-              aria-label="Open navigation menu"
-            >
-              <CircleHelp className="w-5 h-5 text-primary" />
-            </MenubarTrigger>
-            <MenubarContent 
-              className="
-                w-screen max-w-none 
-                mx-0 mt-4 
-                rounded-t-none rounded-b-xl
-                border-0 
-                shadow-2xl
-                !bg-transparent backdrop-blur
-                animate-in slide-in-from-top-2 duration-200
-              "
-              align="end"
-              sideOffset={0}
-            >
-              <div className="py-2">
-                {sections.map((section, index) => (
-                  <MenubarItem 
-                    key={section.id}
-                    onClick={() => scrollToSection(section.id)}
-                    className={`
-                      text-xl font-medium
-                      flex items-center justify-center 
-                      py-5 px-6 mx-2 my-1
-                      rounded-lg
-                      transition-all duration-200 ease-out
-                      active:scale-95
-                      ${activeSection === section.id 
-                        ? "bg-primary text-primary-foreground shadow-md" 
-                        : "hover:bg-primary/5 active:bg-primary/10"
-                      }
-                    `}
-                    style={{ 
-                      animationDelay: `${index * 50}ms`,
-                      animation: 'fadeInUp 300ms ease-out forwards'
-                    }}
-                  >
-                    {section.name}
-                  </MenubarItem>
-                ))}
-              </div>
-            </MenubarContent>
-          </MenubarMenu>
-        </Menubar>
-      </div>
-    </header>
+    <>
+      {/* Floating question mark icon */}
+      <Button
+        ref={iconRef}
+        variant="secondary"
+        size="icon"
+        onClick={toggleNav}
+        className="lg:hidden fixed top-6 right-6 z-40 w-12 h-12 rounded-full shadow-lg"
+      >
+        <CircleHelp className="w-6 h-6" />
+      </Button>
+
+      {/* Portal modal */}
+      {mounted && isNavOpen && createPortal(<ModalContent />, document.body)}
+    </>
   );
 }

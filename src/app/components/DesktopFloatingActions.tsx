@@ -1,16 +1,23 @@
 'use client'
 
+import { useEffect, useRef, forwardRef } from 'react';
+import { gsap } from 'gsap';
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Check, SquareArrowOutUpRight, MessageCircle, Share2 } from "lucide-react"
 
-interface FloatingActionsProps {
-  showTransition?: boolean;
-}
+const DesktopFloatingActions = forwardRef<HTMLDivElement>((props, ref) => {
 
-export default function FloatingActions({ 
-  showTransition = true 
-}: FloatingActionsProps) {
+  // Set initial hidden state for ACT 3 integration
+  useEffect(() => {
+    if (ref && 'current' in ref && ref.current) {
+      gsap.set(ref.current, {
+        opacity: 0,
+        filter: 'blur(8px)',
+        x: 30
+      });
+    }
+  }, [ref]);
 
   const handleShare = async () => {
     const shareData = {
@@ -40,21 +47,17 @@ export default function FloatingActions({
     }
   };
 
-  const containerClasses = `
-    fixed bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-2xl px-6
-    lg:static lg:left-auto lg:right-auto lg:transform-none lg:translate-x-0 lg:w-auto lg:max-w-none lg:px-0 z-40 
-    flex flex-col gap-1 items-center
-    ${showTransition ? 'transition-opacity duration-300 ease-in-out' : ''}
-  `.trim().replace(/\s+/g, ' ');
-
-  // Always visible - scroll logic disabled
-
+  // Desktop-only: Static positioning within sidebar layout
   return (
-    <div className={containerClasses}>
-      {/* Pricing Display - Now at TOP */}
-      <Badge variant="secondary" className="text-sm md:text-base font-medium w-full flex items-center pl-1 pr-3 py-1">
-        <span className="bg-green-500 text-white rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center mr-2">
-          <Check className="w-2 h-2 md:w-3 md:h-3" />
+    <div 
+      ref={ref}
+      className="flex flex-col gap-1 items-center"
+      style={{ willChange: 'opacity, filter, transform' }}
+    >
+      {/* Pricing Display */}
+      <Badge variant="secondary" className="text-sm font-medium w-full flex items-center pl-1 pr-3 py-1">
+        <span className="bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center mr-2">
+          <Check className="w-2 h-2" />
         </span>
         <span className="flex-1 text-center">slots available from £30/hour</span>
       </Badge>
@@ -63,7 +66,7 @@ export default function FloatingActions({
       <Button 
         asChild
         size="lg"
-        className="text-lg md:text-xl shadow-lg rounded-full pl-3 pr-8 w-full"
+        className="text-lg shadow-lg rounded-full pl-3 pr-8 w-full"
       >
         <a 
           href="https://calendly.com/neonroobz" 
@@ -81,7 +84,7 @@ export default function FloatingActions({
           asChild
           variant="outline"
           size="default"
-          className="flex-1 text-xs md:text-sm rounded-full font-light pl-2 pr-4"
+          className="flex-1 text-xs rounded-full font-light pl-2 pr-4"
         >
           <a 
             href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
@@ -97,7 +100,7 @@ export default function FloatingActions({
         <Button 
           variant="outline"
           size="default"
-          className="flex-1 text-xs md:text-sm rounded-full font-light pl-2 pr-4"
+          className="flex-1 text-xs rounded-full font-light pl-2 pr-4"
           onClick={handleShare}
         >
           <span className="bg-white rounded-full w-5 h-5 flex items-center justify-center">
@@ -108,4 +111,8 @@ export default function FloatingActions({
       </div>
     </div>
   );
-}
+});
+
+DesktopFloatingActions.displayName = 'DesktopFloatingActions';
+
+export default DesktopFloatingActions;

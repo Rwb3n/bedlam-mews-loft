@@ -4,7 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 // import { useScrollZone } from '../hooks/useScrollZone'; // Disabled for development
 
-export default function DesktopNavigation() {
+interface DesktopNavigationProps {
+  floatingActionsRef?: React.RefObject<HTMLDivElement>;
+}
+
+export default function DesktopNavigation({ floatingActionsRef }: DesktopNavigationProps) {
   const [activeSection, setActiveSection] = useState('hero');
   const navRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -17,6 +21,18 @@ export default function DesktopNavigation() {
     { id: 'location', name: 'Location' },
     { id: 'host', name: 'Host' }
   ];
+
+  // ACT 3 Animation Configuration
+  const navAnimationConfig = {
+    foundation: { delay: 0, duration: 300 },
+    items: [
+      { delay: 400, duration: 600 }, // Nav Item 1
+      { delay: 600, duration: 600 }, // Nav Item 2  
+      { delay: 800, duration: 600 }, // Nav Item 3
+      { delay: 1000, duration: 600 }, // Nav Item 4
+      { delay: 1200, duration: 600 } // FloatingActions (5th item)
+    ]
+  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -41,7 +57,7 @@ export default function DesktopNavigation() {
     }
   };
 
-  // Initial setup - set sidebar to hidden state immediately
+  // Initial setup - set sidebar to hidden state immediately  
   useEffect(() => {
     if (navRef.current && titleRef.current && navItemsRef.current) {
       gsap.set(navRef.current, { opacity: 0, visibility: 'hidden' });
@@ -52,78 +68,108 @@ export default function DesktopNavigation() {
       });
       
       const navItems = navItemsRef.current.querySelectorAll('button');
-      gsap.set(Array.from(navItems), { 
-        opacity: 0, 
-        x: 20,
-        scale: 0.95 
+      
+      // Set initial hidden state for all nav items (ACT 3 pattern)
+      gsap.set(Array.from(navItems), {
+        filter: 'blur(8px)',
+        x: 30,
+        opacity: 0
       });
     }
   }, []);
 
   useEffect(() => {
-    // Scroll-controlled bi-directional sidebar animation
+    // DISABLED: Scroll-controlled bi-directional sidebar animation
     const handleSidebarAnimation = () => {
       const scrollY = window.scrollY;
       
       // Animation trigger: starts at 400px, completes at 600px
       const startScroll = 400;  // Hero H1 exit point
       const endScroll = 600;    // Full reveal point
-      const scrollRange = endScroll - startScroll;
       
       if (scrollY < startScroll) {
         // Before trigger: sidebar hidden
         updateSidebarState(0);
-      } else if (scrollY >= endScroll) {
-        // After trigger: sidebar fully revealed
-        updateSidebarState(1);
       } else {
-        // During trigger: progressive reveal based on scroll position
-        const rawProgress = (scrollY - startScroll) / scrollRange; // 0-1
-        const progress = gsap.parseEase("power2.out")(rawProgress); // Smooth easing
-        updateSidebarState(progress);
+        // After trigger: sidebar fully revealed (static)
+        updateSidebarState(1);
       }
     };
 
-    // Update sidebar elements based on progress (0-1)
+    // Single animation function for nav items and floating actions
+    const animateItem = (element: HTMLElement, itemIndex: number) => {
+      const config = navAnimationConfig.items[itemIndex];
+      
+      setTimeout(() => {
+        gsap.to(element, {
+          filter: 'blur(0px)',
+          x: 0,
+          opacity: 1,
+          duration: config.duration / 1000, // Convert to seconds
+          ease: 'power2.out'
+        });
+      }, config.delay);
+    };
+
+    // Update sidebar elements with config-driven animation system
     const updateSidebarState = (progress: number) => {
       if (!navRef.current || !titleRef.current || !navItemsRef.current) return;
       
       const navItems = navItemsRef.current.querySelectorAll('button');
       
-      // Container fade + slide from right (0-0.2 progress range)
-      const containerOpacity = Math.min(progress / 0.2, 1);
-      const containerX = (1 - containerOpacity) * 100; // 100px to 0px (right to left)
-      
-      gsap.set(navRef.current, {
-        opacity: containerOpacity,
-        visibility: containerOpacity > 0 ? 'visible' : 'hidden',
-        x: containerX
-      });
-      
-      // Title bounce in from right (0.2-0.5 progress range)
-      const titleProgress = Math.max(0, Math.min((progress - 0.2) / 0.3, 1));
-      const titleX = (1 - titleProgress) * 30; // 30px to 0px (right to left)
-      const titleScale = 0.9 + (titleProgress * 0.1); // 0.9 to 1.0 (subtle bounce)
-      gsap.set(titleRef.current, {
-        opacity: titleProgress,
-        x: titleX,
-        scale: titleScale
-      });
-      
-      // Nav items sequential bounce from right (0.5-1.0 progress range)
-      const itemsProgress = Math.max(0, (progress - 0.5) / 0.5);
-      navItems.forEach((item, index) => {
-        const itemDelay = index * 0.2; // Stagger delay per item
-        const itemProgress = Math.max(0, Math.min(itemsProgress - itemDelay, 1));
-        
-        const itemX = (1 - itemProgress) * 20; // 20px to 0px (right to left)
-        const itemScale = 0.95 + (itemProgress * 0.05); // 0.95 to 1.0 (subtle bounce)
-        gsap.set(item, {
-          opacity: itemProgress,
-          x: itemX,
-          scale: itemScale
+      // Reset state when hiding
+      if (progress === 0) {
+        // Kill any running animations and reset immediately
+        gsap.killTweensOf(navRef.current);
+        gsap.killTweensOf(Array.from(navItems));
+        if (floatingActionsRef?.current) {
+          gsap.killTweensOf(floatingActionsRef.current);
+        }
+        gsap.set(navRef.current, {
+          opacity: 0,
+          visibility: 'hidden'
         });
-      });
+        // Reset all nav items to hidden state
+        gsap.set(Array.from(navItems), {
+          filter: 'blur(8px)',
+          x: 30,
+          opacity: 0
+        });
+        // Reset floating actions to hidden state
+        if (floatingActionsRef?.current) {
+          gsap.set(floatingActionsRef.current, {
+            filter: 'blur(8px)',
+            x: 30,
+            opacity: 0
+          });
+        }
+      } else {
+        // ACT 3: Container fade-in (foundation layer)
+        gsap.to(navRef.current, {
+          opacity: 1,
+          visibility: 'visible',
+          duration: navAnimationConfig.foundation.duration / 1000,
+          ease: 'power2.out',
+          onComplete: () => {
+            // Set title to visible state immediately after container fades in
+            gsap.set(titleRef.current, {
+              opacity: 1,
+              x: 0,
+              scale: 1
+            });
+            
+            // Animate each nav item with staggered timing
+            Array.from(navItems).forEach((item, index) => {
+              animateItem(item as HTMLButtonElement, index);
+            });
+            
+            // Animate floating actions as 5th item
+            if (floatingActionsRef?.current) {
+              animateItem(floatingActionsRef.current, 4); // Index 4 = 5th item
+            }
+          }
+        });
+      }
     };
 
     // Active section tracking (separate from animation)
@@ -151,6 +197,14 @@ export default function DesktopNavigation() {
     handleActiveSection();
     
     return () => {
+      gsap.killTweensOf(navRef.current);
+      if (navItemsRef.current) {
+        const navItems = navItemsRef.current.querySelectorAll('button');
+        gsap.killTweensOf(Array.from(navItems));
+      }
+      if (floatingActionsRef?.current) {
+        gsap.killTweensOf(floatingActionsRef.current);
+      }
       window.removeEventListener('scroll', handleSidebarAnimation);
       window.removeEventListener('scroll', handleActiveSection);
     };
@@ -165,9 +219,8 @@ export default function DesktopNavigation() {
       <div className="mb-6 text-center">
         <h1 
           ref={titleRef}
-          className="text-3xl font-serif text-foreground cursor-pointer hover:opacity-80 transition-opacity"
+          className="text-3xl font-serif text-foreground cursor-pointer hover:opacity-80"
           onClick={scrollToHero}
-          style={{ willChange: 'transform, opacity' }}
         >
           Bedlam Mews Loft
         </h1>
@@ -178,7 +231,7 @@ export default function DesktopNavigation() {
         ref={navItemsRef}
         className="space-y-4 w-full"
       >
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <button
             key={section.id}
             onClick={() => scrollToSection(section.id)}
@@ -187,7 +240,6 @@ export default function DesktopNavigation() {
                 ? "bg-primary/10 text-primary font-medium" 
                 : "hover:bg-primary/5"
             }`}
-            style={{ willChange: 'transform, opacity' }}
           >
             {section.name}
           </button>
