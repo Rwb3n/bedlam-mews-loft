@@ -6,7 +6,6 @@ import { gsap } from 'gsap';
 
 export default function DesktopNavigation() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [isRevealed, setIsRevealed] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const navItemsRef = useRef<HTMLDivElement>(null);
@@ -46,58 +45,88 @@ export default function DesktopNavigation() {
   useEffect(() => {
     if (navRef.current && titleRef.current && navItemsRef.current) {
       gsap.set(navRef.current, { opacity: 0, visibility: 'hidden' });
-      gsap.set(titleRef.current, { opacity: 0, x: 30 });
+      gsap.set(titleRef.current, { 
+        opacity: 0, 
+        y: 20,
+        scale: 0.9 
+      });
       
       const navItems = navItemsRef.current.querySelectorAll('button');
-      gsap.set(Array.from(navItems), { opacity: 0, x: 20 });
+      gsap.set(Array.from(navItems), { 
+        opacity: 0, 
+        y: 15,
+        scale: 0.95 
+      });
     }
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Check if hero H1 has exited viewport (400px scroll trigger)
-      const heroH1 = document.querySelector('#hero h1, #hero .title-container');
-      const shouldReveal = heroH1 && heroH1.getBoundingClientRect().top <= 0;
+    // Scroll-controlled bi-directional sidebar animation
+    const handleSidebarAnimation = (event?: Event) => {
+      // Get smooth scroll position from ScrollSmoother or fallback
+      const customEvent = event as CustomEvent;
+      const scrollY = customEvent?.detail?.scrollTop ?? window.scrollY;
       
-      // Progressive reveal animation (DISABLED for hero testing)
-      if (false && shouldReveal && !isRevealed && navRef.current && titleRef.current && navItemsRef.current) {
-        setIsRevealed(true);
-        
-        // Get all navigation items
-        const navItems = navItemsRef.current?.querySelectorAll('button');
-        
-        if (navItems) {
-          // Progressive reveal timeline
-          const revealTimeline = gsap.timeline();
-          
-          // 0.0s → Sidebar container fades in (300ms)
-          revealTimeline.to(navRef.current, {
-            opacity: 1,
-            visibility: 'visible',
-            duration: 0.3,
-            ease: 'power2.out'
-          });
-          
-          // 0.1s → "Bedlam Mews Loft" title slides from right (500ms)
-          revealTimeline.to(titleRef.current, {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            ease: 'cubic-bezier(0.4, 0, 0.2, 1)'
-          }, 0.1);
-          
-          // 0.4s → Navigation items stagger in (300ms each, 100ms stagger)
-          revealTimeline.to(Array.from(navItems!), {
-            opacity: 1,
-            x: 0,
-            duration: 0.3,
-            stagger: 0.1,
-            ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          }, 0.4);
-        }
+      // Animation trigger: starts at 400px, completes at 600px
+      const startScroll = 400;  // Hero H1 exit point
+      const endScroll = 600;    // Full reveal point
+      const scrollRange = endScroll - startScroll;
+      
+      if (scrollY < startScroll) {
+        // Before trigger: sidebar hidden
+        updateSidebarState(0);
+      } else if (scrollY >= endScroll) {
+        // After trigger: sidebar fully revealed
+        updateSidebarState(1);
+      } else {
+        // During trigger: progressive reveal based on scroll position
+        const rawProgress = (scrollY - startScroll) / scrollRange; // 0-1
+        const progress = gsap.parseEase("power2.out")(rawProgress); // Smooth easing
+        updateSidebarState(progress);
       }
+    };
+
+    // Update sidebar elements based on progress (0-1)
+    const updateSidebarState = (progress: number) => {
+      if (!navRef.current || !titleRef.current || !navItemsRef.current) return;
       
-      // Update active section
+      const navItems = navItemsRef.current.querySelectorAll('button');
+      
+      // Container fade (0-0.2 progress range)
+      const containerOpacity = Math.min(progress / 0.2, 1);
+      gsap.set(navRef.current, {
+        opacity: containerOpacity,
+        visibility: containerOpacity > 0 ? 'visible' : 'hidden'
+      });
+      
+      // Title bounce in (0.2-0.5 progress range)
+      const titleProgress = Math.max(0, Math.min((progress - 0.2) / 0.3, 1));
+      const titleY = (1 - titleProgress) * 20; // 20px to 0px
+      const titleScale = 0.9 + (titleProgress * 0.1); // 0.9 to 1.0 (subtle bounce)
+      gsap.set(titleRef.current, {
+        opacity: titleProgress,
+        y: titleY,
+        scale: titleScale
+      });
+      
+      // Nav items sequential bounce (0.5-1.0 progress range)
+      const itemsProgress = Math.max(0, (progress - 0.5) / 0.5);
+      navItems.forEach((item, index) => {
+        const itemDelay = index * 0.2; // Stagger delay per item
+        const itemProgress = Math.max(0, Math.min(itemsProgress - itemDelay, 1));
+        
+        const itemY = (1 - itemProgress) * 15; // 15px to 0px (smaller bounce)
+        const itemScale = 0.95 + (itemProgress * 0.05); // 0.95 to 1.0 (subtle bounce)
+        gsap.set(item, {
+          opacity: itemProgress,
+          y: itemY,
+          scale: itemScale
+        });
+      });
+    };
+
+    // Active section tracking (separate from animation)
+    const handleActiveSection = () => {
       const sections = ['details', 'amenities', 'location', 'host'];
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -112,11 +141,21 @@ export default function DesktopNavigation() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Set initial active section
+    // Listen to smooth scroll events and regular scroll
+    window.addEventListener('smoothScroll', handleSidebarAnimation, { passive: true });
+    window.addEventListener('scroll', handleSidebarAnimation, { passive: true });
+    window.addEventListener('scroll', handleActiveSection, { passive: true });
     
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isRevealed]);
+    // Set initial states
+    handleSidebarAnimation();
+    handleActiveSection();
+    
+    return () => {
+      window.removeEventListener('smoothScroll', handleSidebarAnimation);
+      window.removeEventListener('scroll', handleSidebarAnimation);
+      window.removeEventListener('scroll', handleActiveSection);
+    };
+  }, []);
 
   return (
     <nav 
