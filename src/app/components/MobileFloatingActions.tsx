@@ -6,46 +6,66 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Check, SquareArrowOutUpRight, MessageCircle, Share2 } from "lucide-react"
 
+type FloatingActionsState = 'visible' | 'hidden-hero' | 'hidden-footer' | 'hidden-nav';
+
 interface MobileFloatingActionsProps {
-  visible?: boolean;
+  state?: FloatingActionsState;
 }
 
-export default function MobileFloatingActions({ visible = true }: MobileFloatingActionsProps) {
+export default function MobileFloatingActions({ state = 'visible' }: MobileFloatingActionsProps) {
   const floatingActionsRef = useRef<HTMLDivElement>(null);
+  const isInitialRender = useRef(true);
 
-  // Set initial states based on visibility
-  useEffect(() => {
-    if (floatingActionsRef.current) {
-      if (visible) {
-        gsap.set(floatingActionsRef.current, {
-          opacity: 1,
-          y: 0 // Default visible position
-        });
-      } else {
-        gsap.set(floatingActionsRef.current, {
-          opacity: 0,
-          y: 100 // Hidden below screen
-        });
-      }
+  // Consolidated Animation Controller
+  const updateFloatingActions = (newState: FloatingActionsState) => {
+    if (!floatingActionsRef.current) return;
+    
+    // Kill any existing animations to prevent conflicts
+    gsap.killTweensOf(floatingActionsRef.current);
+    
+    if (newState === 'visible') {
+      // Animate to visible state
+      gsap.to(floatingActionsRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    } else {
+      // Animate to hidden state (all hidden states use same animation)
+      gsap.to(floatingActionsRef.current, {
+        opacity: 0,
+        y: 100,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
     }
-  }, []);
+  };
 
-  // Update visibility when prop changes
+  // Handle state changes with consolidated animation controller
   useEffect(() => {
-    if (floatingActionsRef.current) {
-      if (visible) {
-        gsap.set(floatingActionsRef.current, {
-          opacity: 1,
-          y: 0
-        });
-      } else {
-        gsap.set(floatingActionsRef.current, {
-          opacity: 0,
-          y: 100
-        });
-      }
+    if (!floatingActionsRef.current) return;
+    
+    if (isInitialRender.current) {
+      // Set initial state immediately without animation
+      const isVisible = state === 'visible';
+      gsap.set(floatingActionsRef.current, {
+        opacity: isVisible ? 1 : 0,
+        y: isVisible ? 0 : 100
+      });
+      isInitialRender.current = false;
+    } else {
+      // Use animated transitions for subsequent changes
+      updateFloatingActions(state);
     }
-  }, [visible]);
+    
+    // Cleanup function to kill animations on unmount
+    return () => {
+      if (floatingActionsRef.current) {
+        gsap.killTweensOf(floatingActionsRef.current);
+      }
+    };
+  }, [state]);
 
   const handleShare = async () => {
     const shareData = {

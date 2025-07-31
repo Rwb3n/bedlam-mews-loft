@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
 import HeroZone from './components/HeroZone';
 import ContentZone from './components/ContentZone';
@@ -18,9 +18,100 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Milestone, MessageCircle } from 'lucide-react';
 
+// FloatingActions State Machine
+type FloatingActionsState = 'visible' | 'hidden-hero' | 'hidden-footer' | 'hidden-nav';
+
 export default function Home() {
   const desktopFloatingActionsRef = useRef<HTMLDivElement>(null);
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [floatingActionsState, setFloatingActionsState] = useState<FloatingActionsState>('visible');
+  
+  // State transition helpers (for future use)
+  
+  // Scroll position detection
+  const determineScrollState = (scrollY: number): FloatingActionsState => {
+    // Check if we're in hero zone (should hide FloatingActions)
+    if (scrollY < 400) {
+      return 'hidden-hero';
+    }
+    
+    // Check if we're in footer zone (should hide FloatingActions)
+    const footerElement = document.getElementById('footer');
+    if (footerElement) {
+      const footerRect = footerElement.getBoundingClientRect();
+      const isInFooter = footerRect.top < window.innerHeight && footerRect.bottom > 0;
+      if (isInFooter) {
+        return 'hidden-footer';
+      }
+    }
+    
+    // Default: visible in middle content area
+    return 'visible';
+  };
+  
+  // State validation to ensure only valid states
+  const validateState = useCallback((state: FloatingActionsState): FloatingActionsState => {
+    const validStates: FloatingActionsState[] = ['visible', 'hidden-hero', 'hidden-footer', 'hidden-nav'];
+    return validStates.includes(state) ? state : 'visible'; // Fallback to visible for invalid states
+  }, []);
+  
+  // Enhanced state update function with edge case handling
+  const updateFloatingActionsState = useCallback((newState: FloatingActionsState, source: 'scroll' | 'navigation') => {
+    // Validate the new state
+    const validatedState = validateState(newState);
+    
+    // Prevent redundant updates
+    if (validatedState === floatingActionsState) {
+      return;
+    }
+    
+    // Priority enforcement: If navigation is open, ignore scroll updates
+    if (source === 'scroll' && floatingActionsState === 'hidden-nav') {
+      return; // Navigation has priority - ignore scroll updates
+    }
+    
+    // Apply the state update
+    setFloatingActionsState(validatedState);
+  }, [floatingActionsState, validateState]);
+
+  // Scroll listener with requestAnimationFrame throttling and priority enforcement
+  useEffect(() => {
+    let scrollTicking = false;
+    
+    const handleScroll = () => {
+      // Skip scroll handling if navigation is open (priority enforcement)
+      if (floatingActionsState === 'hidden-nav') {
+        return;
+      }
+      
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          try {
+            const scrollState = determineScrollState(window.scrollY);
+            updateFloatingActionsState(scrollState, 'scroll');
+          } catch (error) {
+            console.warn('Error in scroll handler:', error);
+            // Fallback to visible state on error
+            updateFloatingActionsState('visible', 'scroll');
+          }
+          
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    };
+    
+    // Add passive scroll listener for performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Set initial state based on current scroll position (only if nav not open)
+    if (floatingActionsState !== 'hidden-nav') {
+      handleScroll();
+    }
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [floatingActionsState, updateFloatingActionsState]);
 
   return (
     <main className="lg:pt-0">
@@ -38,7 +129,7 @@ export default function Home() {
         
         {/* Mobile/Tablet FloatingActions - only show when sidebar is hidden */}
         <div className="lg:hidden">
-          <MobileFloatingActions visible={!isMobileNavOpen} />
+          <MobileFloatingActions state={floatingActionsState} />
         </div>
         {/* Section 2: Space Details - Layered Emergence */}
         <AnimatedSection 
@@ -296,7 +387,22 @@ export default function Home() {
       </ContentZone>
       
       {/* Mobile Navigation - Floating, outside ContentZone */}
-      <MobileNavigation onNavStateChange={setIsMobileNavOpen} />
+      <MobileNavigation onNavStateChange={(isOpen) => {
+        if (isOpen) {
+          // Navigation opening - highest priority
+          updateFloatingActionsState('hidden-nav', 'navigation');
+        } else {
+          // Navigation closing - return to scroll-determined state
+          try {
+            const scrollState = determineScrollState(window.scrollY);
+            updateFloatingActionsState(scrollState, 'navigation');
+          } catch (error) {
+            console.warn('Error determining scroll state on nav close:', error);
+            // Fallback to visible state
+            updateFloatingActionsState('visible', 'navigation');
+          }
+        }
+      }} />
       
       {/* Footer - Full Width, Outside Grid */}
       <Footer />

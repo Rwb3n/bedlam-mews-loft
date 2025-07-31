@@ -17,6 +17,7 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
   const iconRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const navItemsRef = useRef<HTMLDivElement>(null);
 
   const sections = [
     { id: 'details', name: 'Space Details' },
@@ -32,7 +33,7 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
 
   // Set base animation states
   useEffect(() => {
-    if (modalRef.current && contentRef.current) {
+    if (modalRef.current && contentRef.current && navItemsRef.current) {
       // Set initial hidden state for future animations
       gsap.set(modalRef.current, {
         opacity: 0,
@@ -42,11 +43,84 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
         opacity: 0,
         y: 50
       });
+      
+      // Set initial state for nav items
+      const navItems = navItemsRef.current.querySelectorAll('button');
+      gsap.set(navItems, {
+        opacity: 0,
+        y: 20
+      });
     }
   }, [mounted]);
 
-  // Notify parent of state changes
+  // Modal animation controller with staggered nav items
+  const animateModal = (opening: boolean) => {
+    if (!modalRef.current || !contentRef.current || !navItemsRef.current) return;
+    
+    const navItems = navItemsRef.current.querySelectorAll('button');
+    
+    // Kill any existing animations to prevent conflicts
+    gsap.killTweensOf([modalRef.current, contentRef.current, navItems]);
+    
+    if (opening) {
+      // Entrance animation sequence
+      const timeline = gsap.timeline();
+      
+      // 1. Show overlay and fade in
+      timeline.set(modalRef.current, { visibility: 'visible' })
+               .to(modalRef.current, {
+                 opacity: 1,
+                 duration: 0.3,
+                 ease: 'power2.out'
+               })
+               // 2. Slide content up and fade in
+               .to(contentRef.current, {
+                 opacity: 1,
+                 y: 0,
+                 duration: 0.4,
+                 ease: 'power2.out'
+               }, '-=0.1') // Start slightly before overlay completes
+               // 3. Staggered nav items entrance
+               .to(navItems, {
+                 opacity: 1,
+                 y: 0,
+                 duration: 0.3,
+                 stagger: 0.1, // 100ms delay between each item
+                 ease: 'power2.out'
+               }, '-=0.2'); // Start before content completes
+               
+    } else {
+      // Exit animation sequence (reverse order)
+      const timeline = gsap.timeline();
+      
+      // 1. Staggered nav items exit (reverse stagger)
+      timeline.to(navItems, {
+                 opacity: 0,
+                 y: -10,
+                 duration: 0.2,
+                 stagger: -0.05, // Reverse stagger (faster)
+                 ease: 'power2.in'
+               })
+               // 2. Slide content down and fade out
+               .to(contentRef.current, {
+                 opacity: 0,
+                 y: 30,
+                 duration: 0.3,
+                 ease: 'power2.in'
+               }, '-=0.1')
+               // 3. Fade out overlay and hide
+               .to(modalRef.current, {
+                 opacity: 0,
+                 duration: 0.25,
+                 ease: 'power2.in'
+               }, '-=0.1') // Start before content completes
+               .set(modalRef.current, { visibility: 'hidden' });
+    }
+  };
+
+  // Handle navigation state changes with animations
   useEffect(() => {
+    animateModal(isNavOpen);
     onNavStateChange?.(isNavOpen);
   }, [isNavOpen, onNavStateChange]);
 

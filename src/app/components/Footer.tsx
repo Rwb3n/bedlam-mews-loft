@@ -3,7 +3,7 @@
 
 export default function Footer() {
   return (
-    <footer className="w-full">
+    <footer id="footer" className="w-full">
       <div className="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.1fr_1.1fr_0.8fr] py-16">
         {/* Main content area - spans full width on mobile/tablet like ContentZone */}
         <div className="md:col-span-2 lg:col-span-2">
