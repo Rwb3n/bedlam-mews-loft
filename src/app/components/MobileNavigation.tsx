@@ -158,6 +158,18 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isNavOpen]);
 
+  // Cleanup GSAP animations on unmount
+  useEffect(() => {
+    return () => {
+      if (modalRef.current) gsap.killTweensOf(modalRef.current);
+      if (contentRef.current) gsap.killTweensOf(contentRef.current);
+      if (navItemsRef.current) {
+        const navItems = navItemsRef.current.querySelectorAll('button');
+        gsap.killTweensOf(navItems);
+      }
+    };
+  }, []);
+
   const ModalContent = () => (
     <div
       ref={modalRef}
@@ -180,7 +192,7 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
         </Button>
 
         {/* Navigation items */}
-        <div className="flex flex-col items-center space-y-8 max-w-sm w-full">
+        <div ref={navItemsRef} className="flex flex-col items-center space-y-8 max-w-sm w-full">
           {sections.map((section) => (
             <Button
               key={section.id}
