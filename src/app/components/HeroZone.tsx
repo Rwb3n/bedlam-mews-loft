@@ -100,13 +100,9 @@ export default function HeroZone() {
     const updateHeroTransformation = (scrollY: number) => {
       // Step 1: Explicit reset at scroll zero
       if (scrollY === 0) {
-        if (heroSectionRef.current) {
-          gsap.set(heroSectionRef.current, {
-            borderRadius: '0rem'
-          });
-        }
         if (imageRef.current) {
           gsap.set(imageRef.current, {
+            borderRadius: '0rem',
             scale: 1,
             y: 0,
             z: 0,
@@ -131,16 +127,12 @@ export default function HeroZone() {
         progress = rawProgress; // Fallback to linear if no easing available
       }
       
-      // KEY 1: Framing (Visual only - no layout impact) - Container only
-      if (heroSectionRef.current) {
-        const borderRadius = progress * 1; // 0rem → 1rem
-        gsap.set(heroSectionRef.current, {
-          borderRadius: `${borderRadius}rem`
-        });
-      }
-      
+      // KEY 1: Framing (Visual only - no layout impact) - Image only
       // KEY 2 & 3: Visual transforms - Image only
       if (imageRef.current) {
+        // KEY 1: Framing - Border radius
+        const borderRadius = progress * 1.5; // 0rem → 1.5rem
+        
         // KEY 2: Scaling (Size transformation) - Mobile optimized
         const scaleAmount = isMobile ? 0.025 : 0.05; // Mobile: 2.5% vs Desktop: 5%
         const scale = 1 - (progress * scaleAmount);
@@ -154,8 +146,9 @@ export default function HeroZone() {
         const translateY = -(progress * translateYAmount);
         const opacity = 1 - (progress * opacityAmount);
         
-        // Apply visual transforms to image
+        // Apply all visual transforms to image
         gsap.set(imageRef.current, {
+          borderRadius: `${borderRadius}rem`,
           scale: scale,
           z: translateZ,
           y: translateY,
