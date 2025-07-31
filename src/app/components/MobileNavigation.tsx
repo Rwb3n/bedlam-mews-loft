@@ -31,29 +31,9 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
     setMounted(true);
   }, []);
 
-  // Set base animation states
-  useEffect(() => {
-    if (modalRef.current && contentRef.current && navItemsRef.current) {
-      // Set initial hidden state for future animations
-      gsap.set(modalRef.current, {
-        opacity: 0,
-        visibility: 'hidden'
-      });
-      gsap.set(contentRef.current, {
-        opacity: 0,
-        y: 50
-      });
-      
-      // Set initial state for nav items
-      const navItems = navItemsRef.current.querySelectorAll('button');
-      gsap.set(navItems, {
-        opacity: 0,
-        y: 20
-      });
-    }
-  }, [mounted]);
+  // Removed problematic early GSAP setup - moved to just-in-time execution
 
-  // Modal animation controller with staggered nav items
+  // Modal animation controller with just-in-time setup
   const animateModal = (opening: boolean) => {
     if (!modalRef.current || !contentRef.current || !navItemsRef.current) return;
     
@@ -63,12 +43,25 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
     gsap.killTweensOf([modalRef.current, contentRef.current, navItems]);
     
     if (opening) {
+      // Set initial states just-in-time (elements exist NOW)
+      gsap.set(modalRef.current, {
+        opacity: 0,
+        visibility: 'visible'
+      });
+      gsap.set(contentRef.current, {
+        opacity: 0,
+        y: 50
+      });
+      gsap.set(navItems, {
+        opacity: 0,
+        y: 20
+      });
+      
       // Entrance animation sequence
       const timeline = gsap.timeline();
       
-      // 1. Show overlay and fade in
-      timeline.set(modalRef.current, { visibility: 'visible' })
-               .to(modalRef.current, {
+      // 1. Fade in overlay
+      timeline.to(modalRef.current, {
                  opacity: 1,
                  duration: 0.3,
                  ease: 'power2.out'
@@ -174,11 +167,13 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
     <div
       ref={modalRef}
       className="fixed inset-0 z-50 bg-background/95 backdrop-blur-md"
+      style={{ opacity: 0, visibility: 'hidden' }}
       onClick={closeNav}
     >
       <div
         ref={contentRef}
         className="flex flex-col items-center justify-center h-full px-6"
+        style={{ opacity: 0, transform: 'translateY(50px)' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
@@ -199,6 +194,7 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
               variant="ghost"
               onClick={() => scrollToSection(section.id)}
               className="text-2xl font-medium py-4 px-6 w-full rounded-lg hover:bg-primary/10"
+              style={{ opacity: 0, transform: 'translateY(20px)' }}
             >
               {section.name}
             </Button>

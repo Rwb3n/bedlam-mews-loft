@@ -11,7 +11,7 @@ import SplitText from './SplitText';
 gsap.registerPlugin(EasePack);
 
 export default function HeroZone() {
-  const chevronRef = useRef<HTMLDivElement>(null);
+  const chevronRef = useRef<HTMLButtonElement>(null);
   const innerChevronRef = useRef<SVGSVGElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -321,16 +321,22 @@ export default function HeroZone() {
           
           {/* Scroll Indicator */}
           <div className="mt-8 sm:mt-8 md:mt-12 lg:mt-16 xl:mt-20 2xl:mt-20">
-            <div 
+            <button 
               ref={chevronRef}
-              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center"
+              onClick={() => {
+                const detailsSection = document.getElementById('details');
+                if (detailsSection) {
+                  detailsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-colors duration-200 cursor-pointer"
+              aria-label="Scroll to Space Details section"
             >
               <ChevronDown 
                 ref={innerChevronRef}
                 className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 2xl:w-13 2xl:h-13 text-white/80" 
-                aria-label="Scroll down"
               />
-            </div>
+            </button>
           </div>
         </div>
       </section>

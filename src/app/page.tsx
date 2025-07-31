@@ -34,12 +34,14 @@ export default function Home() {
       return 'hidden-hero';
     }
     
-    // Check if we're in footer zone (should hide FloatingActions)
+    // Check if we're deep into footer zone (should hide FloatingActions)  
+    // Only hide when we're very close to the bottom of the page
     const footerElement = document.getElementById('footer');
     if (footerElement) {
       const footerRect = footerElement.getBoundingClientRect();
-      const isInFooter = footerRect.top < window.innerHeight && footerRect.bottom > 0;
-      if (isInFooter) {
+      // Hide only when the footer bottom is close to viewport top (user scrolled very far)
+      const isNearPageBottom = footerRect.bottom - window.innerHeight < 100; // Within 100px of page bottom
+      if (isNearPageBottom) {
         return 'hidden-footer';
       }
     }
@@ -131,12 +133,11 @@ export default function Home() {
         <div className="lg:hidden">
           <MobileFloatingActions state={floatingActionsState} />
         </div>
-        {/* Section 2: Space Details - Layered Emergence */}
+        {/* Section 2: Space Details - Simple Fade Up */}
         <AnimatedSection 
           id="details" 
           className="w-full pt-8 pb-16"
-          animationType="layered-emergence"
-          trigger="hero-exit"
+          animationType="fadeUp"
         >
           {/* Inner container with proper spacing and background */}
           <div className="mx-4 md:mx-6 lg:mx-8 bg-primary/20 rounded-2xl px-0 py-8">
@@ -172,8 +173,7 @@ export default function Home() {
         <AnimatedSection 
           id="amenities" 
           className="w-full bg-secondary/20 pt-8 pb-16"
-          animationType="elegant-fade"
-          trigger="intersection"
+          animationType="fadeUp"
         >
           <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
@@ -250,7 +250,11 @@ export default function Home() {
         </AnimatedSection>
 
         {/* Section 4: Location */}
-        <section id="location" className="w-full bg-secondary/10 pt-8 pb-16">
+        <AnimatedSection 
+          id="location" 
+          className="w-full bg-secondary/10 pt-8 pb-16"
+          animationType="fadeUp"
+        >
           <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
               <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">In the Heart of London&apos;s Creative Quarter</h2>
@@ -309,10 +313,14 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Section 5: Host & Availability */}
-        <section id="host" className="w-full bg-secondary/20 pt-8 pb-16">
+        <AnimatedSection 
+          id="host" 
+          className="w-full bg-secondary/20 pt-8 pb-16"
+          animationType="fadeUp"
+        >
           <div className="flex items-center justify-center">
             <div className="px-6 max-w-2xl lg:max-w-4xl w-full">
               <Card>
@@ -382,7 +390,7 @@ export default function Home() {
               </Card>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
         
       </ContentZone>
       
