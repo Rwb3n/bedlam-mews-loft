@@ -136,7 +136,8 @@
     "mobile-navigation-optimization": "Clean blur backdrop system with improved button styling and accessibility",
     "spacing-system-normalization": "Unified space-y/padding conventions across all components",
     "hero-animation-system-2act": "Complete 2-Act hero animation system: Act 1 (fixed entrance 0-4.8s) + Act 2 (user-controlled scroll transformation)",
-    "dark-theme-color-system": "Complete dark sophisticated theme with semantic token architecture - single source of truth in globals.css for rapid color iteration"
+    "dark-theme-color-system": "Complete dark sophisticated theme with semantic token architecture - single source of truth in globals.css for rapid color iteration",
+    "full-site-grain-filter": "Global SVG fractal noise overlay via body::before - subtle organic texture at 0.08 opacity with accessibility compliance"
   },
 
   "heroAnimationSystem": {
