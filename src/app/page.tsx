@@ -222,13 +222,13 @@ export default function Home() {
                 {/* Accessibility */}
                 <div className="mt-8">
                   <h3 className="font-medium mb-4 text-xl text-left">Accessibility</h3>
-                  <div className="p-6 bg-orange-50 rounded-lg border border-orange-200">
+                  <div className="p-6 bg-accent/10 rounded-lg border border-accent/20">
                     <div className="mb-3">
-                      <Badge variant="secondary" className="bg-orange-100 text-orange-600 border-orange-200 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
-                        <span className="bg-orange-300 text-orange-800 rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">!</span>Please note
+                      <Badge variant="secondary" className="bg-accent/20 text-accent border-accent/30 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
+                        <span className="bg-accent text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">!</span>Please note
                       </Badge>
                     </div>
-                    <p className="text-base font-light text-orange-800">
+                    <p className="text-base font-light text-accent">
                       Access requires two flights of stairs - not wheelchair accessible
                     </p>
                   </div>

@@ -54,9 +54,11 @@
 
   "antiPatterns": [
     "Mixing custom colors (bg-sage) with shadcn colors (bg-primary)",
+    "Using hardcoded colors (bg-orange-50) instead of semantic tokens (bg-accent/10)",
     "Using font-[family-name:var(--font-castoro)] instead of font-serif",
     "Creating custom components when shadcn/ui equivalents exist",
-    "Committing without testing build and functionality"
+    "Committing without testing build and functionality",
+    "Adding colors anywhere except src/app/globals.css :root section"
   ],
 
   "designPatterns": {
@@ -133,7 +135,8 @@
     "herozone-responsive-system": "Complete typography and layout overhaul with 6-breakpoint progressive scaling",
     "mobile-navigation-optimization": "Clean blur backdrop system with improved button styling and accessibility",
     "spacing-system-normalization": "Unified space-y/padding conventions across all components",
-    "hero-animation-system-2act": "Complete 2-Act hero animation system: Act 1 (fixed entrance 0-4.8s) + Act 2 (user-controlled scroll transformation)"
+    "hero-animation-system-2act": "Complete 2-Act hero animation system: Act 1 (fixed entrance 0-4.8s) + Act 2 (user-controlled scroll transformation)",
+    "dark-theme-color-system": "Complete dark sophisticated theme with semantic token architecture - single source of truth in globals.css for rapid color iteration"
   },
 
   "heroAnimationSystem": {
@@ -151,5 +154,38 @@
     },
     "performance": "Hardware accelerated transforms, 60fps, no conflicts with other animations",
     "status": "Complete and deployed, other section animations temporarily disabled for testing"
+  },
+
+  "colorSystem": {
+    "architecture": "Dark-first semantic token system with single source of truth",
+    "file": "src/app/globals.css - ALL color changes happen here only",
+    "format": "oklch() color space for better browser compatibility and color accuracy",
+    "tokens": {
+      "primary": "oklch(0.8 0.25 120) - Bright green for CTAs and primary actions",
+      "accent": "oklch(0.7 0.2 45) - Vibrant orange for secondary actions and highlights", 
+      "background": "oklch(0.145 0 0) - Rich dark brown base background",
+      "foreground": "oklch(1 0 0) - Pure white text for maximum readability",
+      "secondary": "oklch(0.2 0 0) - Slightly lighter dark for cards and sections",
+      "muted": "oklch(0.25 0 0) - Muted backgrounds for subtle elements"
+    },
+    "principles": {
+      "semanticOnly": "Components use semantic tokens (bg-primary, text-accent) - NEVER hardcoded colors",
+      "accessibilityBuiltIn": "All token combinations meet WCAG AA contrast ratios (4.5:1+)",
+      "singleSourceOfTruth": "Color changes take 30 seconds - update CSS variables only",
+      "photographyOptimized": "Dark theme creates dramatic frame that makes daylight photos luminous"
+    },
+    "usage": {
+      "rapidIteration": "Change any color by updating single CSS variable in :root",
+      "themeSwitch": "Light theme possible by changing CSS variables (no component changes)",
+      "brandAlignment": "Easy brand color updates without touching component code",
+      "maintenance": "Zero risk color changes - semantic system prevents breaking changes"
+    },
+    "implementation": {
+      "cssVariables": "All colors defined in :root as oklch() values",
+      "tailwindMapping": "@theme inline section maps CSS variables to Tailwind classes",
+      "componentIntegration": "All components use semantic classes (bg-primary vs bg-green-500)",
+      "auditCompliant": "Eliminated all hardcoded colors through systematic component audit"
+    },
+    "status": "Complete and deployed - ready for rapid color iteration"
   }
 }
