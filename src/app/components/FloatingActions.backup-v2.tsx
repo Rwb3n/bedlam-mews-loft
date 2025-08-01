@@ -56,7 +56,7 @@ export default function FloatingActions() {
         className="text-lg md:text-xl shadow-lg rounded-full"
       >
         <a 
-          href="https://calendly.com/neonroobz" 
+          href="https://app.acuityscheduling.com/schedule.php?owner=36519584" 
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -128,7 +128,7 @@ export default function MobileFloatingActions({ state = 'visible' }: MobileFloat
       >
         <a 
           ref={primaryCTARef}
-          href="https://calendly.com/neonroobz" 
+          href="https://app.acuityscheduling.com/schedule.php?owner=36519584" 
           target="_blank"
           rel="noopener noreferrer"
         >
