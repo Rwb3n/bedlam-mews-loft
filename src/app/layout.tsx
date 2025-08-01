@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sorts_Mill_Goudy, Geist } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
 import "./globals.css";
 import ScrollSmootherInit from "./components/ScrollSmoother";
 
@@ -10,11 +10,10 @@ const geist = Geist({
   display: "swap",
 });
 
-const sortsMillGoudy = Sorts_Mill_Goudy({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["italic"],
-  variable: "--font-sorts-mill-goudy",
+  weight: ["700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -33,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body
-        className={`${geist.variable} ${sortsMillGoudy.variable} font-sans antialiased`}
+        className={`${geist.variable} ${inter.variable} font-sans antialiased`}
       >
         {/* ScrollSmootherInit disabled for sticky test */}
         {/* <ScrollSmootherInit /> */}

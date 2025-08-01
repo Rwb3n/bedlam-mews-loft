@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { useNavigationAnimation } from '@/app/hooks/useNavigationAnimation';
 // import { useScrollZone } from '../hooks/useScrollZone'; // Disabled for development
 
 interface DesktopNavigationProps {
@@ -13,6 +14,25 @@ export default function DesktopNavigation({ floatingActionsRef }: DesktopNavigat
   const navRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const navItemsRef = useRef<HTMLDivElement>(null);
+  
+  // Navigation animation hooks for title and nav items
+  const titleAnimationRef = useNavigationAnimation<HTMLHeadingElement>();
+  const nav1AnimationRef = useNavigationAnimation<HTMLButtonElement>();
+  const nav2AnimationRef = useNavigationAnimation<HTMLButtonElement>();
+  
+  // Callback refs to combine existing functionality with animation
+  const setTitleRefs = useCallback((node: HTMLHeadingElement | null) => {
+    titleRef.current = node;
+    titleAnimationRef.current = node;
+  }, []);
+  
+  const setNav1Refs = useCallback((node: HTMLButtonElement | null) => {
+    nav1AnimationRef.current = node;
+  }, []);
+  
+  const setNav2Refs = useCallback((node: HTMLButtonElement | null) => {
+    nav2AnimationRef.current = node;
+  }, []);
   // const isContentZone = useScrollZone(); // Disabled for development
 
   const sections = [
@@ -218,7 +238,7 @@ export default function DesktopNavigation({ floatingActionsRef }: DesktopNavigat
       {/* Sidebar Title */}
       <div className="mb-6 text-center">
         <h1 
-          ref={titleRef}
+          ref={setTitleRefs}
           className="text-3xl font-serif text-foreground cursor-pointer hover:opacity-80"
           onClick={scrollToHero}
         >
@@ -234,11 +254,12 @@ export default function DesktopNavigation({ floatingActionsRef }: DesktopNavigat
         {sections.map((section, index) => (
           <button
             key={section.id}
+            ref={index === 0 ? setNav1Refs : index === 1 ? setNav2Refs : undefined}
             onClick={() => scrollToSection(section.id)}
             className={`w-full justify-center text-center px-6 py-4 text-xl rounded-sm transition-colors ${
               activeSection === section.id 
-                ? "bg-primary/10 text-primary font-medium" 
-                : "hover:bg-primary/5"
+                ? "bg-neutral text-foreground font-medium" 
+                : "hover:bg-muted"
             }`}
           >
             {section.name}

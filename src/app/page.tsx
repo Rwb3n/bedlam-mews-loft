@@ -17,6 +17,9 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Milestone, MessageCircle } from 'lucide-react';
+import { usePrimaryMinorCTAAnimation } from '@/app/hooks/usePrimaryMinorCTAAnimation';
+import { useSecondaryElementAnimation } from '@/app/hooks/useSecondaryElementAnimation';
+// import AccessibilityTest from './components/AccessibilityTest'; // Removed for production
 
 // FloatingActions State Machine
 type FloatingActionsState = 'visible' | 'hidden-hero' | 'hidden-footer' | 'hidden-nav';
@@ -24,6 +27,12 @@ type FloatingActionsState = 'visible' | 'hidden-hero' | 'hidden-footer' | 'hidde
 export default function Home() {
   const desktopFloatingActionsRef = useRef<HTMLDivElement>(null);
   const [floatingActionsState, setFloatingActionsState] = useState<FloatingActionsState>('visible');
+  
+  // Primary-Minor CTA Animation Hooks for page buttons
+  const getDirectionsRef = usePrimaryMinorCTAAnimation<HTMLAnchorElement>();
+  const messageHostPageRef = usePrimaryMinorCTAAnimation<HTMLAnchorElement>();
+  
+  // Badge animations disabled per user request - moving to PhotoSlider carousel
   
   // State transition helpers (for future use)
   
@@ -117,6 +126,8 @@ export default function Home() {
 
   return (
     <main className="lg:pt-0">
+      {/* Accessibility Test Component removed for production */}
+      
       {/* Zone 1: Hero Zone - Full Width, Independent */}
       <HeroZone />
       
@@ -140,7 +151,7 @@ export default function Home() {
           animationType="fadeUp"
         >
           {/* Inner container with proper spacing and background */}
-          <div className="mx-4 md:mx-6 lg:mx-8 bg-primary/20 rounded-2xl px-0 py-8">
+          <div className="mx-4 md:mx-6 lg:mx-8 bg-muted rounded-2xl px-0 py-8">
           <div className="flex items-center justify-center">
             <div className="text-center px-6 max-w-2xl lg:max-w-4xl w-full">
               <h2 className="text-[24px] md:text-[36px] font-serif mb-4 leading-tight text-center lg:text-left">Where Creative Breakthroughs Happen</h2>
@@ -222,13 +233,13 @@ export default function Home() {
                 {/* Accessibility */}
                 <div className="mt-8">
                   <h3 className="font-medium mb-4 text-xl text-left">Accessibility</h3>
-                  <div className="p-6 bg-accent/10 rounded-lg border border-accent/20">
+                  <div className="p-6 bg-primary/10 rounded-lg border border-primary/20">
                     <div className="mb-3">
-                      <Badge variant="secondary" className="bg-accent/20 text-accent border-accent/30 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
-                        <span className="bg-accent text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">!</span>Please note
+                      <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
+                        <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">!</span>Please note
                       </Badge>
                     </div>
-                    <p className="text-base font-light text-accent">
+                    <p className="text-base font-light text-primary">
                       Access requires two flights of stairs - not wheelchair accessible
                     </p>
                   </div>
@@ -237,10 +248,10 @@ export default function Home() {
               
               <Separator className="my-6" />
               
-              <div className="p-6 bg-primary/10 rounded-lg">
+              <div className="p-6 bg-accent/10 rounded-lg">
                 <div className="mb-3">
-                  <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
-                    <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">?</span>Questions
+                  <Badge variant="secondary" className="bg-accent/20 text-accent border-accent/30 pl-1 pr-3 py-1 text-sm font-semibold inline-flex items-center">
+                    <span className="bg-accent text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-sm mr-2">?</span>Questions
                   </Badge>
                 </div>
                 <p className="text-lg font-light">Questions about setup or special requirements? <Button asChild variant="link" className="p-0 h-auto font-medium text-lg underline"><a href="#host">Let&apos;s chat</a></Button> - Elina responds within the hour.</p>
@@ -283,6 +294,7 @@ export default function Home() {
                   
                   <Button asChild size="lg" className="text-lg rounded-full flex items-center pl-3 pr-8">
                     <a 
+                      ref={getDirectionsRef}
                       href="https://www.google.com/maps/dir/?api=1&destination=Walnut+Tree+Walk,+London+SE11+6DF,+UK" 
                       target="_blank" 
                       rel="noopener noreferrer"
@@ -345,6 +357,7 @@ export default function Home() {
                   
                   <Button asChild size="lg" className="text-xl rounded-full pl-3 pr-8 w-full">
                     <a 
+                      ref={messageHostPageRef}
                       href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
                       target="_blank"
                       rel="noopener noreferrer"

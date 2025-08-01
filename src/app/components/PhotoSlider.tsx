@@ -16,6 +16,7 @@ import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import type { CarouselApi } from "@/components/ui/carousel";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useSecondaryElementAnimation } from '@/app/hooks/useSecondaryElementAnimation';
 
 interface PhotoSliderProps {
   title: string;
@@ -31,6 +32,10 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [imageLoading, setImageLoading] = useState(false)
+  
+  // Secondary element animations for carousel controls
+  const dot1Ref = useSecondaryElementAnimation<HTMLButtonElement>();
+  const dot2Ref = useSecondaryElementAnimation<HTMLButtonElement>();
   
   // Local studio image for all slides
   const studioImage = "/img/studio/studio-placehold.png"
@@ -172,6 +177,7 @@ export default function PhotoSlider({ title, height = "h-64", showDots = false }
             {placeholderImages.map((_, index) => (
               <button
                 key={index}
+                ref={index === 0 ? dot1Ref : index === 1 ? dot2Ref : undefined}
                 className={`w-4 h-4 rounded-full transition-all duration-200 border-2 shadow-sm ${
                   index === current 
                     ? 'bg-gray-800 border-gray-800 scale-110' 

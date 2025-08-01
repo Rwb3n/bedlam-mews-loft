@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { EasePack } from 'gsap/EasePack';
+import { useSecondaryElementAnimation } from '@/app/hooks/useSecondaryElementAnimation';
 import SplitText from './SplitText';
 
 // Register EasePack for expoScale, slow, rough eases
@@ -16,6 +17,15 @@ export default function HeroZone() {
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  
+  // Secondary element animation for chevron press feedback
+  const chevronAnimationRef = useSecondaryElementAnimation<HTMLButtonElement>();
+  
+  // Callback ref to set both refs on the same element
+  const setChevronRefs = useCallback((node: HTMLButtonElement | null) => {
+    chevronRef.current = node;
+    chevronAnimationRef.current = node;
+  }, []);
 
   useEffect(() => {
     if (!imageRef.current || !chevronRef.current || !innerChevronRef.current || !heroSectionRef.current || !contentRef.current) return;
@@ -252,7 +262,7 @@ export default function HeroZone() {
         {/* Content Overlay Layer */}
         <div 
           ref={contentRef}
-          className="absolute inset-0 flex flex-col justify-center items-center text-white py-14 sm:py-14 md:py-16 lg:py-18 xl:py-20 2xl:py-20"
+          className="absolute inset-0 flex flex-col justify-center items-center text-foreground py-14 sm:py-14 md:py-16 lg:py-18 xl:py-20 2xl:py-20"
         >
           
           {/* Main Content with SplitText Animations */}
@@ -261,7 +271,7 @@ export default function HeroZone() {
             <div className="title-container">
               <SplitText
                 text="Bedlam Mews Loft"
-                className="text-[40px] sm:text-[56px] md:text-[72px] lg:text-[86px] xl:text-[86px] 2xl:text-[96px] font-serif leading-tight"
+                className="text-[36px] sm:text-[52px] md:text-[68px] lg:text-[80px] xl:text-[80px] 2xl:text-[88px] font-serif leading-tight"
                 splitType="chars"
                 delay={60}
                 duration={0.8}
@@ -322,19 +332,22 @@ export default function HeroZone() {
           {/* Scroll Indicator */}
           <div className="mt-8 sm:mt-8 md:mt-12 lg:mt-16 xl:mt-20 2xl:mt-20">
             <button 
-              ref={chevronRef}
+              ref={setChevronRefs}
               onClick={() => {
                 const detailsSection = document.getElementById('details');
                 if (detailsSection) {
                   detailsSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-colors duration-200 cursor-pointer"
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 bg-primary hover:bg-primary/90 transition-colors duration-200 cursor-pointer rounded-full flex items-center justify-center"
+              style={{
+                boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)'
+              }}
               aria-label="Scroll to Space Details section"
             >
               <ChevronDown 
                 ref={innerChevronRef}
-                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 2xl:w-13 2xl:h-13 text-white/80" 
+                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 2xl:w-13 2xl:h-13 text-primary-foreground" 
               />
             </button>
           </div>

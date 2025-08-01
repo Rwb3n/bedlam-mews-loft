@@ -39,11 +39,11 @@ export const onMotionPreferenceChange = (callback: (prefersReduced: boolean) => 
 
 // Animation-safe wrapper for GSAP animations
 export const createAccessibleAnimation = (animationConfig: {
-  element: any;
+  element: HTMLElement;
   animation: () => void;
   fallback?: () => void;
 }): void => {
-  const { element, animation, fallback } = animationConfig;
+  const { animation, fallback } = animationConfig;
   
   if (prefersReducedMotion()) {
     // Apply fallback state instead of animation

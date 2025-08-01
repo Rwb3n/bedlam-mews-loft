@@ -3,63 +3,77 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dark Sophisticated Theme - Showcases Daylight Photography */
+  /*
+  BACKUP: Dark Theme Values (Instant Rollback Available)
+  --background: oklch(0.145 0 0);      Rich Dark Brown #201D1D
+  --foreground: oklch(1 0 0);          Pure White #FFFFFF  
+  --primary: oklch(0.8 0.25 120);      Bright Green #9BF500
+  --accent: oklch(0.7 0.2 45);         Vibrant Orange #E96C0C
+  --secondary: oklch(0.2 0 0);         Slightly lighter dark for cards
+  */
+  
+  /* Professional Light Theme - Strategic Color Language */
   --radius: 0.625rem;
   
-  /* Core Dark Theme Colors */
-  --background: oklch(0.145 0 0);      /* Rich Dark Brown #201D1D */
-  --foreground: oklch(1 0 0);          /* Pure White #FFFFFF */
+  /* CORE CONVERSION COLORS - Unchanged for CTA effectiveness */
+  --primary: oklch(0.65 0.18 45);               /* Electric Orange - "Take Action Now" */
+  --primary-foreground: oklch(0.98 0 0);        /* White text on orange buttons */
+  --accent: oklch(0.7139 0.15 165);             /* Teal Green - "Important Information" */
+  --accent-foreground: oklch(0.98 0 0);         /* White text on teal accents */
   
-  /* Electric Green Primary (CTAs) */
-  --primary: oklch(0.8 0.25 120);      /* Bright Green #9BF500 */
-  --primary-foreground: oklch(0.145 0 0); /* Dark Brown text on green buttons */
+  /* NEUTRAL FOUNDATION - 90% of interface (clean & focused) */
+  --surface: oklch(0.97 0 0);                   /* Clean white cards/sections */
+  --surface-foreground: oklch(0.15 0 0);        /* Dark readable text */
+  --neutral: oklch(0.94 0 0);                   /* Subtle gray backgrounds */
+  --neutral-foreground: oklch(0.45 0 0);        /* Medium gray text */
   
-  /* Vibrant Orange Accent */
-  --accent: oklch(0.7 0.2 45);         /* Vibrant Orange #E96C0C */
-  --accent-foreground: oklch(0.145 0 0); /* Dark Brown text on orange buttons */
+  /* SEMANTIC INTENT TOKENS - Purpose-driven color assignments */
+  --warning: var(--primary);                    /* Orange for accessibility boxes */
+  --info: var(--accent);                        /* Teal for questions boxes */
+  --hero-text: var(--surface-foreground);       /* Dark text for photo contrast */
   
-  /* Secondary Dark Elements */
-  --secondary: oklch(0.2 0 0);         /* Slightly lighter dark for cards */
-  --secondary-foreground: oklch(1 0 0); /* White text on secondary */
+  /* SYSTEM MAPPINGS - Existing classes automatically use neutral colors */
+  --background: oklch(0.98 0 0);                /* Pure clean white */
+  --foreground: var(--surface-foreground);      /* Consistent dark text */
+  --secondary: var(--surface);                  /* Clean surface backgrounds */
+  --secondary-foreground: var(--surface-foreground); /* Dark text on surfaces */
+  --card: var(--surface);                       /* Clean card backgrounds */
+  --card-foreground: var(--surface-foreground); /* Dark text on cards */
+  --popover: var(--surface);                    /* Clean popover backgrounds */
+  --popover-foreground: var(--surface-foreground); /* Dark popover text */
+  --muted: var(--neutral);                      /* Muted neutral backgrounds */
+  --muted-foreground: var(--neutral-foreground); /* Medium gray text */
+  --border: oklch(0.88 0 0);                    /* Subtle neutral borders */
+  --input: var(--surface);                      /* Clean input backgrounds */
+  --ring: var(--primary);                       /* Orange focus rings for CTAs */
   
-  /* UI Components */
-  --card: oklch(0.2 0 0);              /* Dark cards */
-  --card-foreground: oklch(1 0 0);     /* White text on cards */
-  --popover: oklch(0.145 0 0);         /* Dark popovers */
-  --popover-foreground: oklch(1 0 0);  /* White text on popovers */
-  --muted: oklch(0.25 0 0);            /* Muted backgrounds */
-  --muted-foreground: oklch(0.7 0 0);  /* Muted text */
-  --border: oklch(0.3 0 0);            /* Dark borders */
-  --input: oklch(0.25 0 0);            /* Dark input backgrounds */
-  --ring: oklch(0.8 0.25 120);         /* Green focus rings */
+  /* Destructive (Red) - Professional red for errors */
+  --destructive: oklch(0.55 0.2 25);            /* Professional red */
+  --destructive-foreground: oklch(0.98 0 0);    /* White text on red */
   
-  /* Destructive (Red) */
-  --destructive: oklch(0.65 0.2 25);   /* Red for destructive actions */
-  --destructive-foreground: oklch(1 0 0); /* White text on red */
+  /* Chart Colors (Neutral + Strategic Accents) */
+  --chart-1: var(--primary);                    /* Electric Orange */
+  --chart-2: var(--accent);                     /* Teal Green */
+  --chart-3: oklch(0.6 0.16 25);                /* Red-Orange */
+  --chart-4: oklch(0.5 0.12 185);               /* Blue-Green */
+  --chart-5: oklch(0.7 0.14 65);                /* Yellow-Orange */
   
-  /* Chart Colors (Green/Orange Theme) */
-  --chart-1: oklch(0.8 0.25 120);      /* Green */
-  --chart-2: oklch(0.7 0.2 45);        /* Orange */
-  --chart-3: oklch(0.75 0.2 105);      /* Yellow-green */
-  --chart-4: oklch(0.65 0.2 35);       /* Red-orange */
-  --chart-5: oklch(0.7 0.15 60);       /* Amber */
-  
-  /* Sidebar (Desktop Navigation) */
-  --sidebar: oklch(0.1 0 0);           /* Very dark sidebar */
-  --sidebar-foreground: oklch(1 0 0);  /* White sidebar text */
-  --sidebar-primary: oklch(0.8 0.25 120); /* Green sidebar primary */
-  --sidebar-primary-foreground: oklch(0.145 0 0); /* Dark text on green */
-  --sidebar-accent: oklch(0.18 0 0);   /* Slightly lighter sidebar accent */
-  --sidebar-accent-foreground: oklch(1 0 0); /* White accent text */
-  --sidebar-border: oklch(0.3 0 0);    /* Dark sidebar borders */
-  --sidebar-ring: oklch(0.8 0.25 120); /* Green sidebar focus */
+  /* SIDEBAR NEUTRALIZATION - Clean navigation system */
+  --sidebar: var(--surface);                    /* Clean neutral sidebar */
+  --sidebar-foreground: var(--surface-foreground); /* Dark sidebar text */
+  --sidebar-primary: var(--primary);            /* Orange for active states only */
+  --sidebar-primary-foreground: var(--primary-foreground); /* White on orange */
+  --sidebar-accent: var(--neutral);             /* Neutral sidebar accents */
+  --sidebar-accent-foreground: var(--surface-foreground); /* Dark accent text */
+  --sidebar-border: var(--border);              /* Neutral borders */
+  --sidebar-ring: var(--primary);               /* Orange focus rings only */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist);
-  --font-serif: var(--font-sorts-mill-goudy);
+  --font-serif: var(--font-inter);
 
   /* shadcn/ui color system - Dark Theme with Green/Orange Accents */
   --color-sidebar-ring: var(--sidebar-ring);

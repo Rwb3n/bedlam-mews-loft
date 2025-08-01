@@ -1,7 +1,13 @@
 // import { Separator } from "@/components/ui/separator"; // Not used
 // import FloatingActions from './FloatingActions'; // Not used
+import { useNavigationAnimation } from '@/app/hooks/useNavigationAnimation';
 
 export default function Footer() {
+  // Navigation animation hooks for footer links
+  const emailLinkRef = useNavigationAnimation<HTMLDivElement>();
+  const whatsappLinkRef = useNavigationAnimation<HTMLDivElement>();
+  const instagramLinkRef = useNavigationAnimation<HTMLDivElement>();
+
   return (
     <footer id="footer" className="w-full">
       <div className="max-w-7xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.1fr_1.1fr_0.8fr] py-16">
@@ -19,7 +25,7 @@ export default function Footer() {
                     className="flex items-center justify-center lg:justify-start gap-2 hover:opacity-80 transition-opacity"
                   >
                     <div className="text-2xl">📧</div>
-                    <div className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
+                    <div ref={emailLinkRef} className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
                       Email
                     </div>
                   </a>
@@ -30,7 +36,7 @@ export default function Footer() {
                     className="flex items-center justify-center lg:justify-start gap-2 hover:opacity-80 transition-opacity"
                   >
                     <div className="text-2xl">📱</div>
-                    <div className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
+                    <div ref={whatsappLinkRef} className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
                       WhatsApp
                     </div>
                   </a>
@@ -41,7 +47,7 @@ export default function Footer() {
                     className="flex items-center justify-center lg:justify-start gap-2 hover:opacity-80 transition-opacity"
                   >
                     <div className="text-2xl">📷</div>
-                    <div className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
+                    <div ref={instagramLinkRef} className="text-primary hover:text-primary/80 transition-colors font-light text-lg">
                       Instagram
                     </div>
                   </a>
@@ -86,12 +92,12 @@ export default function Footer() {
       </div>
       
       {/* Legal + Credit section - full width dark bar */}
-      <div className="w-full bg-primary">
-        <div className="px-12 py-6 flex justify-between items-center text-sm font-light text-primary-foreground">
+      <div className="w-full bg-foreground">
+        <div className="px-12 py-6 flex justify-between items-center text-sm font-light text-background">
           <div>© Bedlam Mews Loft</div>
-          <a href="/terms-conditions" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors underline">Terms & Conditions</a>
-          <a href="/privacy-policy" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors underline">Privacy Policy</a>
-          <div>Built by <a href="https://rubenpires.co.uk" target="_blank" rel="noopener noreferrer" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors underline">Ruben</a></div>
+          <a href="/terms-conditions" className="text-background hover:text-background/80 transition-colors underline">Terms & Conditions</a>
+          <a href="/privacy-policy" className="text-background hover:text-background/80 transition-colors underline">Privacy Policy</a>
+          <div>Built by <a href="https://rubenpires.co.uk" target="_blank" rel="noopener noreferrer" className="text-background hover:text-background/80 transition-colors underline">Ruben</a></div>
         </div>
       </div>
     </footer>

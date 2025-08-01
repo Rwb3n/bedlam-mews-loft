@@ -5,6 +5,8 @@ import { gsap } from 'gsap';
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Check, SquareArrowOutUpRight, MessageCircle, Share2 } from "lucide-react"
+import { usePrimaryCTAAnimation } from '@/app/hooks/usePrimaryCTAAnimation';
+import { usePrimaryMinorCTAAnimation } from '@/app/hooks/usePrimaryMinorCTAAnimation';
 
 type FloatingActionsState = 'visible' | 'hidden-hero' | 'hidden-footer' | 'hidden-nav';
 
@@ -15,6 +17,13 @@ interface MobileFloatingActionsProps {
 export default function MobileFloatingActions({ state = 'visible' }: MobileFloatingActionsProps) {
   const floatingActionsRef = useRef<HTMLDivElement>(null);
   const isInitialRender = useRef(true);
+  
+  // PRIMARY CTA Animation Hook - 3-phase interaction system
+  const primaryCTARef = usePrimaryCTAAnimation();
+  
+  // Primary-Minor CTA Animation Hooks - 2-phase interaction system
+  const messageHostRef = usePrimaryMinorCTAAnimation<HTMLAnchorElement>();
+  const shareButtonRef = usePrimaryMinorCTAAnimation<HTMLButtonElement>();
 
   // Consolidated Animation Controller
   const updateFloatingActions = (newState: FloatingActionsState) => {
@@ -105,19 +114,20 @@ export default function MobileFloatingActions({ state = 'visible' }: MobileFloat
       <div className="px-6 flex flex-col gap-1 items-center">
       {/* Pricing Display */}
       <Badge variant="secondary" className="text-sm md:text-base font-medium w-full flex items-center pl-1 pr-3 py-1">
-        <span className="bg-green-500 text-white rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center mr-2">
+        <span className="bg-accent text-accent-foreground rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center mr-2">
           <Check className="w-2 h-2 md:w-3 md:h-3" />
         </span>
         <span className="flex-1 text-center">slots available from £30/hour</span>
       </Badge>
       
-      {/* Book Now - Primary CTA */}
+      {/* Book Now - Primary CTA with 3-phase interaction animation */}
       <Button 
         asChild
         size="lg"
         className="text-lg md:text-xl shadow-lg rounded-full pl-3 pr-8 w-full"
       >
         <a 
+          ref={primaryCTARef}
           href="https://calendly.com/neonroobz" 
           target="_blank"
           rel="noopener noreferrer"
@@ -127,7 +137,7 @@ export default function MobileFloatingActions({ state = 'visible' }: MobileFloat
         </a>
       </Button>
       
-      {/* Secondary Actions */}
+      {/* Secondary Actions with Primary-Minor animations */}
       <div className="flex gap-2 w-full">
         <Button
           asChild
@@ -136,6 +146,7 @@ export default function MobileFloatingActions({ state = 'visible' }: MobileFloat
           className="flex-1 text-xs md:text-sm rounded-full font-light pl-2 pr-4"
         >
           <a 
+            ref={messageHostRef}
             href="https://wa.me/447700000000?text=Hi%20I%27m%20interested%20in%20booking%20The%20Loft" 
             target="_blank"
             rel="noopener noreferrer"
@@ -147,6 +158,7 @@ export default function MobileFloatingActions({ state = 'visible' }: MobileFloat
           </a>
         </Button>
         <Button 
+          ref={shareButtonRef}
           variant="outline"
           size="default"
           className="flex-1 text-xs md:text-sm rounded-full font-light pl-2 pr-4"
