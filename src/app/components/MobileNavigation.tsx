@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
-import { CircleHelp, X } from 'lucide-react';
+import { CircleHelp, X, SquareArrowOutUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { usePrimaryCTAAnimation } from '@/app/hooks/usePrimaryCTAAnimation';
 
 interface MobileNavigationProps {
   onNavStateChange?: (isOpen: boolean) => void;
@@ -18,6 +19,9 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
   const modalRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const navItemsRef = useRef<HTMLDivElement>(null);
+  
+  // PRIMARY CTA Animation Hook for Book Now button
+  const bookNowRef = usePrimaryCTAAnimation();
 
   const sections = [
     { id: 'details', name: 'Space Details' },
@@ -37,7 +41,7 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
   const animateModal = (opening: boolean) => {
     if (!modalRef.current || !contentRef.current || !navItemsRef.current) return;
     
-    const navItems = navItemsRef.current.querySelectorAll('button');
+    const navItems = navItemsRef.current.querySelectorAll('button, a');
     
     // Kill any existing animations to prevent conflicts
     gsap.killTweensOf([modalRef.current, contentRef.current, navItems]);
@@ -199,6 +203,24 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
               {section.name}
             </Button>
           ))}
+          
+          {/* Book Now - Primary CTA with PRIMARY animation */}
+          <Button 
+            asChild
+            size="lg"
+            className="text-2xl font-medium py-4 px-6 w-full rounded-lg shadow-lg pl-3 pr-8"
+            style={{ opacity: 0, transform: 'translateY(20px)' }}
+          >
+            <a 
+              ref={bookNowRef}
+              href="https://app.acuityscheduling.com/schedule.php?owner=36519584" 
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SquareArrowOutUpRight className="w-5 h-5 text-primary-foreground mr-3" />
+              <span className="flex-1 text-center">Book Now</span>
+            </a>
+          </Button>
         </div>
 
         {/* Space for FloatingActions will be added later */}
