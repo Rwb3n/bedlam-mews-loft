@@ -39,7 +39,7 @@ export default function DesktopNavigation({ floatingActionsRef }: DesktopNavigat
     { id: 'details', name: 'Space Details' },
     { id: 'amenities', name: 'Amenities' },
     { id: 'location', name: 'Location' },
-    { id: 'host', name: 'Host' }
+    { id: 'host', name: 'Your Host' }
   ];
 
   // ACT 3 Animation Configuration

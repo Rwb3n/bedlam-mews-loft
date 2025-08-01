@@ -363,7 +363,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                     >
                       <MessageCircle className="w-4 h-4 text-primary-foreground" />
-                      <span className="flex-1 text-center">message host</span>
+                      <span className="flex-1 text-center">message Elina</span>
                     </a>
                   </Button>
                 </div>

@@ -23,7 +23,7 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
     { id: 'details', name: 'Space Details' },
     { id: 'amenities', name: 'Amenities' },
     { id: 'location', name: 'Location' },
-    { id: 'host', name: 'Host' }
+    { id: 'host', name: 'Your Host' }
   ];
 
   // Handle mounting for portal
