@@ -341,7 +341,7 @@ export default function HeroZone() {
               }}
               className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-19 xl:h-19 2xl:w-26 2xl:h-26 bg-primary hover:bg-primary/90 transition-colors duration-200 cursor-pointer rounded-full flex items-center justify-center"
               style={{
-                boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)'
+                boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 0 20px rgba(232, 93, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15)'
               }}
               aria-label="Scroll to Space Details section"
             >
