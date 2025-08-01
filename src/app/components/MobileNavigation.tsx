@@ -214,10 +214,10 @@ export default function MobileNavigation({ onNavStateChange }: MobileNavigationP
       {/* Floating question mark icon */}
       <Button
         ref={iconRef}
-        variant="secondary"
+        variant="default"
         size="icon"
         onClick={toggleNav}
-        className="lg:hidden fixed top-6 right-6 z-40 w-12 h-12 rounded-full shadow-lg"
+        className="lg:hidden fixed top-6 right-6 z-40 w-12 h-12 rounded-full shadow-lg bg-primary hover:bg-primary/90 text-primary-foreground"
       >
         <CircleHelp className="w-6 h-6" />
       </Button>
