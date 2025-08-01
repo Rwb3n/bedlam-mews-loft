@@ -305,7 +305,7 @@ export default function HeroZone() {
             <div className="subtitle-container">
               <SplitText
                 text="in the heart of London"
-                className="text-[20px] sm:text-[28px] md:text-[36px] lg:text-[43px] xl:text-[43px] 2xl:text-[48px] font-sans leading-tight"
+                className="text-[27px] sm:text-[31px] md:text-[40px] lg:text-[43px] xl:text-[43px] 2xl:text-[48px] font-sans leading-tight"
                 splitType="words"
                 delay={120}
                 duration={0.6}
